@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """
 bldwebpage.py - Generates a Bootstrap v4 webpage with an image, audio button, and text
-Usage: python bldwebpage.py <image.png> <audio.mp3> <text>
+Usage: python bldwebpage.py <image.png> <audio.mp3> <text> <test_number> <max_number>
 """
 
 import sys
 import os
 
-def generate_html(image_path, audio_path, text):
+def generate_html(image_path, audio_path, text, test_number, max_number):
     """Generate HTML content with Bootstrap v4"""
+    
+    # Calculate next test number (wrap to 1 if exceeds max)
+    next_number = 1 if test_number + 1 > max_number else test_number + 1
     
     html_content = f"""<!DOCTYPE html>
 <html lang="fr">
@@ -27,8 +30,8 @@ def generate_html(image_path, audio_path, text):
             margin: 30px 0;
         }}
         .main-image {{
-            width: 50%;
-            max-width: 75%;
+            width: 45%;
+            max-width: 45%;
             height: auto;
         }}
         .button-container {{
@@ -39,6 +42,11 @@ def generate_html(image_path, audio_path, text):
             text-align: center;
             margin-top: 20px;
             font-size: 1.2em;
+            display: none;
+        }}
+        .next-button-container {{
+            text-align: center;
+            margin-top: 30px;
             display: none;
         }}
     </style>
@@ -57,6 +65,10 @@ def generate_html(image_path, audio_path, text):
         
         <div id="answerText" class="answer-text">
             <p class="lead">{text}</p>
+        </div>
+        
+        <div id="nextButtonContainer" class="next-button-container">
+            <a href="tst-{next_number}.html" class="btn btn-success btn-lg">Image Suivante</a>
         </div>
         
         <audio id="audioPlayer" style="display: none;">
@@ -78,6 +90,9 @@ def generate_html(image_path, audio_path, text):
             // Show the answer text
             document.getElementById('answerText').style.display = 'block';
             
+            // Show the next button
+            document.getElementById('nextButtonContainer').style.display = 'block';
+            
             // Optionally disable the button after clicking
             this.disabled = true;
             this.textContent = 'Réponse révélée';
@@ -89,20 +104,22 @@ def generate_html(image_path, audio_path, text):
     return html_content
 
 def main():
-    if len(sys.argv) != 4:
-        print("Usage: python bldwebpage.py <image.png> <audio.mp3> <text>")
-        print("Exemple: python bldwebpage.py photo.png reponse.mp3 'La Tour Eiffel'")
+    if len(sys.argv) != 6:
+        print("Usage: python bldwebpage.py <image.png> <audio.mp3> <text> <test_number> <max_number>")
+        print("Exemple: python bldwebpage.py photo.png reponse.mp3 'La Tour Eiffel' 1 10")
         sys.exit(1)
     
     image_path = sys.argv[1]
     audio_path = sys.argv[2]
     text = sys.argv[3]
+    test_number = int(sys.argv[4])
+    max_number = int(sys.argv[5])
     
     # Generate HTML content
-    html_content = generate_html(image_path, audio_path, text)
+    html_content = generate_html(image_path, audio_path, text, test_number, max_number)
     
-    # Write to output file
-    output_filename = "index.html"
+    # Write to output file with test number
+    output_filename = f"tst-{test_number}.html"
     with open(output_filename, 'w', encoding='utf-8') as f:
         f.write(html_content)
     
@@ -111,4 +128,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
