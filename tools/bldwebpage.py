@@ -13,6 +13,12 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
     # Calculate next test number (wrap to 1 if exceeds max)
     next_number = 1 if test_number + 1 > max_number else test_number + 1
     
+    # Determine the next page filename
+    if next_number == 1:
+        next_page = "fr-flash.html"
+    else:
+        next_page = f"tst-{next_number}.html"
+    
     html_content = f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -68,7 +74,8 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
         </div>
         
         <div id="nextButtonContainer" class="next-button-container">
-            <a href="tst-{next_number}.html" class="btn btn-success btn-lg">Image Suivante</a>
+            <button id="repeatBtn" class="btn btn-warning btn-lg mr-3">Répéter</button>
+            <a href="{next_page}" class="btn btn-success btn-lg">Image Suivante</a>
         </div>
         
         <audio id="audioPlayer" style="display: none;">
@@ -96,6 +103,25 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
             // Optionally disable the button after clicking
             this.disabled = true;
             this.textContent = 'Réponse révélée';
+        }});
+        
+        // Repeat button functionality
+        document.getElementById('repeatBtn').addEventListener('click', function() {{
+            // Hide the answer text
+            document.getElementById('answerText').style.display = 'none';
+            
+            // Hide the button container
+            document.getElementById('nextButtonContainer').style.display = 'none';
+            
+            // Re-enable and reset the answer button
+            var answerBtn = document.getElementById('answerBtn');
+            answerBtn.disabled = false;
+            answerBtn.textContent = 'Cliquez pour la Réponse';
+            
+            // Stop and reset audio
+            var audio = document.getElementById('audioPlayer');
+            audio.pause();
+            audio.currentTime = 0;
         }});
     </script>
 </body>

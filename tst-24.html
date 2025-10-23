@@ -53,6 +53,7 @@
         </div>
         
         <div id="nextButtonContainer" class="next-button-container">
+            <button id="repeatBtn" class="btn btn-warning btn-lg mr-3">Répéter</button>
             <a href="tst-25.html" class="btn btn-success btn-lg">Image Suivante</a>
         </div>
         
@@ -81,6 +82,25 @@
             // Optionally disable the button after clicking
             this.disabled = true;
             this.textContent = 'Réponse révélée';
+        });
+        
+        // Repeat button functionality
+        document.getElementById('repeatBtn').addEventListener('click', function() {
+            // Hide the answer text
+            document.getElementById('answerText').style.display = 'none';
+            
+            // Hide the button container
+            document.getElementById('nextButtonContainer').style.display = 'none';
+            
+            // Re-enable and reset the answer button
+            var answerBtn = document.getElementById('answerBtn');
+            answerBtn.disabled = false;
+            answerBtn.textContent = 'Cliquez pour la Réponse';
+            
+            // Stop and reset audio
+            var audio = document.getElementById('audioPlayer');
+            audio.pause();
+            audio.currentTime = 0;
         });
     </script>
 </body>

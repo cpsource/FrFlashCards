@@ -1,4 +1,25 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""
+bldwebpage.py - Generates a Bootstrap v4 webpage with an image, audio button, and text
+Usage: python bldwebpage.py <image.png> <audio.mp3> <text> <test_number> <max_number>
+"""
+
+import sys
+import os
+
+def generate_html(image_path, audio_path, text, test_number, max_number):
+    """Generate HTML content with Bootstrap v4"""
+    
+    # Calculate next test number (wrap to 1 if exceeds max)
+    next_number = 1 if test_number + 1 > max_number else test_number + 1
+    
+    # Determine the next page filename
+    if next_number == 1:
+        next_page = "fr-flash.html"
+    else:
+        next_page = f"tst-{next_number}.html"
+    
+    html_content = f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -7,33 +28,33 @@
     <!-- Bootstrap v4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
+        body {{
             padding: 20px;
-        }
-        .image-container {
+        }}
+        .image-container {{
             text-align: center;
             margin: 30px 0;
-        }
-        .main-image {
-            width: 45%;
-            max-width: 45%;
+        }}
+        .main-image {{
+            width: 75%;
+            max-width: 75%;
             height: auto;
-        }
-        .button-container {
+        }}
+        .button-container {{
             text-align: center;
             margin: 30px 0;
-        }
-        .answer-text {
+        }}
+        .answer-text {{
             text-align: center;
             margin-top: 20px;
             font-size: 1.2em;
             display: none;
-        }
-        .next-button-container {
+        }}
+        .next-button-container {{
             text-align: center;
             margin-top: 30px;
             display: none;
-        }
+        }}
     </style>
 </head>
 <body>
@@ -41,7 +62,7 @@
         <h1 class="text-center my-4">Nommez cette Image</h1>
         
         <div class="image-container">
-            <img src="lesanimaux/un-taureau.png" alt="Image à identifier" class="main-image img-fluid">
+            <img src="{image_path}" alt="Image à identifier" class="main-image img-fluid">
         </div>
         
         <div class="button-container">
@@ -49,16 +70,16 @@
         </div>
         
         <div id="answerText" class="answer-text">
-            <p class="lead">un taureau</p>
+            <p class="lead">{text}</p>
         </div>
         
         <div id="nextButtonContainer" class="next-button-container">
             <button id="repeatBtn" class="btn btn-warning btn-lg mr-3">Répéter</button>
-            <a href="tst-19.html" class="btn btn-success btn-lg">Image Suivante</a>
+            <a href="{next_page}" class="btn btn-success btn-lg">Image Suivante</a>
         </div>
         
         <audio id="audioPlayer" style="display: none;">
-            <source src="lesanimaux/un-taureau.mp3" type="audio/mpeg">
+            <source src="{audio_path}" type="audio/mpeg">
             Votre navigateur ne supporte pas l'élément audio.
         </audio>
     </div>
@@ -68,7 +89,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        document.getElementById('answerBtn').addEventListener('click', function() {
+        document.getElementById('answerBtn').addEventListener('click', function() {{
             // Play the audio
             var audio = document.getElementById('audioPlayer');
             audio.play();
@@ -82,10 +103,10 @@
             // Optionally disable the button after clicking
             this.disabled = true;
             this.textContent = 'Réponse révélée';
-        });
+        }});
         
         // Repeat button functionality
-        document.getElementById('repeatBtn').addEventListener('click', function() {
+        document.getElementById('repeatBtn').addEventListener('click', function() {{
             // Hide the answer text
             document.getElementById('answerText').style.display = 'none';
             
@@ -101,7 +122,35 @@
             var audio = document.getElementById('audioPlayer');
             audio.pause();
             audio.currentTime = 0;
-        });
+        }});
     </script>
 </body>
-</html>
+</html>"""
+    
+    return html_content
+
+def main():
+    if len(sys.argv) != 6:
+        print("Usage: python bldwebpage.py <image.png> <audio.mp3> <text> <test_number> <max_number>")
+        print("Exemple: python bldwebpage.py photo.png reponse.mp3 'La Tour Eiffel' 1 10")
+        sys.exit(1)
+    
+    image_path = sys.argv[1]
+    audio_path = sys.argv[2]
+    text = sys.argv[3]
+    test_number = int(sys.argv[4])
+    max_number = int(sys.argv[5])
+    
+    # Generate HTML content
+    html_content = generate_html(image_path, audio_path, text, test_number, max_number)
+    
+    # Write to output file with test number
+    output_filename = f"tst-{test_number}.html"
+    with open(output_filename, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    print(f"Page web générée avec succès: {output_filename}")
+    print(f"Ouvrez {output_filename} dans votre navigateur pour voir le résultat.")
+
+if __name__ == "__main__":
+    main()
