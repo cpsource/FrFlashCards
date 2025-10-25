@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texte Français avec Traductions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        .text-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        .hover-word {
+            border-bottom: 1px dotted #007bff;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .translation {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9em;
+        }
+        .translation::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .hover-word:hover .translation {
+            visibility: visible;
+            opacity: 1;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .instruction {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .button-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        hr {
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-container">
+        <h1>Les Nations Unies</h1>
+        <p class="instruction">Survolez les mots et expressions pour voir la traduction anglaise</p>
+        
+        <p>
+            <span class="hover-word">À l'issue de<span class="translation">At the conclusion of</span></span>
+            <span class="hover-word">la conférence<span class="translation">the conference</span></span>
+            de San Francisco
+            <span class="hover-word">organisée<span class="translation">organized</span></span>
+            en juin 1945
+            <span class="hover-word">alors que<span class="translation">while</span></span>
+            <span class="hover-word">la guerre<span class="translation">the war</span></span>
+            <span class="hover-word">faisait encore rage<span class="translation">was still raging</span></span>
+            dans le Pacifique,
+            <span class="hover-word">cinquante-et-un<span class="translation">fifty-one</span></span>
+            <span class="hover-word">États<span class="translation">states</span></span>
+            <span class="hover-word">signaient<span class="translation">signed</span></span>
+            <span class="hover-word">la Charte<span class="translation">the Charter</span></span>
+            <span class="hover-word">établissant<span class="translation">establishing</span></span>
+            <span class="hover-word">une organisation internationale<span class="translation">an international organization</span></span>
+            qui
+            <span class="hover-word">prendra le nom de<span class="translation">will take the name of</span></span>
+            Nations unies.
+            <span class="hover-word">Elle entre en vigueur<span class="translation">It entered into force</span></span>
+            le 24 octobre 1945,
+            <span class="hover-word">il y a<span class="translation">ago</span></span>
+            <span class="hover-word">tout juste<span class="translation">exactly / just</span></span>
+            <span class="hover-word">huit décennies<span class="translation">eight decades</span></span>.
+        </p>
+
+        <hr>
+
+        <div class="button-section">
+            <button id="speakBtn" class="btn btn-primary btn-lg">
+                🔊 Écouter le Texte
+            </button>
+        </div>
+
+        <audio id="audioPlayer" style="display: none;">
+            <source src="les-nations-unies.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+
+        <hr>
+
+        <div class="button-section">
+            <a href="https://frflashy.com" class="btn btn-success btn-lg">
+                ⬆️ Retour en Haut
+            </a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('speakBtn').addEventListener('click', function() {
+            var audio = document.getElementById('audioPlayer');
+            audio.play();
+        });
+    </script>
+</body>
+</html>
