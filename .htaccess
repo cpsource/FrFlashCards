@@ -1,0 +1,16 @@
+RewriteEngine on
+
+RewriteCond %{THE_REQUEST} !/phpmyadmin [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [L]
+
+# Block access to .gitignore file
+<Files ".gitignore">
+    Require all denied
+</Files>
+
+# Optionally, return a 403 Forbidden status for hidden files
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
