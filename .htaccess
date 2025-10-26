@@ -1,15 +1,34 @@
-RewriteEngine on
+RewriteEngine On
 
-RewriteCond %{THE_REQUEST} !/phpmyadmin [NC]
+# --- 2) SPA FALLBACK or 403 ---
+# If it's not an existing file or directory, send a 403 instead of index.html
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ - [G,L]
+
+# Block anything that begins with "core" (core, core/, core.php, core.whatever)
+RewriteRule ^core([/\.].*)?$ - [F,L]
+
+# --- 1) BLOCK COMMON SCANNER PATHS (403) ---
+# WordPress probes, admin tools, env files, etc.
+RewriteRule ^(wp-login\.php|xmlrpc\.php)$ - [F,L]
+RewriteRule ^(wp-admin/|wp-includes/|wp-content/) - [F,L]
+RewriteRule ^wordpress/ - [F,L]
+RewriteRule ^(phpmyadmin/|pma/|adminer\.php) - [F,L]
+RewriteRule ^(setup-config\.php|vendor/|composer\.(json|lock)|package\.json)$ - [F,L]
+RewriteRule ^\.env$ - [F,L]
+
+# Block ANY direct .php request (belt-and-suspenders for a static site)
+RewriteRule \.php$ - [F,L]
+
+# --- 2) SPA FALLBACK (keep AFTER the blocks) ---
+# If it's not an existing file or dir, serve index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [L]
 
-# Block access to .gitignore file
-<Files ".gitignore">
-    Require all denied
-</Files>
-
-# Optionally, return a 403 Forbidden status for hidden files
+# --- 3) HIDDEN FILES PROTECTION ---
+# Deny hidden files (e.g., .gitignore, .htaccess, .env)
 <FilesMatch "^\.">
     Require all denied
 </FilesMatch>
