@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texte Français avec Traductions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        .text-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        .hover-word {
+            border-bottom: 1px dotted #007bff;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .translation {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9em;
+        }
+        .translation::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .hover-word:hover .translation {
+            visibility: visible;
+            opacity: 1;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .instruction {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .button-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        hr {
+            margin: 30px 0;
+        }
+        .verb-table {
+            margin-top: 30px;
+        }
+        .verb-table h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .table {
+            background: white;
+        }
+        .table thead th {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-container">
+        <h1>Franz Reichelt - Le Tailleur Volant</h1>
+        <p class="instruction">Survolez les mots et expressions pour voir la traduction anglaise</p>
+        
+        <p>
+            <span class="hover-word">Franz Reichelt est né<span class="translation">Franz Reichelt was born</span></span>
+            le 16 octobre 1878
+            <span class="hover-word">dans l'Empire austro-hongrois<span class="translation">in the Austro-Hungarian Empire</span></span>.
+            <span class="hover-word">Plus tard<span class="translation">Later</span></span>
+            <span class="hover-word">il a déménagé<span class="translation">he moved</span></span>
+            en France
+            <span class="hover-word">où<span class="translation">where</span></span>
+            <span class="hover-word">il est devenu<span class="translation">he became</span></span>
+            <span class="hover-word">un tailleur<span class="translation">a tailor</span></span>
+            <span class="hover-word">connu pour<span class="translation">known for</span></span>
+            <span class="hover-word">ses designs uniques<span class="translation">his unique designs</span></span>.
+        </p>
+
+        <p>
+            Mais Franz
+            <span class="hover-word">avait un rêve plus grand<span class="translation">had a bigger dream</span></span> :
+            <span class="hover-word">il voulait inventer<span class="translation">he wanted to invent</span></span>
+            <span class="hover-word">un costume-parachute<span class="translation">a parachute suit</span></span>
+            pour
+            <span class="hover-word">aider<span class="translation">help</span></span>
+            <span class="hover-word">les aviateurs<span class="translation">aviators</span></span>
+            à
+            <span class="hover-word">survivre aux chutes<span class="translation">survive falls</span></span>.
+        </p>
+
+        <p>
+            Franz
+            <span class="hover-word">était très passionné par<span class="translation">was very passionate about</span></span>
+            son invention.
+            <span class="hover-word">Il a passé des heures<span class="translation">He spent hours</span></span>
+            à
+            <span class="hover-word">créer<span class="translation">creating</span></span>
+            et
+            <span class="hover-word">tester<span class="translation">testing</span></span>
+            son costume-parachute,
+            <span class="hover-word">en essayant de<span class="translation">trying to</span></span>
+            <span class="hover-word">le rendre<span class="translation">make it</span></span>
+            <span class="hover-word">sûr<span class="translation">safe</span></span>
+            et
+            <span class="hover-word">efficace<span class="translation">effective</span></span>.
+            <span class="hover-word">Ses premiers tests<span class="translation">His first tests</span></span>
+            avec des mannequins
+            <span class="hover-word">semblaient réussir<span class="translation">seemed to succeed</span></span>,
+            <span class="hover-word">ce qui<span class="translation">which</span></span>
+            <span class="hover-word">augmenta<span class="translation">increased</span></span>
+            sa confiance.
+            Mais
+            <span class="hover-word">il voulait l'essayer lui-même<span class="translation">he wanted to try it himself</span></span>
+            pour
+            <span class="hover-word">prouver<span class="translation">prove</span></span>
+            que cela
+            <span class="hover-word">fonctionnait vraiment<span class="translation">really worked</span></span>.
+        </p>
+
+        <p>
+            Le 4 février 1912, Franz
+            <span class="hover-word">monta sur<span class="translation">climbed up to</span></span>
+            <span class="hover-word">la première plateforme<span class="translation">the first platform</span></span>
+            de la Tour Eiffel.
+            <span class="hover-word">Il avait reçu<span class="translation">He had received</span></span>
+            <span class="hover-word">la permission<span class="translation">permission</span></span>
+            de la police de Paris
+            pour tester son costume-parachute
+            <span class="hover-word">d'une hauteur de<span class="translation">from a height of</span></span>
+            57 mètres.
+            <span class="hover-word">Malgré<span class="translation">Despite</span></span>
+            <span class="hover-word">les avertissements<span class="translation">the warnings</span></span>
+            de ses amis et des spectateurs, Franz
+            <span class="hover-word">se sentait prêt<span class="translation">felt ready</span></span>.
+        </p>
+
+        <p>
+            <span class="hover-word">Devant une foule<span class="translation">Before a crowd</span></span>
+            qui regardait,
+            <span class="hover-word">il sauta<span class="translation">he jumped</span></span>
+            mais
+            <span class="hover-word">le parachute ne s'ouvrit pas<span class="translation">the parachute did not open</span></span>
+            <span class="hover-word">comme prévu<span class="translation">as planned</span></span>.
+            Franz
+            <span class="hover-word">tomba tragiquement<span class="translation">fell tragically</span></span>
+            et
+            <span class="hover-word">perdit la vie<span class="translation">lost his life</span></span>.
+        </p>
+
+        <p>
+            <span class="hover-word">Les journaux<span class="translation">The newspapers</span></span>
+            <span class="hover-word">l'ont appelé<span class="translation">called him</span></span>
+            <span class="hover-word">le Tailleur Volant<span class="translation">the Flying Tailor</span></span>
+            et
+            <span class="hover-word">ont écrit sur<span class="translation">wrote about</span></span>
+            <span class="hover-word">sa tentative courageuse<span class="translation">his courageous attempt</span></span>.
+            <span class="hover-word">Aujourd'hui<span class="translation">Today</span></span>,
+            Franz Reichelt
+            <span class="hover-word">est rappelé comme<span class="translation">is remembered as</span></span>
+            <span class="hover-word">un inventeur courageux et passionné<span class="translation">a brave and passionate inventor</span></span>
+            <span class="hover-word">dont<span class="translation">whose</span></span>
+            <span class="hover-word">les rêves<span class="translation">dreams</span></span>,
+            <span class="hover-word">bien qu'inachevés<span class="translation">although unfinished</span></span>,
+            <span class="hover-word">continuent d'inspirer<span class="translation">continue to inspire</span></span>.
+        </p>
+
+        <hr>
+
+        <div class="verb-table">
+            <h3>Formes Verbales Utilisées dans le Texte</h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Verbe dans le Texte</th>
+                        <th>Infinitif</th>
+                        <th>Forme Verbale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>est né</td>
+                        <td>naître</td>
+                        <td>Passé composé</td>
+                    </tr>
+                    <tr>
+                        <td>a déménagé</td>
+                        <td>déménager</td>
+                        <td>Passé composé</td>
+                    </tr>
+                    <tr>
+                        <td>est devenu</td>
+                        <td>devenir</td>
+                        <td>Passé composé</td>
+                    </tr>
+                    <tr>
+                        <td>avait</td>
+                        <td>avoir</td>
+                        <td>Imparfait</td>
+                    </tr>
+                    <tr>
+                        <td>voulait</td>
+                        <td>vouloir</td>
+                        <td>Imparfait</td>
+                    </tr>
+                    <tr>
+                        <td>était</td>
+                        <td>être</td>
+                        <td>Imparfait</td>
+                    </tr>
+                    <tr>
+                        <td>a passé</td>
+                        <td>passer</td>
+                        <td>Passé composé</td>
+                    </tr>
+                    <tr>
+                        <td>semblaient</td>
+                        <td>sembler</td>
+                        <td>Imparfait</td>
+                    </tr>
+                    <tr>
+                        <td>augmenta</td>
+                        <td>augmenter</td>
+                        <td>Passé simple</td>
+                    </tr>
+                    <tr>
+                        <td>monta</td>
+                        <td>monter</td>
+                        <td>Passé simple</td>
+                    </tr>
+                    <tr>
+                        <td>avait reçu</td>
+                        <td>recevoir</td>
+                        <td>Plus-que-parfait</td>
+                    </tr>
+                    <tr>
+                        <td>se sentait</td>
+                        <td>se sentir</td>
+                        <td>Imparfait</td>
+                    </tr>
+                    <tr>
+                        <td>sauta</td>
+                        <td>sauter</td>
+                        <td>Passé simple</td>
+                    </tr>
+                    <tr>
+                        <td>s'ouvrit</td>
+                        <td>s'ouvrir</td>
+                        <td>Passé simple</td>
+                    </tr>
+                    <tr>
+                        <td>tomba</td>
+                        <td>tomber</td>
+                        <td>Passé simple</td>
+                    </tr>
+                    <tr>
+                        <td>perdit</td>
+                        <td>perdre</td>
+                        <td>Passé simple</td>
+                    </tr>
+                    <tr>
+                        <td>ont appelé</td>
+                        <td>appeler</td>
+                        <td>Passé composé</td>
+                    </tr>
+                    <tr>
+                        <td>ont écrit</td>
+                        <td>écrire</td>
+                        <td>Passé composé</td>
+                    </tr>
+                    <tr>
+                        <td>est rappelé</td>
+                        <td>rappeler</td>
+                        <td>Présent passif</td>
+                    </tr>
+                    <tr>
+                        <td>continuent</td>
+                        <td>continuer</td>
+                        <td>Présent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="button-section">
+            <button id="speakBtn" class="btn btn-primary btn-lg">
+                🔊 Écouter le Texte
+            </button>
+        </div>
+
+        <audio id="audioPlayer" style="display: none;">
+            <source src="franz-reichelt.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+
+        <hr>
+
+        <div class="button-section">
+            <a href="https://frflashy.com" class="btn btn-success btn-lg">
+                ⬆️ Retour en Haut
+            </a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('speakBtn').addEventListener('click', function() {
+            var audio = document.getElementById('audioPlayer');
+            audio.play();
+        });
+    </script>
+</body>
+</html>
