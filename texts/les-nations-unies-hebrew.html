@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טקסט עברי עם תרגומים</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+        .text-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        .hover-word {
+            border-bottom: 1px dotted #007bff;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .translation {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9em;
+        }
+        .translation::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .hover-word:hover .translation {
+            visibility: visible;
+            opacity: 1;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .instruction {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .button-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        hr {
+            margin: 30px 0;
+        }
+        .verb-table {
+            margin-top: 30px;
+        }
+        .verb-table h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .table {
+            background: white;
+        }
+        .table thead th {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-container">
+        <h1>האומות המאוחדות</h1>
+        <p class="instruction">העבר את העכבר מעל המילים והביטויים כדי לראות את התרגום לאנגלית</p>
+        
+        <p>
+            <span class="hover-word">בסיום<span class="translation">At the conclusion of</span></span>
+            <span class="hover-word">הוועידה<span class="translation">the conference</span></span>
+            בסן פרנסיסקו
+            <span class="hover-word">שאורגנה<span class="translation">organized</span></span>
+            ביוני 1945
+            <span class="hover-word">בעוד<span class="translation">while</span></span>
+            <span class="hover-word">המלחמה<span class="translation">the war</span></span>
+            <span class="hover-word">עדיין השתוללה<span class="translation">was still raging</span></span>
+            באוקיינוס השקט,
+            <span class="hover-word">חמישים ואחת<span class="translation">fifty-one</span></span>
+            <span class="hover-word">מדינות<span class="translation">states</span></span>
+            <span class="hover-word">חתמו<span class="translation">signed</span></span>
+            על
+            <span class="hover-word">האמנה<span class="translation">the Charter</span></span>
+            <span class="hover-word">המקימה<span class="translation">establishing</span></span>
+            <span class="hover-word">ארגון בינלאומי<span class="translation">an international organization</span></span>
+            אשר
+            <span class="hover-word">יקבל את השם<span class="translation">will take the name of</span></span>
+            האומות המאוחדות.
+            <span class="hover-word">היא נכנסה לתוקף<span class="translation">It entered into force</span></span>
+            ב-24 באוקטובר 1945,
+            <span class="hover-word">לפני<span class="translation">ago</span></span>
+            <span class="hover-word">בדיוק<span class="translation">exactly / just</span></span>
+            <span class="hover-word">שמונה עשורים<span class="translation">eight decades</span></span>.
+        </p>
+
+        <hr>
+
+        <div class="verb-table">
+            <h3>צורות פעלים בשימוש בטקסט</h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>פועל בטקסט</th>
+                        <th>שורש</th>
+                        <th>צורת הפועל</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>השתוללה</td>
+                        <td>להשתולל</td>
+                        <td>עבר</td>
+                    </tr>
+                    <tr>
+                        <td>חתמו</td>
+                        <td>לחתום</td>
+                        <td>עבר</td>
+                    </tr>
+                    <tr>
+                        <td>המקימה</td>
+                        <td>להקים</td>
+                        <td>בינוני</td>
+                    </tr>
+                    <tr>
+                        <td>יקבל</td>
+                        <td>לקבל</td>
+                        <td>עתיד</td>
+                    </tr>
+                    <tr>
+                        <td>נכנסה</td>
+                        <td>להיכנס</td>
+                        <td>עבר</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="verb-table">
+            <h3>מדריך הגייה</h3>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>מילה/ביטוי</th>
+                        <th>הגייה (באנגלית)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>בסיום</td>
+                        <td>bee-see-yoom</td>
+                    </tr>
+                    <tr>
+                        <td>הוועידה</td>
+                        <td>ha-va-ee-dah</td>
+                    </tr>
+                    <tr>
+                        <td>שאורגנה</td>
+                        <td>sheh-or-gah-nah</td>
+                    </tr>
+                    <tr>
+                        <td>השתוללה</td>
+                        <td>heesh-to-leh-lah</td>
+                    </tr>
+                    <tr>
+                        <td>חמישים ואחת</td>
+                        <td>kha-mee-sheem veh-ah-khat</td>
+                    </tr>
+                    <tr>
+                        <td>מדינות</td>
+                        <td>meh-dee-note</td>
+                    </tr>
+                    <tr>
+                        <td>האמנה</td>
+                        <td>ha-ah-mah-nah</td>
+                    </tr>
+                    <tr>
+                        <td>המקימה</td>
+                        <td>ha-meh-kee-mah</td>
+                    </tr>
+                    <tr>
+                        <td>בינלאומי</td>
+                        <td>bein-leh-oo-mee</td>
+                    </tr>
+                    <tr>
+                        <td>עשורים</td>
+                        <td>eh-soh-reem</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="button-section">
+            <a href="particle-present.html" class="btn btn-info btn-lg">
+                📚 הסבר על בינוניים
+            </a>
+        </div>
+
+        <hr>
+
+        <div class="button-section">
+            <button id="speakBtn" class="btn btn-primary btn-lg">
+                🔊 האזן לטקסט
+            </button>
+            <div style="margin-top: 15px;">
+                <label for="speedControl">מהירות: <span id="speedValue">1.0</span>x</label><br>
+                <input type="range" id="speedControl" min="0.5" max="2" step="0.1" value="1" style="width: 300px;">
+            </div>
+        </div>
+
+        <audio id="audioPlayer" style="display: none;">
+            <source src="les-nations-unies-hebrew.mp3" type="audio/mpeg">
+            הדפדפן שלך אינו תומך ברכיב השמע.
+        </audio>
+
+        <hr>
+
+        <div class="button-section">
+            <a href="https://frflashy.com/texts/practice-texts.html" class="btn btn-success btn-lg">
+                ⬆️ חזור למעלה
+            </a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('speakBtn').addEventListener('click', function() {
+            var audio = document.getElementById('audioPlayer');
+            audio.play();
+        });
+
+        // Add speed control
+        document.getElementById('speedControl').addEventListener('input', function() {
+            var audio = document.getElementById('audioPlayer');
+            var speed = this.value;
+            audio.playbackRate = speed;
+            document.getElementById('speedValue').textContent = speed;
+        });
+    </script>
+</body>
+</html>
