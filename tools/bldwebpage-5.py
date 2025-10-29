@@ -100,87 +100,136 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
         const CURRENT_PAGE = {test_number};
         const MAX_PAGES = {max_number};
         
-        document.getElementById('answerBtn').addEventListener('click', function() {{
-            // Play the audio with error handling
-            var audio = document.getElementById('audioPlayer');
-            audio.play().catch(function(error) {{
-                console.log('Audio playback failed:', error);
-                // Continue anyway - don't block the UI
-            }});
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {{
+            console.log('DOM loaded, setting up event listeners');
             
-            // Show the answer text
-            document.getElementById('answerText').style.display = 'block';
-            
-            // Show the next button
-            document.getElementById('nextButtonContainer').style.display = 'block';
-            
-            // Optionally disable the button after clicking
-            this.disabled = true;
-            this.textContent = 'Réponse révélée';
-        }});
-        
-        // Repeat button functionality
-        document.getElementById('repeatBtn').addEventListener('click', function() {{
-            // Hide the answer text
-            document.getElementById('answerText').style.display = 'none';
-            
-            // Hide the button container
-            document.getElementById('nextButtonContainer').style.display = 'none';
-            
-            // Re-enable and reset the answer button
+            // Answer button
             var answerBtn = document.getElementById('answerBtn');
-            answerBtn.disabled = false;
-            answerBtn.textContent = 'Cliquez pour la Réponse';
-            
-            // Stop and reset audio
-            var audio = document.getElementById('audioPlayer');
-            audio.pause();
-            audio.currentTime = 0;
-        }});
-        
-        // Easy button functionality
-        document.getElementById('easyBtn').addEventListener('click', function() {{
-            // Mark current page as easy
-            mark_page_as_easy(CURRENT_PAGE);
-            
-            // Change button appearance to show it was marked
-            this.classList.remove('btn-info');
-            this.classList.add('btn-secondary');
-            this.textContent = 'Marqué comme Facile ✓';
-            this.disabled = true;
-            
-            // Show success message
-            alert('Page ' + CURRENT_PAGE + ' marquée comme facile!');
-        }});
-        
-        // Next button functionality - navigate to next non-easy page
-        document.getElementById('nextBtn').addEventListener('click', function() {{
-            // Get next non-easy page
-            var nextPage = next_page(CURRENT_PAGE, MAX_PAGES);
-            
-            if (nextPage === null) {{
-                // All pages are easy!
-                alert('Félicitations! Toutes les pages sont marquées comme faciles!');
-                window.location.href = '../fr-flash.html';
-            }} else if (nextPage === 1) {{
-                // Wrap back to beginning
-                window.location.href = '../fr-flash.html';
-            }} else {{
-                // Go to next non-easy page
-                window.location.href = 'tst-' + nextPage + '.html';
+            if (answerBtn) {{
+                answerBtn.addEventListener('click', function() {{
+                    console.log('Answer button clicked');
+                    
+                    // Play the audio with error handling
+                    var audio = document.getElementById('audioPlayer');
+                    if (audio) {{
+                        audio.play().catch(function(error) {{
+                            console.log('Audio playback failed:', error);
+                        }});
+                    }}
+                    
+                    // Show the answer text
+                    var answerText = document.getElementById('answerText');
+                    if (answerText) {{
+                        answerText.style.display = 'block';
+                    }}
+                    
+                    // Show the next button
+                    var nextButtonContainer = document.getElementById('nextButtonContainer');
+                    if (nextButtonContainer) {{
+                        nextButtonContainer.style.display = 'block';
+                    }}
+                    
+                    // Disable the button after clicking
+                    this.disabled = true;
+                    this.textContent = 'Réponse révélée';
+                }});
             }}
-        }});
-        
-        // On page load, check if this page is already marked as easy
-        window.addEventListener('DOMContentLoaded', function() {{
-            if (is_page_easy(CURRENT_PAGE)) {{
-                // Disable and update the easy button
+            
+            // Repeat button functionality
+            var repeatBtn = document.getElementById('repeatBtn');
+            if (repeatBtn) {{
+                repeatBtn.addEventListener('click', function() {{
+                    console.log('Repeat button clicked');
+                    
+                    // Hide the answer text
+                    var answerText = document.getElementById('answerText');
+                    if (answerText) {{
+                        answerText.style.display = 'none';
+                    }}
+                    
+                    // Hide the button container
+                    var nextButtonContainer = document.getElementById('nextButtonContainer');
+                    if (nextButtonContainer) {{
+                        nextButtonContainer.style.display = 'none';
+                    }}
+                    
+                    // Re-enable and reset the answer button
+                    var answerBtn = document.getElementById('answerBtn');
+                    if (answerBtn) {{
+                        answerBtn.disabled = false;
+                        answerBtn.textContent = 'Cliquez pour la Réponse';
+                    }}
+                    
+                    // Stop and reset audio
+                    var audio = document.getElementById('audioPlayer');
+                    if (audio) {{
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }}
+                }});
+            }}
+            
+            // Easy button functionality
+            var easyBtn = document.getElementById('easyBtn');
+            if (easyBtn) {{
+                easyBtn.addEventListener('click', function() {{
+                    console.log('Easy button clicked');
+                    
+                    // Mark current page as easy
+                    if (typeof mark_page_as_easy === 'function') {{
+                        mark_page_as_easy(CURRENT_PAGE);
+                    }}
+                    
+                    // Change button appearance to show it was marked
+                    this.classList.remove('btn-info');
+                    this.classList.add('btn-secondary');
+                    this.textContent = 'Marqué comme Facile ✓';
+                    this.disabled = true;
+                    
+                    // Show success message
+                    alert('Page ' + CURRENT_PAGE + ' marquée comme facile!');
+                }});
+            }}
+            
+            // Next button functionality - navigate to next non-easy page
+            var nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) {{
+                nextBtn.addEventListener('click', function() {{
+                    console.log('Next button clicked');
+                    
+                    // Get next non-easy page
+                    var nextPage = null;
+                    if (typeof next_page === 'function') {{
+                        nextPage = next_page(CURRENT_PAGE, MAX_PAGES);
+                    }}
+                    
+                    if (nextPage === null) {{
+                        // All pages are easy!
+                        alert('Félicitations! Toutes les pages sont marquées comme faciles!');
+                        window.location.href = '../fr-flash.html';
+                    }} else if (nextPage === 1) {{
+                        // Wrap back to beginning
+                        window.location.href = '../fr-flash.html';
+                    }} else {{
+                        // Go to next non-easy page
+                        window.location.href = 'tst-' + nextPage + '.html';
+                    }}
+                }});
+            }}
+            
+            // Check if this page is already marked as easy
+            if (typeof is_page_easy === 'function' && is_page_easy(CURRENT_PAGE)) {{
                 var easyBtn = document.getElementById('easyBtn');
-                easyBtn.classList.remove('btn-info');
-                easyBtn.classList.add('btn-secondary');
-                easyBtn.textContent = 'Déjà Facile ✓';
-                easyBtn.disabled = true;
+                if (easyBtn) {{
+                    easyBtn.classList.remove('btn-info');
+                    easyBtn.classList.add('btn-secondary');
+                    easyBtn.textContent = 'Déjà Facile ✓';
+                    easyBtn.disabled = true;
+                }}
             }}
+            
+            console.log('All event listeners set up successfully');
         }});
     </script>
 </body>
