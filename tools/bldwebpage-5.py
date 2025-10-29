@@ -186,9 +186,6 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
                     this.classList.add('btn-secondary');
                     this.textContent = 'Marqué comme Facile ✓';
                     this.disabled = true;
-                    
-                    // Show success message
-                    alert('Page ' + CURRENT_PAGE + ' marquée comme facile!');
                 }});
             }}
             
