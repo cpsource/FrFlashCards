@@ -15,7 +15,7 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
     
     # Determine the next page filename
     if next_number == 1:
-        next_page = "fr-flash.html"
+        next_page = "../fr-flash.html"
     else:
         next_page = f"tst-{next_number}.html"
     
@@ -145,7 +145,7 @@ def main():
     html_content = generate_html(image_path, audio_path, text, test_number, max_number)
     
     # Write to output file with test number
-    output_filename = f"tst-{test_number}.html"
+    output_filename = f"lesanimaux/tst-{test_number}.html"
     with open(output_filename, 'w', encoding='utf-8') as f:
         f.write(html_content)
     
