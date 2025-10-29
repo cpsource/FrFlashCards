@@ -31,8 +31,6 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
     <title>Nommez cette Image</title>
     <!-- Bootstrap v4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- lesanimaux session management -->
-    <script src="lesanimaux.js"></script>
     <style>
         body {{
             padding: 20px;
@@ -94,6 +92,8 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- lesanimaux session management -->
+    <script src="lesanimaux.js"></script>
     
     <script>
         // Page configuration
@@ -101,9 +101,12 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
         const MAX_PAGES = {max_number};
         
         document.getElementById('answerBtn').addEventListener('click', function() {{
-            // Play the audio
+            // Play the audio with error handling
             var audio = document.getElementById('audioPlayer');
-            audio.play();
+            audio.play().catch(function(error) {{
+                console.log('Audio playback failed:', error);
+                // Continue anyway - don't block the UI
+            }});
             
             // Show the answer text
             document.getElementById('answerText').style.display = 'block';
