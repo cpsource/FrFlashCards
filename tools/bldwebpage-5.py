@@ -205,8 +205,8 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
                         // All pages are easy!
                         alert('Félicitations! Toutes les pages sont marquées comme faciles!');
                         window.location.href = '../fr-flash.html';
-                    }} else if (nextPage === 1) {{
-                        // Wrap back to beginning
+                    }} else if (nextPage < CURRENT_PAGE) {{
+                        // Next page is less than current (wrapped around), go back to menu
                         window.location.href = '../fr-flash.html';
                     }} else {{
                         // Go to next non-easy page
