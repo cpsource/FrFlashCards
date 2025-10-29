@@ -96,9 +96,9 @@ def generate_html(image_path, audio_path, text, test_number, max_number):
     <script src="lesanimaux.js"></script>
     
     <script>
-        // Page configuration
-        const CURRENT_PAGE = {test_number};
-        const MAX_PAGES = {max_number};
+        // Page configuration (using var to avoid redeclaration errors)
+        var CURRENT_PAGE = {test_number};
+        var MAX_PAGES = {max_number};
         
         // Wait for DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', function() {{
