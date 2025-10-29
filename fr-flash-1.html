@@ -50,6 +50,13 @@
             <hr class="my-4">
 
             <div class="text-center">
+              <button id="resetSession" class="btn btn-warning btn-lg">Réinitialiser la Session</button>
+              <p class="text-muted mt-2 small">Cliquez ici pour effacer votre progression et recommencer</p>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="text-center">
               <a href="texts/practice-texts.html" class="btn btn-secondary btn-lg">Pratiquer avec des Textes</a>
             </div>
           </div>
@@ -82,6 +89,19 @@
       if (typeof create_session === 'function') {
         create_session();
         console.log('Session initialized');
+      }
+      
+      // Reset session button
+      var resetBtn = document.getElementById('resetSession');
+      if (resetBtn && typeof reset_session === 'function') {
+        resetBtn.addEventListener('click', function() {
+          if (confirm('Êtes-vous sûr de vouloir réinitialiser votre progression ? Toutes les pages marquées comme "facile" seront effacées.')) {
+            reset_session();
+            alert('Session réinitialisée ! Vous pouvez recommencer depuis le début.');
+            // Optionally reload the page to reflect the reset
+            window.location.reload();
+          }
+        });
       }
       
       // Update "Commencer" button to go to first non-easy page
