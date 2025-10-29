@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nommez cette Image</title>
+    <!-- Bootstrap v4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .main-image {
+            width: 45%;
+            max-width: 45%;
+            height: auto;
+        }
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .answer-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            display: none;
+        }
+        .next-button-container {
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Nommez cette Image</h1>
+        
+        <div class="image-container">
+            <img src="test.png" alt="Image à identifier" class="main-image img-fluid">
+        </div>
+        
+        <div class="button-container">
+            <button id="answerBtn" class="btn btn-primary btn-lg">Cliquez pour la Réponse</button>
+        </div>
+        
+        <div id="answerText" class="answer-text">
+            <p class="lead">Test Animal</p>
+        </div>
+        
+        <div id="nextButtonContainer" class="next-button-container">
+            <button id="repeatBtn" class="btn btn-warning btn-lg mr-3">Répéter</button>
+            <button id="easyBtn" class="btn btn-info btn-lg mr-3">Facile</button>
+            <button id="nextBtn" class="btn btn-success btn-lg">Image Suivante</button>
+        </div>
+        
+        <audio id="audioPlayer" style="display: none;">
+            <source src="test.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- lesanimaux session management -->
+    <script src="lesanimaux.js"></script>
+    
+    <script>
+        // Page configuration (using var to avoid redeclaration errors)
+        var CURRENT_PAGE = 1;
+        var MAX_PAGES = 5;
+        
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, setting up event listeners');
+            
+            // Answer button
+            var answerBtn = document.getElementById('answerBtn');
+            if (answerBtn) {
+                answerBtn.addEventListener('click', function() {
+                    console.log('Answer button clicked');
+                    
+                    // Play the audio with error handling
+                    var audio = document.getElementById('audioPlayer');
+                    if (audio) {
+                        audio.play().catch(function(error) {
+                            console.log('Audio playback failed:', error);
+                        });
+                    }
+                    
+                    // Show the answer text
+                    var answerText = document.getElementById('answerText');
+                    if (answerText) {
+                        answerText.style.display = 'block';
+                    }
+                    
+                    // Show the next button
+                    var nextButtonContainer = document.getElementById('nextButtonContainer');
+                    if (nextButtonContainer) {
+                        nextButtonContainer.style.display = 'block';
+                    }
+                    
+                    // Disable the button after clicking
+                    this.disabled = true;
+                    this.textContent = 'Réponse révélée';
+                });
+            }
+            
+            // Repeat button functionality
+            var repeatBtn = document.getElementById('repeatBtn');
+            if (repeatBtn) {
+                repeatBtn.addEventListener('click', function() {
+                    console.log('Repeat button clicked');
+                    
+                    // Hide the answer text
+                    var answerText = document.getElementById('answerText');
+                    if (answerText) {
+                        answerText.style.display = 'none';
+                    }
+                    
+                    // Hide the button container
+                    var nextButtonContainer = document.getElementById('nextButtonContainer');
+                    if (nextButtonContainer) {
+                        nextButtonContainer.style.display = 'none';
+                    }
+                    
+                    // Re-enable and reset the answer button
+                    var answerBtn = document.getElementById('answerBtn');
+                    if (answerBtn) {
+                        answerBtn.disabled = false;
+                        answerBtn.textContent = 'Cliquez pour la Réponse';
+                    }
+                    
+                    // Stop and reset audio
+                    var audio = document.getElementById('audioPlayer');
+                    if (audio) {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }
+                });
+            }
+            
+            // Easy button functionality
+            var easyBtn = document.getElementById('easyBtn');
+            if (easyBtn) {
+                easyBtn.addEventListener('click', function() {
+                    console.log('Easy button clicked');
+                    
+                    // Mark current page as easy
+                    if (typeof mark_page_as_easy === 'function') {
+                        mark_page_as_easy(CURRENT_PAGE);
+                    }
+                    
+                    // Change button appearance to show it was marked
+                    this.classList.remove('btn-info');
+                    this.classList.add('btn-secondary');
+                    this.textContent = 'Marqué comme Facile ✓';
+                    this.disabled = true;
+                    
+                    // Show success message
+                    alert('Page ' + CURRENT_PAGE + ' marquée comme facile!');
+                });
+            }
+            
+            // Next button functionality - navigate to next non-easy page
+            var nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    console.log('Next button clicked');
+                    
+                    // Get next non-easy page
+                    var nextPage = null;
+                    if (typeof next_page === 'function') {
+                        nextPage = next_page(CURRENT_PAGE, MAX_PAGES);
+                    }
+                    
+                    if (nextPage === null) {
+                        // All pages are easy!
+                        alert('Félicitations! Toutes les pages sont marquées comme faciles!');
+                        window.location.href = '../fr-flash.html';
+                    } else if (nextPage === 1) {
+                        // Wrap back to beginning
+                        window.location.href = '../fr-flash.html';
+                    } else {
+                        // Go to next non-easy page
+                        window.location.href = 'tst-' + nextPage + '.html';
+                    }
+                });
+            }
+            
+            // Check if this page is already marked as easy
+            if (typeof is_page_easy === 'function' && is_page_easy(CURRENT_PAGE)) {
+                var easyBtn = document.getElementById('easyBtn');
+                if (easyBtn) {
+                    easyBtn.classList.remove('btn-info');
+                    easyBtn.classList.add('btn-secondary');
+                    easyBtn.textContent = 'Déjà Facile ✓';
+                    easyBtn.disabled = true;
+                }
+            }
+            
+            console.log('All event listeners set up successfully');
+        });
+    </script>
+</body>
+</html>
