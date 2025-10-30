@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Être — A1 Interactive Conjugation & Examples</title>
+  <style>
+    :root{
+      --bg:#0b0d10; --surface:#131720; --muted:#1b2130; --text:#e7ecf3; --sub:#a7b3c6; --accent:#6bd3ff; --accent-2:#8bffb5; --warn:#ffd166;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+    .container{max-width:980px;margin:24px auto;padding:0 16px}
+    h1{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:8px 0 6px}
+    h2{font-size:clamp(1.2rem,2vw,1.4rem);color:var(--sub);font-weight:600;margin:0 0 18px}
+    .card{background:linear-gradient(180deg,var(--surface),#0f131b);border:1px solid #1e2535;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);overflow:hidden}
+    .row-head{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:12px 14px;color:var(--sub);background:linear-gradient(180deg,#121722,#0f141e);border-bottom:1px solid #1f2535;font-weight:600}
+    .rows .row{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:14px;border-bottom:1px solid #1d2333;align-items:center;cursor:pointer;transition:background .15s ease}
+    .rows .row:hover{background:rgba(107,211,255,.08)}
+    .rows .row .tag{font-size:.95rem}
+    .rows .row .tip{color:var(--warn)}
+    .rows .row [data-col="form"]{font-weight:700}
+
+    .panel{display:none;border-top:1px solid #1d2333;background:#0f141d}
+    .panel.active{display:block}
+    .panel-inner{padding:18px 16px 20px}
+    .flex{display:flex;flex-wrap:wrap;gap:20px}
+    .col{flex:1 1 280px;min-width:260px}
+    .block{background:var(--muted);border:1px solid #222a3d;border-radius:12px;padding:14px}
+    .block h3{margin:0 0 10px;font-size:1.05rem;color:var(--accent)}
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
+    .note{font-size:.95rem;color:var(--sub)}
+
+    .gloss{position:relative;border-bottom:1px dotted rgba(255,255,255,.4);cursor:help}
+    .gloss::after{content:attr(data-gloss);position:absolute;left:0;bottom:125%;background:#000;border:1px solid #2a334a;padding:6px 8px;border-radius:8px;color:#fff;font-size:.85rem;white-space:nowrap;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .15s, transform .15s;box-shadow:0 6px 16px rgba(0,0,0,.45)}
+    .gloss:hover::after{opacity:1;transform:translateY(0)}
+
+    .badge{display:inline-block;padding:.1rem .5rem;border:1px solid #2a334a;border-radius:999px;background:#10162a;color:#cfe6ff;font-size:.8rem;margin-left:.5rem}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.85rem;background:#0e1526;border:1px solid #27324b;border-radius:6px;padding:.1rem .35rem}
+    .footer{color:var(--sub);font-size:.9rem;margin-top:18px;text-align:center}
+    .footer a{color:var(--accent);text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+
+    @media (max-width:680px){
+      .row-head,.rows .row{grid-template-columns:1fr}
+      .row-head{display:none}
+      .rows .row{gap:6px}
+      .rows .row > div::before{content:attr(data-label)": ";color:var(--sub)}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🥖 A1 – Survival Stage: <span style="color:var(--accent)">Être</span></h1>
+      <h2>Foundation stone verbs for daily French. Click a row to reveal conjugations + 5 mini examples. Hover <span class="gloss" data-gloss="English meaning appears on hover">highlighted words</span> for quick English.</h2>
+    </header>
+
+    <!-- content omitted for brevity -->
+
+    <p class="footer">
+      Tip: You can copy–paste this file as <span class="kbd">etre.html</span> and open it locally. Add more verbs by duplicating a panel and changing content. <span class="badge">A1</span><br>
+      <a href="../verbs.html">← Back to Verbs</a>
+    </p>
+  </div>
+
+  <script>
+    const rows = document.querySelectorAll('.row');
+    const panels = document.querySelectorAll('.panel');
+
+    function openPanel(id){
+      panels.forEach(p => p.classList.remove('active'));
+      const el = document.getElementById(id);
+      if(el){
+        el.classList.add('active');
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    }
+
+    rows.forEach(r => r.addEventListener('click', () => openPanel(r.dataset.target)));
+
+    openPanel('present');
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aller — A1 Interactive Conjugation & Examples</title>
+  <style>
+    :root{--bg:#0b0d10;--surface:#131720;--muted:#1b2130;--text:#e7ecf3;--sub:#a7b3c6;--accent:#6bffcf;--warn:#ffd166}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+    .container{max-width:980px;margin:24px auto;padding:0 16px}
+    h1{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:8px 0 6px}
+    h2{font-size:clamp(1.2rem,2vw,1.4rem);color:var(--sub);font-weight:600;margin:0 0 18px}
+    .card{background:linear-gradient(180deg,var(--surface),#0f131b);border:1px solid #1e2535;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);overflow:hidden}
+    .row-head{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:12px 14px;color:var(--sub);background:linear-gradient(180deg,#121722,#0f141e);border-bottom:1px solid #1f2535;font-weight:600}
+    .rows .row{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:14px;border-bottom:1px solid #1d2333;align-items:center;cursor:pointer;transition:background .15s ease}
+    .rows .row:hover{background:rgba(107,255,207,.08)}
+    .rows .row [data-col="form"]{font-weight:700}
+    .panel{display:none;border-top:1px solid #1d2333;background:#0f141d}
+    .panel.active{display:block}
+    .panel-inner{padding:18px 16px 20px}
+    .flex{display:flex;flex-wrap:wrap;gap:20px}
+    .col{flex:1 1 280px;min-width:260px}
+    .block{background:var(--muted);border:1px solid #222a3d;border-radius:12px;padding:14px}
+    .block h3{margin:0 0 10px;font-size:1.05rem;color:var(--accent)}
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
+    .note{font-size:.95rem;color:var(--sub)}
+    .gloss{position:relative;border-bottom:1px dotted rgba(255,255,255,.4);cursor:help}
+    .gloss::after{content:attr(data-gloss);position:absolute;left:0;bottom:125%;background:#000;border:1px solid #2a334a;padding:6px 8px;border-radius:8px;color:#fff;font-size:.85rem;white-space:nowrap;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .15s, transform .15s;box-shadow:0 6px 16px rgba(0,0,0,.45)}
+    .gloss:hover::after{opacity:1;transform:translateY(0)}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.85rem;background:#0e1526;border:1px solid #27324b;border-radius:6px;padding:.1rem .35rem}
+    .footer{text-align:center;color:var(--sub);font-size:.9rem;margin-top:18px}
+    .footer a{color:var(--accent);text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    @media (max-width:680px){.row-head,.rows .row{grid-template-columns:1fr}.row-head{display:none}.rows .row{gap:6px}.rows .row>div::before{content:attr(data-label)": ";color:var(--sub)}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🥖 A1 – Survival Stage: <span style="color:var(--accent)">Aller</span></h1>
+    <h2>Click a row to reveal conjugations + 5 A1 examples. Hover <span class="gloss" data-gloss="English meaning appears on hover">highlighted words</span> for translations.</h2>
+  </header>
+
+  <div class="card">
+    <div class="row-head"><div>Form</div><div>Name</div><div>Example</div><div>Use</div><div>Notes</div></div>
+    <div class="rows" id="rows">
+      <div class="row" data-target="present"><div data-col="form">Présent</div><div>Present tense</div><div>Je vais, tu vas, il va</div><div>Going somewhere / how you feel</div><div>🔹 Start here</div></div>
+      <div class="row" data-target="imperatif"><div data-col="form">Impératif</div><div>Imperative</div><div>Va ! Allons-y ! Allez !</div><div>Commands / invitations</div><div>tu, nous, vous only</div></div>
+      <div class="row" data-target="futur-proche"><div data-col="form">Futur proche</div><div>Near future</div><div>Je vais aller</div><div>Plans / intentions</div><div>Easy pattern</div></div>
+      <div class="row" data-target="pc"><div data-col="form">Passé composé</div><div>Compound past</div><div>Je suis allé</div><div>Completed past
+      </div><div>Auxiliary: être</div></div>
+      <div class="row" data-target="infinitif"><div data-col="form">Infinitif</div><div>Base form</div><div>aller</div><div>After prepositions</div><div>Dictionary form</div></div>
+    </div>
+
+    <section id="present" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Présent – Conjugation</h3>
+        <ul>
+          <li>je <strong>vais</strong></li>
+          <li>tu <strong>vas</strong></li>
+          <li>il / elle / on <strong>va</strong></li>
+          <li>nous <strong>allons</strong></li>
+          <li>vous <strong>allez</strong></li>
+          <li>ils / elles <strong>vont</strong></li>
+        </ul>
+        <p class="note">Expression: <span class="kbd">ça va ?</span> = “how’s it going?”</p>
+      </div>
+      <div class="col block"><h3>Présent – 5 Examples</h3>
+        <ul>
+          <li>Je vais <span class="gloss" data-gloss="to the market">au marché</span>.</li>
+          <li>Tu vas <span class="gloss" data-gloss="well / okay">bien</span> ?</li>
+          <li>Il va à <span class="gloss" data-gloss="school">l’école</span>.</li>
+          <li>Nous allons <span class="gloss" data-gloss="on foot">à pied</span>.</li>
+          <li>Elles vont au <span class="gloss" data-gloss="cinema">cinéma</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="imperatif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Impératif – Conjugation</h3>
+        <ul><li>(tu) <strong>va</strong> / <strong>vas‑y</strong> !</li><li>(nous) <strong>allons‑y</strong> !</li><li>(vous) <strong>allez‑y</strong> !</li></ul>
+        <p class="note">Informal spoken French often uses <span class="kbd">vas‑y !</span></p>
+      </div>
+      <div class="col block"><h3>Impératif – 5 Examples</h3>
+        <ul>
+          <li><strong>Va</strong> <span class="gloss" data-gloss="slowly">doucement</span>.</li>
+          <li><strong>Allons‑y</strong> <span class="gloss" data-gloss="now">maintenant</span> !</li>
+          <li><strong>Allez</strong> à la <span class="gloss" data-gloss="station">gare</span>.</li>
+          <li><strong>Allez‑y</strong>, s’il vous plaît.</li>
+          <li><strong>Va</strong> <span class="gloss" data-gloss="home">à la maison</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="futur-proche" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Futur proche – Conjugation (aller + aller)</h3>
+        <ul>
+          <li>je <strong>vais aller</strong></li>
+          <li>tu <strong>vas aller</strong></li>
+          <li>il / elle / on <strong>va aller</strong></li>
+          <li>nous <strong>allons aller</strong></li>
+          <li>vous <strong>allez aller</strong></li>
+          <li>ils / elles <strong>vont aller</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Futur proche – 5 Examples</h3>
+        <ul>
+          <li>Je vais aller <span class="gloss" data-gloss="to the beach">à la plage</span>.</li>
+          <li>Tu vas aller chez <span class="gloss" data-gloss="the doctor">le médecin</span>.</li>
+          <li>Il va aller <span class="gloss" data-gloss="by bus">en bus</span>.</li>
+          <li>Nous allons aller au <span class="gloss" data-gloss="restaurant">restaurant</span>.</li>
+          <li>Vous allez aller <span class="gloss" data-gloss="soon">bientôt</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="pc" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Passé composé – Conjugation (être + allé)</h3>
+        <ul>
+          <li>je <strong>suis allé</strong> <span class="note">(fem.: allée)</span></li>
+          <li>tu <strong>es allé</strong> <span class="note">(fem.: allée)</span></li>
+          <li>il <strong>est allé</strong> / elle <strong>est allée</strong></li>
+          <li>nous <strong>sommes allés</strong> <span class="note">(fem.: allées)</span></li>
+          <li>vous <strong>êtes allé</strong>(s) <span class="note">(fem.: allée/s)</span></li>
+          <li>ils <strong>sont allés</strong> / elles <strong>sont allées</strong></li>
+        </ul>
+        <p class="note">Agreement with gender/number because auxiliary is <span class="kbd">être</span>.</p>
+      </div>
+      <div class="col block"><h3>Passé composé – 5 Examples</h3>
+        <ul>
+          <li>Je suis allé au <span class="gloss" data-gloss="market">marché</span>.</li>
+          <li>Elle est allée à la <span class="gloss" data-gloss="library">bibliothèque</span>.</li>
+          <li>Nous sommes allés <span class="gloss" data-gloss="to see a film">voir un film</span>.</li>
+          <li>Vous êtes allés <span class="gloss" data-gloss="yesterday">hier</span> ?</li>
+          <li>Ils sont allés <span class="gloss" data-gloss="on vacation">en vacances</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="infinitif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Infinitif – Form</h3><p><strong>aller</strong></p></div>
+      <div class="col block"><h3>Infinitif – 5 Examples</h3>
+        <ul>
+          <li><strong>Aller</strong> <span class="gloss" data-gloss="to work">au travail</span> tôt aide.</li>
+          <li>Il veut <strong>aller</strong> <span class="gloss" data-gloss="abroad">à l’étranger</span>.</li>
+          <li>On aime <strong>aller</strong> <span class="gloss" data-gloss="for a walk">se promener</span>.</li>
+          <li>Je dois <strong>aller</strong> <span class="gloss" data-gloss="to the bank">à la banque</span>.</li>
+          <li><strong>Aller</strong> <span class="gloss" data-gloss="home">chez soi</span> fait du bien.</li>
+        </ul>
+      </div>
+    </div></section>
+  </div>
+  <p class="footer"><a href="../verbs.html">← Back to Verbs</a></p>
+</div>
+<script>
+  const rows=document.querySelectorAll('.row');const panels=document.querySelectorAll('.panel');
+  function openPanel(id){panels.forEach(p=>p.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'});}}
+  rows.forEach(r=>r.addEventListener('click',()=>openPanel(r.dataset.target)));
+  openPanel('present');
+</script>
+</body>
+</html>
