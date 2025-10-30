@@ -353,8 +353,8 @@ def generate_index_page(source_directory, output_filename="verbs.html", subdirec
         
         <div class="footer-section">
             <p>Continue building your French skills with these carefully curated resources!</p>
-            <a href="../index.html" class="btn btn-light btn-lg btn-return">
-                ↩️ Return to Main Page
+            <a href="top.html" class="btn btn-light btn-lg btn-return">
+                ↩️ Return
             </a>
         </div>
     </div>
