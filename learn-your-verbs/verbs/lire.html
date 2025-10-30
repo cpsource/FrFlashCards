@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lire — A1 Interactive Conjugation & Examples</title>
+  <style>
+    :root{--bg:#0b0d10;--surface:#131720;--muted:#1b2130;--text:#e7ecf3;--sub:#a7b3c6;--accent:#c4a1ff;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+    .container{max-width:980px;margin:24px auto;padding:0 16px}
+    h1{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:8px 0 6px}
+    h2{font-size:clamp(1.2rem,2vw,1.4rem);color:var(--sub);font-weight:600;margin:0 0 18px}
+    .card{background:linear-gradient(180deg,var(--surface),#0f131b);border:1px solid #1e2535;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);overflow:hidden}
+    .row-head{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:12px 14px;color:var(--sub);background:linear-gradient(180deg,#121722,#0f141e);border-bottom:1px solid #1f2535;font-weight:600}
+    .rows .row{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:14px;border-bottom:1px solid #1d2333;align-items:center;cursor:pointer;transition:background .15s ease}
+    .rows .row:hover{background:rgba(196,161,255,.08)}
+    .rows .row [data-col="form"]{font-weight:700}
+    .panel{display:none;border-top:1px solid #1d2333;background:#0f141d}
+    .panel.active{display:block}
+    .panel-inner{padding:18px 16px 20px}
+    .flex{display:flex;flex-wrap:wrap;gap:20px}
+    .col{flex:1 1 280px;min-width:260px}
+    .block{background:var(--muted);border:1px solid #222a3d;border-radius:12px;padding:14px}
+    .block h3{margin:0 0 10px;font-size:1.05rem;color:var(--accent)}
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
+    .gloss{position:relative;border-bottom:1px dotted rgba(255,255,255,.4);cursor:help}
+    .gloss::after{content:attr(data-gloss);position:absolute;left:0;bottom:125%;background:#000;border:1px solid #2a334a;padding:6px 8px;border-radius:8px;color:#fff;font-size:.85rem;white-space:nowrap;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .15s, transform .15s;box-shadow:0 6px 16px rgba(0,0,0,.45)}
+    .gloss:hover::after{opacity:1;transform:translateY(0)}
+    .footer{text-align:center;color:var(--sub);font-size:.9rem;margin-top:18px}
+    .footer a{color:var(--accent);text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🥖 A1 – Survival Stage: <span style="color:var(--accent)">Lire</span></h1>
+    <h2>Meaning: <em>to read</em>. Click a row to reveal conjugations + 5 A1 examples. Hover highlighted words for translations.</h2>
+  </header>
+
+  <div class="card">
+    <div class="row-head"><div>Form</div><div>Name</div><div>Example</div><div>Use</div><div>Notes</div></div>
+    <div class="rows" id="rows">
+      <div class="row" data-target="present"><div data-col="form">Présent</div><div>Present tense</div><div>Je lis, tu lis, il lit</div><div>Everyday speech</div><div>Irregular verb</div></div>
+      <div class="row" data-target="imperatif"><div data-col="form">Impératif</div><div>Imperative</div><div>Lis, Lisons, Lisez</div><div>Commands or advice</div><div>Only 3 forms</div></div>
+      <div class="row" data-target="futur-proche"><div data-col="form">Futur proche</div><div>Near future</div><div>Je vais lire</div><div>Plans or intentions</div><div>Common</div></div>
+      <div class="row" data-target="pc"><div data-col="form">Passé composé</div><div>Compound past</div><div>J’ai lu</div><div>Completed actions</div><div>Auxiliary: avoir</div></div>
+      <div class="row" data-target="infinitif"><div data-col="form">Infinitif</div><div>Base form</div><div>lire</div><div>With modal verbs</div><div>Dictionary form</div></div>
+    </div>
+
+    <section id="present" class="panel active"><div class="panel-inner flex">
+      <div class="col block"><h3>Présent – Conjugation</h3>
+        <ul>
+          <li>je <strong>lis</strong></li>
+          <li>tu <strong>lis</strong></li>
+          <li>il / elle / on <strong>lit</strong></li>
+          <li>nous <strong>lisons</strong></li>
+          <li>vous <strong>lisez</strong></li>
+          <li>ils / elles <strong>lisent</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Présent – 5 Examples</h3>
+        <ul>
+          <li>Je lis <span class="gloss" data-gloss="a book">un livre</span>.</li>
+          <li>Tu lis <span class="gloss" data-gloss="the newspaper">le journal</span> ?</li>
+          <li>Il lit <span class="gloss" data-gloss="a story">une histoire</span>.</li>
+          <li>Nous lisons <span class="gloss" data-gloss="together">ensemble</span>.</li>
+          <li>Vous lisez <span class="gloss" data-gloss="every day">tous les jours</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="imperatif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Impératif – Conjugation</h3>
+        <ul><li>(tu) <strong>lis</strong></li><li>(nous) <strong>lisons</strong></li><li>(vous) <strong>lisez</strong></li></ul>
+      </div>
+      <div class="col block"><h3>Impératif – 5 Examples</h3>
+        <ul>
+          <li><strong>Lis</strong> <span class="gloss" data-gloss="this book">ce livre</span> !</li>
+          <li><strong>Lisons</strong> <span class="gloss" data-gloss="together">ensemble</span>.</li>
+          <li><strong>Lisez</strong> <span class="gloss" data-gloss="slowly">lentement</span>.</li>
+          <li><strong>Lis</strong> <span class="gloss" data-gloss="the title">le titre</span>.</li>
+          <li><strong>Lisez</strong> <span class="gloss" data-gloss="the instructions">les instructions</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="futur-proche" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Futur proche – Conjugation (aller + lire)</h3>
+        <ul>
+          <li>je <strong>vais lire</strong></li>
+          <li>tu <strong>vas lire</strong></li>
+          <li>il / elle / on <strong>va lire</strong></li>
+          <li>nous <strong>allons lire</strong></li>
+          <li>vous <strong>allez lire</strong></li>
+          <li>ils / elles <strong>vont lire</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Futur proche – 5 Examples</h3>
+        <ul>
+          <li>Je vais lire <span class="gloss" data-gloss="a new book">un nouveau livre</span>.</li>
+          <li>Tu vas lire <span class="gloss" data-gloss="the article">l’article</span>.</li>
+          <li>Il va lire <span class="gloss" data-gloss="the text">le texte</span>.</li>
+          <li>Nous allons lire <span class="gloss" data-gloss="together">ensemble</span>.</li>
+          <li>Vous allez lire <span class="gloss" data-gloss="in class">en classe</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="pc" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Passé composé – Conjugation (avoir + lu)</h3>
+        <ul>
+          <li>j’<strong>ai lu</strong></li>
+          <li>tu <strong>as lu</strong></li>
+          <li>il / elle / on <strong>a lu</strong></li>
+          <li>nous <strong>avons lu</strong></li>
+          <li>vous <strong>avez lu</strong></li>
+          <li>ils / elles <strong>ont lu</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Passé composé – 5 Examples</h3>
+        <ul>
+          <li>J’ai lu <span class="gloss" data-gloss="the book">le livre</span>.</li>
+          <li>Tu as lu <span class="gloss" data-gloss="the news">les nouvelles</span>.</li>
+          <li>Il a lu <span class="gloss" data-gloss="a story">une histoire</span>.</li>
+          <li>Nous avons lu <span class="gloss" data-gloss="the same text">le même texte</span>.</li>
+          <li>Vous avez lu <span class="gloss" data-gloss="before sleeping">avant de dormir</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="infinitif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Infinitif – Form</h3><p><strong>lire</strong></p></div>
+      <div class="col block"><h3>Infinitif – 5 Examples</h3>
+        <ul>
+          <li><strong>Lire</strong> <span class="gloss" data-gloss="every day">chaque jour</span> aide beaucoup.</li>
+          <li>Il aime <strong>lire</strong> <span class="gloss" data-gloss="books">des livres</span>.</li>
+          <li>Nous voulons <strong>lire</strong> <span class="gloss" data-gloss="in French">en français</span>.</li>
+          <li>Tu dois <strong>lire</strong> <span class="gloss" data-gloss="the message">le message</span>.</li>
+          <li><strong>Lire</strong> <span class="gloss" data-gloss="is relaxing">est relaxant</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+  </div>
+  <p class="footer"><a href="../verbs.html">← Back to Verbs</a></p>
+</div>
+<script>
+  const rows=document.querySelectorAll('.row');const panels=document.querySelectorAll('.panel');
+  function openPanel(id){panels.forEach(p=>p.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'});}}
+  rows.forEach(r=>r.addEventListener('click',()=>openPanel(r.dataset.target)));
+</script>
+</body>
+</html>

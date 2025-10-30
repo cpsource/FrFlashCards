@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chercher — A1 Interactive Conjugation & Examples</title>
+  <style>
+    :root{--bg:#0b0d10;--surface:#131720;--muted:#1b2130;--text:#e7ecf3;--sub:#a7b3c6;--accent:#87d3ff;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+    .container{max-width:980px;margin:24px auto;padding:0 16px}
+    h1{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:8px 0 6px}
+    h2{font-size:clamp(1.2rem,2vw,1.4rem);color:var(--sub);font-weight:600;margin:0 0 18px}
+    .card{background:linear-gradient(180deg,var(--surface),#0f131b);border:1px solid #1e2535;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);overflow:hidden}
+    .row-head{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:12px 14px;color:var(--sub);background:linear-gradient(180deg,#121722,#0f141e);border-bottom:1px solid #1f2535;font-weight:600}
+    .rows .row{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:14px;border-bottom:1px solid #1d2333;align-items:center;cursor:pointer;transition:background .15s ease}
+    .rows .row:hover{background:rgba(135,211,255,.08)}
+    .rows .row [data-col="form"]{font-weight:700}
+    .panel{display:none;border-top:1px solid #1d2333;background:#0f141d}
+    .panel.active{display:block}
+    .panel-inner{padding:18px 16px 20px}
+    .flex{display:flex;flex-wrap:wrap;gap:20px}
+    .col{flex:1 1 280px;min-width:260px}
+    .block{background:var(--muted);border:1px solid #222a3d;border-radius:12px;padding:14px}
+    .block h3{margin:0 0 10px;font-size:1.05rem;color:var(--accent)}
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
+    .note{font-size:.95rem;color:var(--sub)}
+    .gloss{position:relative;border-bottom:1px dotted rgba(255,255,255,.4);cursor:help}
+    .gloss::after{content:attr(data-gloss);position:absolute;left:0;bottom:125%;background:#000;border:1px solid #2a334a;padding:6px 8px;border-radius:8px;color:#fff;font-size:.85rem;white-space:nowrap;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .15s, transform .15s;box-shadow:0 6px 16px rgba(0,0,0,.45)}
+    .gloss:hover::after{opacity:1;transform:translateY(0)}
+    .footer{text-align:center;color:var(--sub);font-size:.9rem;margin-top:18px}
+    .footer a{color:var(--accent);text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🥖 A1 – Survival Stage: <span style="color:var(--accent)">Chercher</span></h1>
+    <h2>Meaning: <em>to look for / to search</em>. Click a row to reveal conjugations + 5 A1 examples. Hover highlighted words for translations.</h2>
+  </header>
+
+  <div class="card">
+    <div class="row-head"><div>Form</div><div>Name</div><div>Example</div><div>Use</div><div>Notes</div></div>
+    <div class="rows" id="rows">
+      <div class="row" data-target="present"><div data-col="form">Présent</div><div>Present tense</div><div>Je cherche, tu cherches, il cherche</div><div>Everyday speech</div><div>Regular -er verb</div></div>
+      <div class="row" data-target="imperatif"><div data-col="form">Impératif</div><div>Imperative</div><div>Cherche, Cherchons, Cherchez</div><div>Commands or advice</div><div>Only 3 forms</div></div>
+      <div class="row" data-target="futur-proche"><div data-col="form">Futur proche</div><div>Near future</div><div>Je vais chercher</div><div>Plans or intentions</div><div>Common</div></div>
+      <div class="row" data-target="pc"><div data-col="form">Passé composé</div><div>Compound past</div><div>J’ai cherché</div><div>Completed actions</div><div>Auxiliary: avoir</div></div>
+      <div class="row" data-target="infinitif"><div data-col="form">Infinitif</div><div>Base form</div><div>chercher</div><div>With modal verbs</div><div>Dictionary form</div></div>
+    </div>
+
+    <section id="present" class="panel active"><div class="panel-inner flex">
+      <div class="col block"><h3>Présent – Conjugation</h3>
+        <ul>
+          <li>je <strong>cherche</strong></li>
+          <li>tu <strong>cherches</strong></li>
+          <li>il / elle / on <strong>cherche</strong></li>
+          <li>nous <strong>cherchons</strong></li>
+          <li>vous <strong>cherchez</strong></li>
+          <li>ils / elles <strong>cherchent</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Présent – 5 Examples</h3>
+        <ul>
+          <li>Je cherche <span class="gloss" data-gloss="my keys">mes clés</span>.</li>
+          <li>Tu cherches <span class="gloss" data-gloss="an address">une adresse</span> ?</li>
+          <li>Il cherche <span class="gloss" data-gloss="a job">un travail</span>.</li>
+          <li>Nous cherchons <span class="gloss" data-gloss="a table">une table</span>.</li>
+          <li>Vous cherchez <span class="gloss" data-gloss="something">quelque chose</span> ?</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="imperatif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Impératif – Conjugation</h3>
+        <ul><li>(tu) <strong>cherche</strong></li><li>(nous) <strong>cherchons</strong></li><li>(vous) <strong>cherchez</strong></li></ul>
+      </div>
+      <div class="col block"><h3>Impératif – 5 Examples</h3>
+        <ul>
+          <li><strong>Cherche</strong> <span class="gloss" data-gloss="carefully">soigneusement</span>.</li>
+          <li><strong>Cherchons</strong> <span class="gloss" data-gloss="together">ensemble</span>.</li>
+          <li><strong>Cherchez</strong> <span class="gloss" data-gloss="in the bag">dans le sac</span>.</li>
+          <li><strong>Cherche</strong> <span class="gloss" data-gloss="on the map">sur la carte</span>.</li>
+          <li><strong>Cherchez</strong> <span class="gloss" data-gloss="calmly">calmement</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="futur-proche" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Futur proche – Conjugation (aller + chercher)</h3>
+        <ul>
+          <li>je <strong>vais chercher</strong></li>
+          <li>tu <strong>vas chercher</strong></li>
+          <li>il / elle / on <strong>va chercher</strong></li>
+          <li>nous <strong>allons chercher</strong></li>
+          <li>vous <strong>allez chercher</strong></li>
+          <li>ils / elles <strong>vont chercher</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Futur proche – 5 Examples</h3>
+        <ul>
+          <li>Je vais chercher <span class="gloss" data-gloss="some bread">du pain</span>.</li>
+          <li>Tu vas chercher <span class="gloss" data-gloss="a solution">une solution</span>.</li>
+          <li>Il va chercher <span class="gloss" data-gloss="his mother at the station (pick up)">sa mère à la gare</span>.</li>
+          <li>Nous allons chercher <span class="gloss" data-gloss="an apartment">un appartement</span>.</li>
+          <li>Vous allez chercher <span class="gloss" data-gloss="online">en ligne</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="pc" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Passé composé – Conjugation (avoir + cherché)</h3>
+        <ul>
+          <li>j’<strong>ai cherché</strong></li>
+          <li>tu <strong>as cherché</strong></li>
+          <li>il / elle / on <strong>a cherché</strong></li>
+          <li>nous <strong>avons cherché</strong></li>
+          <li>vous <strong>avez cherché</strong></li>
+          <li>ils / elles <strong>ont cherché</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Passé composé – 5 Examples</h3>
+        <ul>
+          <li>J’ai cherché <span class="gloss" data-gloss="everywhere">partout</span>.</li>
+          <li>Tu as cherché <span class="gloss" data-gloss="for a long time">longtemps</span>.</li>
+          <li>Il a cherché <span class="gloss" data-gloss="his phone">son téléphone</span>.</li>
+          <li>Nous avons cherché <span class="gloss" data-gloss="but without success">mais sans succès</span>.</li>
+          <li>Vous avez cherché <span class="gloss" data-gloss="an address">une adresse</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="infinitif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Infinitif – Form</h3><p><strong>chercher</strong></p></div>
+      <div class="col block"><h3>Infinitif – 5 Examples</h3>
+        <ul>
+          <li><strong>Chercher</strong> <span class="gloss" data-gloss="a job">un travail</span> peut être difficile.</li>
+          <li>Il aime <strong>chercher</strong> <span class="gloss" data-gloss="new ideas">de nouvelles idées</span>.</li>
+          <li>Nous allons <strong>chercher</strong> <span class="gloss" data-gloss="calmly">calmement</span>.</li>
+          <li>Tu peux <strong>chercher</strong> <span class="gloss" data-gloss="on Google">sur Google</span>.</li>
+          <li><strong>Chercher</strong> <span class="gloss" data-gloss="the truth">la vérité</span> est important.</li>
+        </ul>
+      </div>
+    </div></section>
+  </div>
+  <p class="footer"><a href="../verbs.html">← Back to Verbs</a></p>
+</div>
+<script>
+  const rows=document.querySelectorAll('.row');const panels=document.querySelectorAll('.panel');
+  function openPanel(id){panels.forEach(p=>p.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'});}}
+  rows.forEach(r=>r.addEventListener('click',()=>openPanel(r.dataset.target)));
+</script>
+</body>
+</html>

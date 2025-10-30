@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Partir — A1 Interactive Conjugation & Examples</title>
+  <style>
+    :root{--bg:#0b0d10;--surface:#131720;--muted:#1b2130;--text:#e7ecf3;--sub:#a7b3c6;--accent:#ffafcc;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+    .container{max-width:980px;margin:24px auto;padding:0 16px}
+    h1{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:8px 0 6px}
+    h2{font-size:clamp(1.2rem,2vw,1.4rem);color:var(--sub);font-weight:600;margin:0 0 18px}
+    .card{background:linear-gradient(180deg,var(--surface),#0f131b);border:1px solid #1e2535;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);overflow:hidden}
+    .row-head{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:12px 14px;color:var(--sub);background:linear-gradient(180deg,#121722,#0f141e);border-bottom:1px solid #1f2535;font-weight:600}
+    .rows .row{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:14px;border-bottom:1px solid #1d2333;align-items:center;cursor:pointer;transition:background .15s ease}
+    .rows .row:hover{background:rgba(255,175,204,.08)}
+    .rows .row [data-col="form"]{font-weight:700}
+    .panel{display:none;border-top:1px solid #1d2333;background:#0f141d}
+    .panel.active{display:block}
+    .panel-inner{padding:18px 16px 20px}
+    .flex{display:flex;flex-wrap:wrap;gap:20px}
+    .col{flex:1 1 280px;min-width:260px}
+    .block{background:var(--muted);border:1px solid #222a3d;border-radius:12px;padding:14px}
+    .block h3{margin:0 0 10px;font-size:1.05rem;color:var(--accent)}
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
+    .gloss{position:relative;border-bottom:1px dotted rgba(255,255,255,.4);cursor:help}
+    .gloss::after{content:attr(data-gloss);position:absolute;left:0;bottom:125%;background:#000;border:1px solid #2a334a;padding:6px 8px;border-radius:8px;color:#fff;font-size:.85rem;white-space:nowrap;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .15s, transform .15s;box-shadow:0 6px 16px rgba(0,0,0,.45)}
+    .gloss:hover::after{opacity:1;transform:translateY(0)}
+    .footer{text-align:center;color:var(--sub);font-size:.9rem;margin-top:18px}
+    .footer a{color:var(--accent);text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🥖 A1 – Survival Stage: <span style="color:var(--accent)">Partir</span></h1>
+    <h2>Meaning: <em>to leave / to depart</em>. Click a row to reveal conjugations + 5 A1 examples. Hover highlighted words for translations.</h2>
+  </header>
+
+  <div class="card">
+    <div class="row-head"><div>Form</div><div>Name</div><div>Example</div><div>Use</div><div>Notes</div></div>
+    <div class="rows" id="rows">
+      <div class="row" data-target="present"><div data-col="form">Présent</div><div>Present tense</div><div>Je pars, tu pars, il part</div><div>Everyday speech</div><div>Irregular -ir verb</div></div>
+      <div class="row" data-target="imperatif"><div data-col="form">Impératif</div><div>Imperative</div><div>Pars, Partons, Partez</div><div>Commands or advice</div><div>Only 3 forms</div></div>
+      <div class="row" data-target="futur-proche"><div data-col="form">Futur proche</div><div>Near future</div><div>Je vais partir</div><div>Plans or intentions</div><div>Common</div></div>
+      <div class="row" data-target="pc"><div data-col="form">Passé composé</div><div>Compound past</div><div>Je suis parti(e)</div><div>Completed actions</div><div>Auxiliary: être</div></div>
+      <div class="row" data-target="infinitif"><div data-col="form">Infinitif</div><div>Base form</div><div>partir</div><div>With modal verbs</div><div>Dictionary form</div></div>
+    </div>
+
+    <section id="present" class="panel active"><div class="panel-inner flex">
+      <div class="col block"><h3>Présent – Conjugation</h3>
+        <ul>
+          <li>je <strong>pars</strong></li>
+          <li>tu <strong>pars</strong></li>
+          <li>il / elle / on <strong>part</strong></li>
+          <li>nous <strong>partons</strong></li>
+          <li>vous <strong>partez</strong></li>
+          <li>ils / elles <strong>partent</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Présent – 5 Examples</h3>
+        <ul>
+          <li>Je pars <span class="gloss" data-gloss="tomorrow">demain</span>.</li>
+          <li>Tu pars <span class="gloss" data-gloss="early">tôt</span> ?</li>
+          <li>Il part <span class="gloss" data-gloss="for Paris">pour Paris</span>.</li>
+          <li>Nous partons <span class="gloss" data-gloss="on vacation">en vacances</span>.</li>
+          <li>Vous partez <span class="gloss" data-gloss="soon">bientôt</span> ?</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="imperatif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Impératif – Conjugation</h3>
+        <ul><li>(tu) <strong>pars</strong></li><li>(nous) <strong>partons</strong></li><li>(vous) <strong>partez</strong></li></ul>
+      </div>
+      <div class="col block"><h3>Impératif – 5 Examples</h3>
+        <ul>
+          <li><strong>Pars</strong> <span class="gloss" data-gloss="now">maintenant</span> !</li>
+          <li><strong>Partons</strong> <span class="gloss" data-gloss="quickly">vite</span> !</li>
+          <li><strong>Partez</strong> <span class="gloss" data-gloss="together">ensemble</span>.</li>
+          <li><strong>Pars</strong> <span class="gloss" data-gloss="in peace">en paix</span>.</li>
+          <li><strong>Partez</strong> <span class="gloss" data-gloss="right away">tout de suite</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="futur-proche" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Futur proche – Conjugation (aller + partir)</h3>
+        <ul>
+          <li>je <strong>vais partir</strong></li>
+          <li>tu <strong>vas partir</strong></li>
+          <li>il / elle / on <strong>va partir</strong></li>
+          <li>nous <strong>allons partir</strong></li>
+          <li>vous <strong>allez partir</strong></li>
+          <li>ils / elles <strong>vont partir</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Futur proche – 5 Examples</h3>
+        <ul>
+          <li>Je vais partir <span class="gloss" data-gloss="tomorrow morning">demain matin</span>.</li>
+          <li>Tu vas partir <span class="gloss" data-gloss="soon">bientôt</span>.</li>
+          <li>Il va partir <span class="gloss" data-gloss="on a trip">en voyage</span>.</li>
+          <li>Nous allons partir <span class="gloss" data-gloss="in an hour">dans une heure</span>.</li>
+          <li>Vous allez partir <span class="gloss" data-gloss="for Paris">pour Paris</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="pc" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Passé composé – Conjugation (être + parti)</h3>
+        <ul>
+          <li>je <strong>suis parti(e)</strong></li>
+          <li>tu <strong>es parti(e)</strong></li>
+          <li>il / elle / on <strong>est parti(e)</strong></li>
+          <li>nous <strong>sommes parti(e)s</strong></li>
+          <li>vous <strong>êtes parti(e)(s)</strong></li>
+          <li>ils / elles <strong>sont parti(e)s</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Passé composé – 5 Examples</h3>
+        <ul>
+          <li>Je suis parti <span class="gloss" data-gloss="early">tôt</span>.</li>
+          <li>Tu es parti <span class="gloss" data-gloss="yesterday">hier</span>.</li>
+          <li>Il est parti <span class="gloss" data-gloss="to work">au travail</span>.</li>
+          <li>Nous sommes partis <span class="gloss" data-gloss="on vacation">en vacances</span>.</li>
+          <li>Vous êtes partis <span class="gloss" data-gloss="for Paris">pour Paris</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="infinitif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Infinitif – Form</h3><p><strong>partir</strong></p></div>
+      <div class="col block"><h3>Infinitif – 5 Examples</h3>
+        <ul>
+          <li><strong>Partir</strong> <span class="gloss" data-gloss="early">tôt</span> est difficile.</li>
+          <li>Il veut <strong>partir</strong> <span class="gloss" data-gloss="tomorrow">demain</span>.</li>
+          <li>Nous aimons <strong>partir</strong> <span class="gloss" data-gloss="on vacation">en vacances</span>.</li>
+          <li>Tu peux <strong>partir</strong> <span class="gloss" data-gloss="now">maintenant</span>.</li>
+          <li><strong>Partir</strong> <span class="gloss" data-gloss="with friends">avec des amis</span> est amusant.</li>
+        </ul>
+      </div>
+    </div></section>
+  </div>
+  <p class="footer"><a href="../verbs.html">← Back to Verbs</a></p>
+</div>
+<script>
+  const rows=document.querySelectorAll('.row');const panels=document.querySelectorAll('.panel');
+  function openPanel(id){panels.forEach(p=>p.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'});}}
+  rows.forEach(r=>r.addEventListener('click',()=>openPanel(r.dataset.target)));
+</script>
+</body>
+</html>
