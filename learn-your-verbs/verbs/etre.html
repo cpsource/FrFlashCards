@@ -1,13 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Être — A1 Interactive Conjugation & Examples</title>
   <style>
-    :root{
-      --bg:#0b0d10; --surface:#131720; --muted:#1b2130; --text:#e7ecf3; --sub:#a7b3c6; --accent:#6bd3ff; --accent-2:#8bffb5; --warn:#ffd166;
-    }
+    :root{--bg:#0b0d10;--surface:#131720;--muted:#1b2130;--text:#e7ecf3;--sub:#a7b3c6;--accent:#ffd479;}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
     .container{max-width:980px;margin:24px auto;padding:0 16px}
     h1{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:8px 0 6px}
@@ -15,11 +13,8 @@
     .card{background:linear-gradient(180deg,var(--surface),#0f131b);border:1px solid #1e2535;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);overflow:hidden}
     .row-head{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:12px 14px;color:var(--sub);background:linear-gradient(180deg,#121722,#0f141e);border-bottom:1px solid #1f2535;font-weight:600}
     .rows .row{display:grid;grid-template-columns:1.1fr .9fr 1.6fr 1.4fr .8fr;gap:8px;padding:14px;border-bottom:1px solid #1d2333;align-items:center;cursor:pointer;transition:background .15s ease}
-    .rows .row:hover{background:rgba(107,211,255,.08)}
-    .rows .row .tag{font-size:.95rem}
-    .rows .row .tip{color:var(--warn)}
+    .rows .row:hover{background:rgba(255,212,121,.08)}
     .rows .row [data-col="form"]{font-weight:700}
-
     .panel{display:none;border-top:1px solid #1d2333;background:#0f141d}
     .panel.active{display:block}
     .panel-inner{padding:18px 16px 20px}
@@ -29,58 +24,131 @@
     .block h3{margin:0 0 10px;font-size:1.05rem;color:var(--accent)}
     ul{margin:0;padding-left:18px}
     li{margin:6px 0}
-    .note{font-size:.95rem;color:var(--sub)}
-
     .gloss{position:relative;border-bottom:1px dotted rgba(255,255,255,.4);cursor:help}
     .gloss::after{content:attr(data-gloss);position:absolute;left:0;bottom:125%;background:#000;border:1px solid #2a334a;padding:6px 8px;border-radius:8px;color:#fff;font-size:.85rem;white-space:nowrap;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .15s, transform .15s;box-shadow:0 6px 16px rgba(0,0,0,.45)}
     .gloss:hover::after{opacity:1;transform:translateY(0)}
-
-    .badge{display:inline-block;padding:.1rem .5rem;border:1px solid #2a334a;border-radius:999px;background:#10162a;color:#cfe6ff;font-size:.8rem;margin-left:.5rem}
-    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.85rem;background:#0e1526;border:1px solid #27324b;border-radius:6px;padding:.1rem .35rem}
-    .footer{color:var(--sub);font-size:.9rem;margin-top:18px;text-align:center}
+    .footer{text-align:center;color:var(--sub);font-size:.9rem;margin-top:18px}
     .footer a{color:var(--accent);text-decoration:none}
     .footer a:hover{text-decoration:underline}
-
-    @media (max-width:680px){
-      .row-head,.rows .row{grid-template-columns:1fr}
-      .row-head{display:none}
-      .rows .row{gap:6px}
-      .rows .row > div::before{content:attr(data-label)": ";color:var(--sub)}
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>🥖 A1 – Survival Stage: <span style="color:var(--accent)">Être</span></h1>
-      <h2>Foundation stone verbs for daily French. Click a row to reveal conjugations + 5 mini examples. Hover <span class="gloss" data-gloss="English meaning appears on hover">highlighted words</span> for quick English.</h2>
-    </header>
+<div class="container">
+  <header>
+    <h1>🥖 A1 – Survival Stage: <span style="color:var(--accent)">Être</span></h1>
+    <h2>Meaning: <em>to be</em>. Click a row to reveal conjugations + 5 A1 examples. Hover highlighted words for translations.</h2>
+  </header>
 
-    <!-- content omitted for brevity -->
+  <div class="card">
+    <div class="row-head"><div>Form</div><div>Name</div><div>Example</div><div>Use</div><div>Notes</div></div>
+    <div class="rows" id="rows">
+      <div class="row" data-target="present"><div data-col="form">Présent</div><div>Present tense</div><div>Je suis, tu es, il est</div><div>Everyday speech</div><div>Irregular verb</div></div>
+      <div class="row" data-target="imperatif"><div data-col="form">Impératif</div><div>Imperative</div><div>Sois, Soyons, Soyez</div><div>Commands or advice</div><div>Only 3 forms</div></div>
+      <div class="row" data-target="futur-proche"><div data-col="form">Futur proche</div><div>Near future</div><div>Je vais être</div><div>Plans or intentions</div><div>Common</div></div>
+      <div class="row" data-target="pc"><div data-col="form">Passé composé</div><div>Compound past</div><div>J’ai été</div><div>Completed actions</div><div>Auxiliary: avoir</div></div>
+      <div class="row" data-target="infinitif"><div data-col="form">Infinitif</div><div>Base form</div><div>être</div><div>With modal verbs</div><div>Dictionary form</div></div>
+    </div>
 
-    <p class="footer">
-      Tip: You can copy–paste this file as <span class="kbd">etre.html</span> and open it locally. Add more verbs by duplicating a panel and changing content. <span class="badge">A1</span><br>
-      <a href="../verbs.html">← Back to Verbs</a>
-    </p>
+    <section id="present" class="panel active"><div class="panel-inner flex">
+      <div class="col block"><h3>Présent – Conjugation</h3>
+        <ul>
+          <li>je <strong>suis</strong></li>
+          <li>tu <strong>es</strong></li>
+          <li>il / elle / on <strong>est</strong></li>
+          <li>nous <strong>sommes</strong></li>
+          <li>vous <strong>êtes</strong></li>
+          <li>ils / elles <strong>sont</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Présent – 5 Examples</h3>
+        <ul>
+          <li>Je suis <span class="gloss" data-gloss="happy">content</span>.</li>
+          <li>Tu es <span class="gloss" data-gloss="tired">fatigué</span> ?</li>
+          <li>Il est <span class="gloss" data-gloss="at home">à la maison</span>.</li>
+          <li>Nous sommes <span class="gloss" data-gloss="students">étudiants</span>.</li>
+          <li>Vous êtes <span class="gloss" data-gloss="ready">prêts</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="imperatif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Impératif – Conjugation</h3>
+        <ul><li>(tu) <strong>sois</strong></li><li>(nous) <strong>soyons</strong></li><li>(vous) <strong>soyez</strong></li></ul>
+      </div>
+      <div class="col block"><h3>Impératif – 5 Examples</h3>
+        <ul>
+          <li><strong>Sois</strong> <span class="gloss" data-gloss="careful">prudent</span> !</li>
+          <li><strong>Sois</strong> <span class="gloss" data-gloss="on time">à l’heure</span>.</li>
+          <li><strong>Soyons</strong> <span class="gloss" data-gloss="kind">gentils</span>.</li>
+          <li><strong>Soyez</strong> <span class="gloss" data-gloss="calm">calmes</span>.</li>
+          <li><strong>Sois</strong> <span class="gloss" data-gloss="strong">fort</span> !</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="futur-proche" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Futur proche – Conjugation (aller + être)</h3>
+        <ul>
+          <li>je <strong>vais être</strong></li>
+          <li>tu <strong>vas être</strong></li>
+          <li>il / elle / on <strong>va être</strong></li>
+          <li>nous <strong>allons être</strong></li>
+          <li>vous <strong>allez être</strong></li>
+          <li>ils / elles <strong>vont être</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Futur proche – 5 Examples</h3>
+        <ul>
+          <li>Je vais être <span class="gloss" data-gloss="late">en retard</span>.</li>
+          <li>Tu vas être <span class="gloss" data-gloss="happy">content</span>.</li>
+          <li>Il va être <span class="gloss" data-gloss="busy">occupé</span>.</li>
+          <li>Nous allons être <span class="gloss" data-gloss="ready">prêts</span>.</li>
+          <li>Vous allez être <span class="gloss" data-gloss="surprised">surpris</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="pc" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Passé composé – Conjugation (avoir + été)</h3>
+        <ul>
+          <li>j’<strong>ai été</strong></li>
+          <li>tu <strong>as été</strong></li>
+          <li>il / elle / on <strong>a été</strong></li>
+          <li>nous <strong>avons été</strong></li>
+          <li>vous <strong>avez été</strong></li>
+          <li>ils / elles <strong>ont été</strong></li>
+        </ul>
+      </div>
+      <div class="col block"><h3>Passé composé – 5 Examples</h3>
+        <ul>
+          <li>J’ai été <span class="gloss" data-gloss="sick">malade</span>.</li>
+          <li>Tu as été <span class="gloss" data-gloss="on vacation">en vacances</span>.</li>
+          <li>Il a été <span class="gloss" data-gloss="gentle">gentil</span>.</li>
+          <li>Nous avons été <span class="gloss" data-gloss="lucky">chanceux</span>.</li>
+          <li>Vous avez été <span class="gloss" data-gloss="excellent">excellents</span>.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section id="infinitif" class="panel"><div class="panel-inner flex">
+      <div class="col block"><h3>Infinitif – Form</h3><p><strong>être</strong></p></div>
+      <div class="col block"><h3>Infinitif – 5 Examples</h3>
+        <ul>
+          <li><strong>Être</strong> <span class="gloss" data-gloss="happy">heureux</span> est important.</li>
+          <li>Il veut <strong>être</strong> <span class="gloss" data-gloss="teacher">professeur</span>.</li>
+          <li>Nous aimons <strong>être</strong> <span class="gloss" data-gloss="together">ensemble</span>.</li>
+          <li>Tu peux <strong>être</strong> <span class="gloss" data-gloss="honest">honnête</span>.</li>
+          <li><strong>Être</strong> <span class="gloss" data-gloss="yourself">soi-même</span> est bien.</li>
+        </ul>
+      </div>
+    </div></section>
   </div>
-
-  <script>
-    const rows = document.querySelectorAll('.row');
-    const panels = document.querySelectorAll('.panel');
-
-    function openPanel(id){
-      panels.forEach(p => p.classList.remove('active'));
-      const el = document.getElementById(id);
-      if(el){
-        el.classList.add('active');
-        el.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    }
-
-    rows.forEach(r => r.addEventListener('click', () => openPanel(r.dataset.target)));
-
-    openPanel('present');
-  </script>
+  <p class="footer"><a href="../verbs.html">← Back to Verbs</a></p>
+</div>
+<script>
+  const rows=document.querySelectorAll('.row');const panels=document.querySelectorAll('.panel');
+  function openPanel(id){panels.forEach(p=>p.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'});}}
+  rows.forEach(r=>r.addEventListener('click',()=>openPanel(r.dataset.target)));
+</script>
 </body>
 </html>
-

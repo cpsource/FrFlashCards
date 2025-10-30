@@ -1,171 +1,394 @@
-<!doctype html>
-<html lang=en>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset=utf-8>
-  <meta name=viewport content="width=device-width, initial-scale=1">
-  <title>A1 Verbs – Index</title>
-  <style>
-    :root{--bg:#0b0d10;--surface:#131720;--muted:#1b2130;--text:#e7ecf3;--sub:#a7b3c6;--accent:#6bd3ff}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
-    .container{max-width:980px;margin:28px auto;padding:0 16px}
-    h1{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:8px 0 6px}
-    p.lead{color:var(--sub)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:18px}
-    .card{display:block;background:linear-gradient(180deg,var(--surface),#0f131b);border:1px solid #1e2535;border-radius:14px;padding:14px;text-decoration:none;color:var(--text);transition:transform .12s ease, border-color .12s ease}
-    .card:hover{transform:translateY(-2px);border-color:#2a3650}
-    .card-title{font-weight:700;margin-bottom:6px}
-    .card-sub{color:var(--sub);font-size:.9rem}
-    .footer{margin-top:22px;color:var(--sub);font-size:.9rem}
-    .empty{color:var(--sub)}
-    .small{font-size:.9rem;color:var(--sub)}
-    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.85rem;background:#0e1526;border:1px solid #27324b;border-radius:6px;padding:.1rem .35rem}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Verb Resources - Resource Index</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        h1 {
+            color: #764ba2;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        .resource-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+        .table tbody tr:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+        .table tbody td {
+            padding: 20px;
+            vertical-align: middle;
+            border-top: 1px solid #dee2e6;
+        }
+        .resource-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #764ba2;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .resource-title:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        .resource-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .resource-number {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        .stats-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .stat-item {
+            display: inline-block;
+            margin: 0 30px;
+            color: #764ba2;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .stat-label {
+            color: #666;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        .footer-section {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+        }
+        .btn-return {
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .resource-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1em;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .table tbody td {
+                padding: 15px 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class=container>
-    <h1>🥖 A1 Verbs – Index</h1>
-    <p class=lead>Auto‑generated on 2025-10-30 18:47. Click a card to open a verb page. Add more by dropping their <span class=kbd>.html</span> files in this folder.</p>
-    <div class=grid>
-      
-        <a class=card href="verbs/aimer.html">
-          <div class=card-title>Aimer — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
+    <div class="container">
+        <div class="header-section">
+            <h1>📚 French Verb Resources 📚</h1>
+            <p class="subtitle">Master French verb conjugations and usage</p>
+        </div>
         
-
-        <a class=card href="verbs/aller.html">
-          <div class=card-title>Aller — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
+        <div class="resource-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px; text-align: center;">#</th>
+                        <th>Resource</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">1</div>
+                        </td>
+                        <td>
+                            <a href="verbs/aimer.html" class="resource-title">Aimer A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">2</div>
+                        </td>
+                        <td>
+                            <a href="verbs/aller.html" class="resource-title">Aller A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Expression ça va ?  hows it going?</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">3</div>
+                        </td>
+                        <td>
+                            <a href="verbs/attendre.html" class="resource-title">Attendre A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">4</div>
+                        </td>
+                        <td>
+                            <a href="verbs/avoir.html" class="resource-title">Avoir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">5</div>
+                        </td>
+                        <td>
+                            <a href="verbs/choisir.html" class="resource-title">Choisir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">6</div>
+                        </td>
+                        <td>
+                            <a href="verbs/connaitre.html" class="resource-title">Connaître A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Pattern connaître  nom  Je connais Paris.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">7</div>
+                        </td>
+                        <td>
+                            <a href="verbs/devoir.html" class="resource-title">Devoir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Pattern je dois  infinitif  I have to </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">8</div>
+                        </td>
+                        <td>
+                            <a href="verbs/dire.html" class="resource-title">Dire A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">9</div>
+                        </td>
+                        <td>
+                            <a href="verbs/etre.html" class="resource-title">Être A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Tip You can copypaste this file as etre.html and open it locally. Add more verbs by duplicating a panel and changing content. A1  Back to Verbs</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">10</div>
+                        </td>
+                        <td>
+                            <a href="verbs/faire.html" class="resource-title">Faire A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Common expressions faire du sport, faire la cuisine, il fait froid.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">11</div>
+                        </td>
+                        <td>
+                            <a href="verbs/finir.html" class="resource-title">Finir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">12</div>
+                        </td>
+                        <td>
+                            <a href="verbs/mettre.html" class="resource-title">Prendre A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">13</div>
+                        </td>
+                        <td>
+                            <a href="verbs/parler.html" class="resource-title">Parler A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">14</div>
+                        </td>
+                        <td>
+                            <a href="verbs/perdre.html" class="resource-title">Perdre A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">15</div>
+                        </td>
+                        <td>
+                            <a href="verbs/pouvoir.html" class="resource-title">Pouvoir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Used in formal wishes Puisse-t-il réussir !  May he succeed!</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">16</div>
+                        </td>
+                        <td>
+                            <a href="verbs/prendre.html" class="resource-title">Prendre A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">17</div>
+                        </td>
+                        <td>
+                            <a href="verbs/reussir.html" class="resource-title">Réussir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">18</div>
+                        </td>
+                        <td>
+                            <a href="verbs/savoir.html" class="resource-title">Savoir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Pattern savoir  infinitif  Je sais nager I know how to swim.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">19</div>
+                        </td>
+                        <td>
+                            <a href="verbs/travailler.html" class="resource-title">Travailler A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">20</div>
+                        </td>
+                        <td>
+                            <a href="verbs/vendre.html" class="resource-title">Vendre A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">21</div>
+                        </td>
+                        <td>
+                            <a href="verbs/venir.html" class="resource-title">Venir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Useful venir de  infinitif  to have just done.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">22</div>
+                        </td>
+                        <td>
+                            <a href="verbs/voir.html" class="resource-title">Voir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">French verb conjugation patterns and practice exercises.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div class="resource-number">23</div>
+                        </td>
+                        <td>
+                            <a href="verbs/vouloir.html" class="resource-title">Vouloir A1 Interactive Conjugation Examples</a>
+                            <div class="resource-description">Everyday French often uses tu veux bien ? for a soft request. Very polite Veuillez</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         
-
-        <a class=card href="verbs/attendre.html">
-          <div class=card-title>Attendre — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="stat-number">23</div>
+                <div class="stat-label">Total Resources</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">🇫🇷</div>
+                <div class="stat-label">Language</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">A1-B2</div>
+                <div class="stat-label">Levels Covered</div>
+            </div>
+        </div>
         
-
-        <a class=card href="verbs/avoir.html">
-          <div class=card-title>Avoir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/choisir.html">
-          <div class=card-title>Choisir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/connaitre.html">
-          <div class=card-title>Connaître — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/devoir.html">
-          <div class=card-title>Devoir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/dire.html">
-          <div class=card-title>Dire — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/faire.html">
-          <div class=card-title>Faire — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/finir.html">
-          <div class=card-title>Finir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/parler.html">
-          <div class=card-title>Parler — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/perdre.html">
-          <div class=card-title>Perdre — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/pouvoir.html">
-          <div class=card-title>Pouvoir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/prendre.html">
-          <div class=card-title>Prendre — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/mettre.html">
-          <div class=card-title>Prendre — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/reussir.html">
-          <div class=card-title>Réussir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/savoir.html">
-          <div class=card-title>Savoir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/travailler.html">
-          <div class=card-title>Travailler — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/vendre.html">
-          <div class=card-title>Vendre — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/venir.html">
-          <div class=card-title>Venir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/voir.html">
-          <div class=card-title>Voir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/vouloir.html">
-          <div class=card-title>Vouloir — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
-
-        <a class=card href="verbs/etre.html">
-          <div class=card-title>Être — A1 Interactive Conjugation &amp; Examples</div>
-          <div class=card-sub>Updated 2025-10-30</div>
-        </a>
-        
+        <div class="footer-section">
+            <p>Continue building your French skills with these carefully curated resources!</p>
+            <a href="../index.html" class="btn btn-light btn-lg btn-return">
+                ↩️ Return to Main Page
+            </a>
+        </div>
     </div>
-    <p class=footer>Tip: Keep individual pages named like <span class=kbd>etre.html</span>, <span class=kbd>avoir.html</span>, etc., or any name with a meaningful <span class=kbd>&lt;title&gt;</span>.</p>
-  </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
