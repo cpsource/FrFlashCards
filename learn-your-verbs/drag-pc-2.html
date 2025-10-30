@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Match – Passé composé</title>
+<style>
+  :root{
+    --bg1:#0b1020; --bg2:#111b2c; --card:#111827; --border:#1f2937; --text:#e5e7eb; --muted:#93c5fd;
+    --ok:#16a34a; --bad:#dc2626; --accent:#22d3ee; --disabled:#334155;
+  }
+  html,body{height:100%}
+  body{
+    margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2)); color:var(--text);
+    display:flex; flex-direction:column; align-items:center;
+  }
+  header{ text-align:center; padding:20px 16px 8px; }
+  header h1{ margin:0 0 6px; color:#86efac; font-size:2rem; font-weight:800; }
+  header p{ margin:0; color:#cbd5e1 }
+
+  .controls{ margin:10px 0; }
+  .btn{ background:#0ea5e9; color:#fff; border:none; padding:8px 12px; border-radius:10px; font-weight:700; cursor:pointer }
+  .btn:hover{ filter:brightness(1.1) }
+
+  .status{ margin-left:8px; font-weight:700; color:#a7f3d0 }
+
+  .board{ width:100%; max-width:1000px; padding:14px 16px 24px; display:grid; gap:16px; grid-template-columns:1fr 1fr }
+
+  .column{ background:rgba(17,24,39,.85); border:1px solid var(--border); border-radius:12px; padding:12px }
+  .column h2{ margin:0 0 10px; text-align:center; color:var(--muted) }
+
+  .list{ display:flex; flex-direction:column; gap:8px }
+
+  /* Card sizing: ~two character heights */
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:10px; text-align:center; font-weight:700;
+         height:2.2em; line-height:1; padding:4px 8px; display:flex; align-items:center; justify-content:center; user-select:none; }
+  .card[draggable="true"]{ cursor:grab }
+  .card.dragging{ opacity:.9; outline:2px dashed var(--accent) }
+
+  .dropzone{ position:relative }
+  .dropzone.hover{ outline:2px dashed var(--accent); outline-offset:2px; }
+
+  .locked{ background:#0f172a; color:#9ca3af; border-color:#273449; cursor:default !important; }
+  .locked .check{ margin-left:6px; color:#86efac; font-weight:900 }
+
+  /* flashes */
+  .flash-ok{ animation:ok .6s ease }
+  .flash-bad{ animation:bad .45s ease }
+  @keyframes ok{0%{box-shadow:0 0 0 0 rgba(22,163,74,.85)}100%{box-shadow:0 0 0 14px rgba(22,163,74,0)}}
+  @keyframes bad{0%{box-shadow:0 0 0 0 rgba(220,38,38,.85)}100%{box-shadow:0 0 0 14px rgba(220,38,38,0)}}
+
+  footer{ width:100%; max-width:1000px; padding:8px 16px 18px }
+  footer a{ color:#93c5fd; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Match – Passé composé</h1>
+    <p>Glisse chaque forme de <em>passé composé</em> (il/elle/on) sur son verbe à l’infinitif.</p>
+  </header>
+
+  <div class="controls">
+    <button id="resetBtn" class="btn" type="button">Réinitialiser le jeu</button>
+    <span id="status" class="status">0 / 28 correct</span>
+  </div>
+
+  <main class="board" id="board" aria-live="polite"></main>
+
+  <footer>
+    <hr style="border-color:#1f2937; opacity:.6; margin:10px 0 8px;">
+    <p style="text-align:center; margin:0"><a href="../index.html">return</a></p>
+  </footer>
+
+<script>
+const DATA = [
+  ["aimer",      "a aimé"],
+  ["aller",      "est allé"],
+  ["attendre",   "a attendu"],
+  ["avoir",      "a eu"],
+  ["chercher",   "a cherché"],
+  ["choisir",    "a choisi"],
+  ["connaître",  "a connu"],
+  ["devoir",     "a dû"],
+  ["dire",       "a dit"],
+  ["écrire",     "a écrit"],
+  ["être",       "a été"],
+  ["faire",      "a fait"],
+  ["finir",      "a fini"],
+  ["habiter",    "a habité"],
+  ["lire",       "a lu"],
+  ["mettre",     "a mis"],
+  ["parler",     "a parlé"],
+  ["partir",     "est parti"],
+  ["perdre",     "a perdu"],
+  ["pouvoir",    "a pu"],
+  ["prendre",    "a pris"],
+  ["réussir",    "a réussi"],
+  ["savoir",     "a su"],
+  ["travailler", "a travaillé"],
+  ["vendre",     "a vendu"],
+  ["venir",      "est venu"],
+  ["voir",       "a vu"],
+  ["vouloir",    "a voulu"]
+];
+
+const board = document.getElementById('board');
+const statusEl = document.getElementById('status');
+const resetBtn = document.getElementById('resetBtn');
+let correctCount = 0;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function updateStatus(){ statusEl.textContent = `${correctCount} / ${DATA.length} correct`; }
+
+function render(){
+  correctCount = 0; updateStatus();
+  board.innerHTML = '';
+
+  const leftCol = document.createElement('section');
+  leftCol.className='column';
+  leftCol.innerHTML = '<h2>Verbes (infinitif)</h2>';
+  const leftList = document.createElement('div'); leftList.className='list'; leftCol.appendChild(leftList);
+
+  const rightCol = document.createElement('section');
+  rightCol.className='column';
+  rightCol.innerHTML = '<h2>Passé composé (il/elle/on)</h2>';
+  const rightList = document.createElement('div'); rightList.className='list'; rightCol.appendChild(rightList);
+
+  board.appendChild(leftCol); board.appendChild(rightCol);
+
+  // Left dropzones
+  DATA.forEach(([inf])=>{
+    const dz = document.createElement('div');
+    dz.className='card dropzone'; dz.setAttribute('data-inf', inf); dz.setAttribute('tabindex','0');
+    dz.textContent = inf;
+    leftList.appendChild(dz);
+  });
+
+  // Right draggable cards (shuffled PCs)
+  shuffle(DATA.map(d=>d[1])).forEach(pc=>{
+    const c = document.createElement('div');
+    c.className='card'; c.textContent=pc; c.setAttribute('data-pc', pc); c.setAttribute('draggable','true');
+    rightList.appendChild(c);
+  });
+
+  wireDnD();
+}
+
+function wireDnD(){
+  let dragged=null;
+
+  board.querySelectorAll('.card[draggable="true"]').forEach(card=>{
+    card.addEventListener('dragstart', e=>{ dragged=card; card.classList.add('dragging'); e.dataTransfer.setData('text/plain', card.dataset.pc||card.textContent); });
+    card.addEventListener('dragend', ()=>{ card.classList.remove('dragging'); dragged=null; });
+  });
+
+  board.querySelectorAll('.dropzone').forEach(zone=>{
+    zone.addEventListener('dragover', e=>{ e.preventDefault(); if(zone.dataset.locked!=='1') zone.classList.add('hover'); });
+    zone.addEventListener('dragleave', ()=> zone.classList.remove('hover'));
+    zone.addEventListener('drop', e=>{ e.preventDefault(); zone.classList.remove('hover'); if(!dragged || zone.dataset.locked==='1') return; handleDrop(zone, dragged); });
+  });
+}
+
+function handleDrop(zone, card){
+  const inf = zone.dataset.inf; const pc = card.dataset.pc || card.textContent.trim();
+  const correct = DATA.find(([i])=>i===inf)[1];
+  if(pc===correct){
+    // Lock dropzone and disable dragged card
+    zone.classList.add('flash-ok','locked');
+    zone.dataset.locked='1';
+    zone.innerHTML = `${inf} <span class="check">✔ ${correct}</span>`;
+
+    card.classList.add('locked');
+    card.setAttribute('draggable','false');
+    card.style.pointerEvents='none';
+    // remove from DOM to declutter
+    card.parentElement.removeChild(card);
+
+    correctCount++; updateStatus();
+  } else {
+    zone.classList.add('flash-bad');
+    setTimeout(()=> zone.classList.remove('flash-bad'), 450);
+  }
+}
+
+resetBtn.addEventListener('click', render);
+
+// init
+render();
+</script>
+</body>
+</html>
+

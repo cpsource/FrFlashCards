@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Match – Passé composé</title>
+<style>
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: linear-gradient(135deg, #0b1020 0%, #111b2c 100%);
+    color: #e5e7eb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: #86efac;
+    margin-bottom: 0.2em;
+  }
+
+  p {
+    color: #cbd5e1;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 20px;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .column {
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid #1f2937;
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .column h2 {
+    text-align: center;
+    color: #93c5fd;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card {
+    border: 1px solid #1f2937;
+    background: #111827;
+    color: #e5e7eb;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .card[draggable="true"] { cursor: grab; }
+  .dropzone.hover { border: 2px dashed #22d3ee; }
+  .flash-ok { background: #16a34a; }
+  .flash-bad { background: #dc2626; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Match – Passé composé</h1>
+    <p>Glisse la bonne forme de <em>passé composé</em> vers le verbe correct.</p>
+  </header>
+
+  <div class="board">
+    <div class="column" id="left-col">
+      <h2>Verbes</h2>
+      <div class="list" id="verbs"></div>
+    </div>
+
+    <div class="column" id="right-col">
+      <h2>Passé composé</h2>
+      <div class="list" id="passeCompose"></div>
+    </div>
+  </div>
+
+<script>
+const DATA = [
+  ["aimer", "a aimé"], ["aller", "est allé"], ["attendre", "a attendu"], ["avoir", "a eu"], ["chercher", "a cherché"],
+  ["choisir", "a choisi"], ["connaître", "a connu"], ["devoir", "a dû"], ["dire", "a dit"], ["écrire", "a écrit"],
+  ["être", "a été"], ["faire", "a fait"], ["finir", "a fini"], ["habiter", "a habité"], ["lire", "a lu"], ["mettre", "a mis"],
+  ["parler", "a parlé"], ["partir", "est parti"], ["perdre", "a perdu"], ["pouvoir", "a pu"], ["prendre", "a pris"],
+  ["réussir", "a réussi"], ["savoir", "a su"], ["travailler", "a travaillé"], ["vendre", "a vendu"], ["venir", "est venu"],
+  ["voir", "a vu"], ["vouloir", "a voulu"]
+];
+
+const verbsDiv = document.getElementById('verbs');
+const pcDiv = document.getElementById('passeCompose');
+
+function shuffle(a) {
+  return a.map(x => [Math.random(), x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+}
+
+function render() {
+  verbsDiv.innerHTML = '';
+  pcDiv.innerHTML = '';
+  const shuffled = shuffle(DATA);
+
+  DATA.forEach(([verb]) => {
+    const card = document.createElement('div');
+    card.className = 'card dropzone';
+    card.textContent = verb;
+    verbsDiv.appendChild(card);
+  });
+
+  shuffled.forEach(([_, pc]) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.textContent = pc;
+    card.setAttribute('draggable', 'true');
+    pcDiv.appendChild(card);
+  });
+
+  setupDragAndDrop();
+}
+
+function setupDragAndDrop() {
+  let dragged;
+
+  document.querySelectorAll('[draggable="true"]').forEach(el => {
+    el.addEventListener('dragstart', e => {
+      dragged = e.target;
+      e.dataTransfer.effectAllowed = 'move';
+    });
+  });
+
+  document.querySelectorAll('.dropzone').forEach(zone => {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('hover'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('hover'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault(); zone.classList.remove('hover');
+      const match = DATA.find(([verb, pc]) => verb === zone.textContent.trim());
+      if (match && dragged.textContent.trim() === match[1]) {
+        zone.classList.add('flash-ok');
+        dragged.style.visibility = 'hidden';
+      } else {
+        zone.classList.add('flash-bad');
+        setTimeout(()=>zone.classList.remove('flash-bad'), 400);
+      }
+    });
+  });
+}
+
+render();
+</script>
+</body>
+</html>
+
