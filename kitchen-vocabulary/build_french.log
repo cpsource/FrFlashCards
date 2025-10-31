@@ -1,0 +1,1340 @@
+Starting French build...
+▶ Processing spoon ...
+[OK] Image saved as spoon.png
+[OK] Audio saved as spoon.mp3 (response_format=)
+
+✅ Done.
+   Image: spoon.png
+   Audio: spoon.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: spoon.png
+Original size: 2328.75 KB
+Target max size: 100.0 KB
+Original dimensions: 1808x4000 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x849 pixels
+
+Resizing to 384x849...
+Initial result size: 433.97 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 184x407
+  Result size: 107.08 KB
+
+============================================================
+✓ Success! Created temporary file: spoon_temp.png
+✓ Final size: 107.08 KB (target: ~100.0 KB)
+✓ Final dimensions: 184x407 pixels
+✓ Final width: 1.92 inches at 96 DPI
+✓ Size reduction: 95.4%
+✓ Aspect ratio maintained: 2.212
+============================================================
+
+Renaming original file to: spoon.png.bak
+Renaming temporary file to: spoon.png
+
+✓ Complete! Original saved as spoon.png.bak
+✓ Resized file is now spoon.png
+   MP3 OK for spoon
+✅ Completed spoon
+▶ Processing fork ...
+[OK] Image saved as fork.png
+[OK] Audio saved as fork.mp3 (response_format=)
+
+✅ Done.
+   Image: fork.png
+   Audio: fork.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: fork.png
+Original size: 39.65 KB
+Target max size: 100.0 KB
+
+✓ File is already 39.65 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for fork
+✅ Completed fork
+▶ Processing knife ...
+[OK] Image saved as knife.png
+[OK] Audio saved as knife.mp3 (response_format=)
+
+✅ Done.
+   Image: knife.png
+   Audio: knife.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: knife.png
+Original size: 23.58 KB
+Target max size: 100.0 KB
+
+✓ File is already 23.58 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for knife
+✅ Completed knife
+▶ Processing plate ...
+[OK] Image saved as plate.png
+[OK] Audio saved as plate.mp3 (response_format=)
+
+✅ Done.
+   Image: plate.png
+   Audio: plate.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: plate.png
+Original size: 60.04 KB
+Target max size: 100.0 KB
+
+✓ File is already 60.04 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for plate
+✅ Completed plate
+▶ Processing bowl ...
+[OK] Image saved as bowl.png
+[OK] Audio saved as bowl.mp3 (response_format=)
+
+✅ Done.
+   Image: bowl.png
+   Audio: bowl.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: bowl.png
+Original size: 1311.39 KB
+Target max size: 100.0 KB
+Original dimensions: 3010x2007 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x256 pixels
+
+Resizing to 384x256...
+Initial result size: 135.17 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 330x220
+  Result size: 101.90 KB
+
+============================================================
+✓ Success! Created temporary file: bowl_temp.png
+✓ Final size: 101.90 KB (target: ~100.0 KB)
+✓ Final dimensions: 330x220 pixels
+✓ Final width: 3.44 inches at 96 DPI
+✓ Size reduction: 92.2%
+✓ Aspect ratio maintained: 0.667
+============================================================
+
+Renaming original file to: bowl.png.bak
+Renaming temporary file to: bowl.png
+
+✓ Complete! Original saved as bowl.png.bak
+✓ Resized file is now bowl.png
+   MP3 OK for bowl
+✅ Completed bowl
+▶ Processing glass ...
+[OK] Image saved as glass.png
+[OK] Audio saved as glass.mp3 (response_format=)
+
+✅ Done.
+   Image: glass.png
+   Audio: glass.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: glass.png
+Original size: 2336.36 KB
+Target max size: 100.0 KB
+Original dimensions: 2512x3490 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x533 pixels
+
+Resizing to 384x533...
+Initial result size: 294.12 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 223x310
+  Result size: 111.58 KB
+  Attempt 2: Trying 212x295
+  Result size: 101.96 KB
+
+============================================================
+✓ Success! Created temporary file: glass_temp.png
+✓ Final size: 101.96 KB (target: ~100.0 KB)
+✓ Final dimensions: 212x295 pixels
+✓ Final width: 2.21 inches at 96 DPI
+✓ Size reduction: 95.6%
+✓ Aspect ratio maintained: 1.389
+============================================================
+
+Renaming original file to: glass.png.bak
+Renaming temporary file to: glass.png
+
+✓ Complete! Original saved as glass.png.bak
+✓ Resized file is now glass.png
+   MP3 OK for glass
+✅ Completed glass
+▶ Processing cup ...
+[OK] Image saved as cup.png
+[OK] Audio saved as cup.mp3 (response_format=)
+
+✅ Done.
+   Image: cup.png
+   Audio: cup.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: cup.png
+Original size: 809.99 KB
+Target max size: 100.0 KB
+Original dimensions: 2592x1936 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x286 pixels
+
+Resizing to 384x286...
+Initial result size: 136.09 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 329x245
+  Result size: 103.09 KB
+
+============================================================
+✓ Success! Created temporary file: cup_temp.png
+✓ Final size: 103.09 KB (target: ~100.0 KB)
+✓ Final dimensions: 329x245 pixels
+✓ Final width: 3.43 inches at 96 DPI
+✓ Size reduction: 87.3%
+✓ Aspect ratio maintained: 0.747
+============================================================
+
+Renaming original file to: cup.png.bak
+Renaming temporary file to: cup.png
+
+✓ Complete! Original saved as cup.png.bak
+✓ Resized file is now cup.png
+   MP3 OK for cup
+✅ Completed cup
+▶ Processing napkin ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/napkin.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: napkin.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for napkin
+✅ Completed napkin
+▶ Processing straw ...
+[OK] Image saved as straw.png
+[OK] Audio saved as straw.mp3 (response_format=)
+
+✅ Done.
+   Image: straw.png
+   Audio: straw.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: straw.png
+Original size: 38.11 KB
+Target max size: 100.0 KB
+
+✓ File is already 38.11 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for straw
+✅ Completed straw
+▶ Processing dish ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/dish.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: dish.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for dish
+✅ Completed dish
+▶ Processing pan ...
+[OK] Image saved as pan.png
+[OK] Audio saved as pan.mp3 (response_format=)
+
+✅ Done.
+   Image: pan.png
+   Audio: pan.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: pan.png
+Original size: 427.69 KB
+Target max size: 100.0 KB
+Original dimensions: 800x846 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x406 pixels
+
+Resizing to 384x406...
+Initial result size: 259.16 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 238x252
+  Result size: 108.09 KB
+
+============================================================
+✓ Success! Created temporary file: pan_temp.png
+✓ Final size: 108.09 KB (target: ~100.0 KB)
+✓ Final dimensions: 238x252 pixels
+✓ Final width: 2.48 inches at 96 DPI
+✓ Size reduction: 74.7%
+✓ Aspect ratio maintained: 1.058
+============================================================
+
+Renaming original file to: pan.png.bak
+Renaming temporary file to: pan.png
+
+✓ Complete! Original saved as pan.png.bak
+✓ Resized file is now pan.png
+   MP3 OK for pan
+✅ Completed pan
+▶ Processing pot ...
+[OK] Image saved as pot.png
+[OK] Audio saved as pot.mp3 (response_format=)
+
+✅ Done.
+   Image: pot.png
+   Audio: pot.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: pot.png
+Original size: 32.91 KB
+Target max size: 100.0 KB
+
+✓ File is already 32.91 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for pot
+✅ Completed pot
+▶ Processing lid ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/lid.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: lid.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for lid
+✅ Completed lid
+▶ Processing spatula ...
+[OK] Image saved as spatula.png
+[OK] Audio saved as spatula.mp3 (response_format=)
+
+✅ Done.
+   Image: spatula.png
+   Audio: spatula.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: spatula.png
+Original size: 329.68 KB
+Target max size: 100.0 KB
+Original dimensions: 586x1930 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x1264 pixels
+
+Resizing to 384x1264...
+Initial result size: 554.20 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 163x536
+  Result size: 113.57 KB
+  Attempt 2: Trying 154x510
+  Result size: 102.81 KB
+
+============================================================
+✓ Success! Created temporary file: spatula_temp.png
+✓ Final size: 102.81 KB (target: ~100.0 KB)
+✓ Final dimensions: 154x510 pixels
+✓ Final width: 1.60 inches at 96 DPI
+✓ Size reduction: 68.8%
+✓ Aspect ratio maintained: 3.294
+============================================================
+
+Renaming original file to: spatula.png.bak
+Renaming temporary file to: spatula.png
+
+✓ Complete! Original saved as spatula.png.bak
+✓ Resized file is now spatula.png
+   MP3 OK for spatula
+✅ Completed spatula
+▶ Processing whisk ...
+[OK] Image saved as whisk.png
+[OK] Audio saved as whisk.mp3 (response_format=)
+
+✅ Done.
+   Image: whisk.png
+   Audio: whisk.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: whisk.png
+Original size: 8.65 KB
+Target max size: 100.0 KB
+
+✓ File is already 8.65 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for whisk
+✅ Completed whisk
+▶ Processing ladle ...
+[OK] Image saved as ladle.png
+[OK] Audio saved as ladle.mp3 (response_format=)
+
+✅ Done.
+   Image: ladle.png
+   Audio: ladle.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: ladle.png
+Original size: 5.71 KB
+Target max size: 100.0 KB
+
+✓ File is already 5.71 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for ladle
+✅ Completed ladle
+▶ Processing cutting_board ...
+[OK] Image saved as cutting_board.png
+[OK] Audio saved as cutting_board.mp3 (response_format=)
+
+✅ Done.
+   Image: cutting_board.png
+   Audio: cutting_board.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: cutting_board.png
+Original size: 87.84 KB
+Target max size: 100.0 KB
+
+✓ File is already 87.84 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for cutting_board
+✅ Completed cutting_board
+▶ Processing grater ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/grater.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: grater.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for grater
+✅ Completed grater
+▶ Processing peeler ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/peeler.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: peeler.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for peeler
+✅ Completed peeler
+▶ Processing colander ...
+[OK] Image saved as colander.png
+[OK] Audio saved as colander.mp3 (response_format=)
+
+✅ Done.
+   Image: colander.png
+   Audio: colander.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: colander.png
+Original size: 133.03 KB
+Target max size: 100.0 KB
+Original dimensions: 456x439 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x369 pixels
+
+Resizing to 384x369...
+Initial result size: 300.22 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 221x212
+  Result size: 98.40 KB
+
+============================================================
+✓ Success! Created temporary file: colander_temp.png
+✓ Final size: 98.40 KB (target: ~100.0 KB)
+✓ Final dimensions: 221x212 pixels
+✓ Final width: 2.30 inches at 96 DPI
+✓ Size reduction: 26.0%
+✓ Aspect ratio maintained: 0.963
+============================================================
+
+Renaming original file to: colander.png.bak
+Renaming temporary file to: colander.png
+
+✓ Complete! Original saved as colander.png.bak
+✓ Resized file is now colander.png
+   MP3 OK for colander
+✅ Completed colander
+▶ Processing rolling_pin ...
+[OK] Image saved as rolling_pin.png
+[OK] Audio saved as rolling_pin.mp3 (response_format=)
+
+✅ Done.
+   Image: rolling_pin.png
+   Audio: rolling_pin.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: rolling_pin.png
+Original size: 3450.54 KB
+Target max size: 100.0 KB
+Original dimensions: 4032x3024 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x288 pixels
+
+Resizing to 384x288...
+Initial result size: 193.30 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 276x207
+  Result size: 99.12 KB
+
+============================================================
+✓ Success! Created temporary file: rolling_pin_temp.png
+✓ Final size: 99.12 KB (target: ~100.0 KB)
+✓ Final dimensions: 276x207 pixels
+✓ Final width: 2.88 inches at 96 DPI
+✓ Size reduction: 97.1%
+✓ Aspect ratio maintained: 0.750
+============================================================
+
+Renaming original file to: rolling_pin.png.bak
+Renaming temporary file to: rolling_pin.png
+
+✓ Complete! Original saved as rolling_pin.png.bak
+✓ Resized file is now rolling_pin.png
+   MP3 OK for rolling_pin
+✅ Completed rolling_pin
+▶ Processing oven_mitt ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/oven_mitt.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: oven_mitt.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for oven_mitt
+✅ Completed oven_mitt
+▶ Processing stove ...
+[OK] Image saved as stove.png
+[OK] Audio saved as stove.mp3 (response_format=)
+
+✅ Done.
+   Image: stove.png
+   Audio: stove.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: stove.png
+Original size: 17.21 KB
+Target max size: 100.0 KB
+
+✓ File is already 17.21 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for stove
+✅ Completed stove
+▶ Processing oven ...
+[OK] Image saved as oven.png
+[OK] Audio saved as oven.mp3 (response_format=)
+
+✅ Done.
+   Image: oven.png
+   Audio: oven.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: oven.png
+Original size: 174.90 KB
+Target max size: 100.0 KB
+Original dimensions: 768x1024 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x512 pixels
+
+Resizing to 384x512...
+Initial result size: 257.78 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 239x318
+  Result size: 103.97 KB
+
+============================================================
+✓ Success! Created temporary file: oven_temp.png
+✓ Final size: 103.97 KB (target: ~100.0 KB)
+✓ Final dimensions: 239x318 pixels
+✓ Final width: 2.49 inches at 96 DPI
+✓ Size reduction: 40.6%
+✓ Aspect ratio maintained: 1.333
+============================================================
+
+Renaming original file to: oven.png.bak
+Renaming temporary file to: oven.png
+
+✓ Complete! Original saved as oven.png.bak
+✓ Resized file is now oven.png
+   MP3 OK for oven
+✅ Completed oven
+▶ Processing microwave ...
+[OK] Image saved as microwave.png
+[OK] Audio saved as microwave.mp3 (response_format=)
+
+✅ Done.
+   Image: microwave.png
+   Audio: microwave.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: microwave.png
+Original size: 143.56 KB
+Target max size: 100.0 KB
+Original dimensions: 911x537 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x226 pixels
+
+Resizing to 384x226...
+Initial result size: 114.45 KB
+
+============================================================
+✓ Success! Created temporary file: microwave_temp.png
+✓ Final size: 114.45 KB (target: ~100.0 KB)
+✓ Final dimensions: 384x226 pixels
+✓ Final width: 4.00 inches at 96 DPI
+✓ Size reduction: 20.3%
+✓ Aspect ratio maintained: 0.589
+============================================================
+
+Renaming original file to: microwave.png.bak
+Renaming temporary file to: microwave.png
+
+✓ Complete! Original saved as microwave.png.bak
+✓ Resized file is now microwave.png
+   MP3 OK for microwave
+✅ Completed microwave
+▶ Processing refrigerator ...
+[OK] Image saved as refrigerator.png
+[OK] Audio saved as refrigerator.mp3 (response_format=)
+
+✅ Done.
+   Image: refrigerator.png
+   Audio: refrigerator.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: refrigerator.png
+Original size: 55.26 KB
+Target max size: 100.0 KB
+
+✓ File is already 55.26 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for refrigerator
+✅ Completed refrigerator
+▶ Processing freezer ...
+[OK] Image saved as freezer.png
+[OK] Audio saved as freezer.mp3 (response_format=)
+
+✅ Done.
+   Image: freezer.png
+   Audio: freezer.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: freezer.png
+Original size: 30.54 KB
+Target max size: 100.0 KB
+
+✓ File is already 30.54 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for freezer
+✅ Completed freezer
+▶ Processing dishwasher ...
+[OK] Image saved as dishwasher.png
+[OK] Audio saved as dishwasher.mp3 (response_format=)
+
+✅ Done.
+   Image: dishwasher.png
+   Audio: dishwasher.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: dishwasher.png
+Original size: 44.16 KB
+Target max size: 100.0 KB
+
+✓ File is already 44.16 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for dishwasher
+✅ Completed dishwasher
+▶ Processing toaster ...
+[OK] Image saved as toaster.png
+[OK] Audio saved as toaster.mp3 (response_format=)
+
+✅ Done.
+   Image: toaster.png
+   Audio: toaster.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: toaster.png
+Original size: 585.62 KB
+Target max size: 100.0 KB
+Original dimensions: 1938x1644 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x325 pixels
+
+Resizing to 384x325...
+Initial result size: 227.83 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 254x215
+  Result size: 106.74 KB
+
+============================================================
+✓ Success! Created temporary file: toaster_temp.png
+✓ Final size: 106.74 KB (target: ~100.0 KB)
+✓ Final dimensions: 254x215 pixels
+✓ Final width: 2.65 inches at 96 DPI
+✓ Size reduction: 81.8%
+✓ Aspect ratio maintained: 0.848
+============================================================
+
+Renaming original file to: toaster.png.bak
+Renaming temporary file to: toaster.png
+
+✓ Complete! Original saved as toaster.png.bak
+✓ Resized file is now toaster.png
+   MP3 OK for toaster
+✅ Completed toaster
+▶ Processing blender ...
+[OK] Image saved as blender.png
+[OK] Audio saved as blender.mp3 (response_format=)
+
+✅ Done.
+   Image: blender.png
+   Audio: blender.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: blender.png
+Original size: 18.58 KB
+Target max size: 100.0 KB
+
+✓ File is already 18.58 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for blender
+✅ Completed blender
+▶ Processing coffee_maker ...
+[OK] Image saved as coffee_maker.png
+[OK] Audio saved as coffee_maker.mp3 (response_format=)
+
+✅ Done.
+   Image: coffee_maker.png
+   Audio: coffee_maker.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: coffee_maker.png
+Original size: 33.62 KB
+Target max size: 100.0 KB
+
+✓ File is already 33.62 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for coffee_maker
+✅ Completed coffee_maker
+▶ Processing kettle ...
+[OK] Image saved as kettle.png
+[OK] Audio saved as kettle.mp3 (response_format=)
+
+✅ Done.
+   Image: kettle.png
+   Audio: kettle.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: kettle.png
+Original size: 39.65 KB
+Target max size: 100.0 KB
+
+✓ File is already 39.65 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for kettle
+✅ Completed kettle
+▶ Processing knife_block ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/knife_block.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: knife_block.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for knife_block
+✅ Completed knife_block
+▶ Processing jar ...
+[OK] Image saved as jar.png
+[OK] Audio saved as jar.mp3 (response_format=)
+
+✅ Done.
+   Image: jar.png
+   Audio: jar.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: jar.png
+Original size: 3421.58 KB
+Target max size: 100.0 KB
+Original dimensions: 2848x4272 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x576 pixels
+
+Resizing to 384x576...
+Initial result size: 328.43 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 211x317
+  Result size: 101.19 KB
+
+============================================================
+✓ Success! Created temporary file: jar_temp.png
+✓ Final size: 101.19 KB (target: ~100.0 KB)
+✓ Final dimensions: 211x317 pixels
+✓ Final width: 2.20 inches at 96 DPI
+✓ Size reduction: 97.0%
+✓ Aspect ratio maintained: 1.500
+============================================================
+
+Renaming original file to: jar.png.bak
+Renaming temporary file to: jar.png
+
+✓ Complete! Original saved as jar.png.bak
+✓ Resized file is now jar.png
+   MP3 OK for jar
+✅ Completed jar
+▶ Processing bottle ...
+[OK] Image saved as bottle.png
+[OK] Audio saved as bottle.mp3 (response_format=)
+
+✅ Done.
+   Image: bottle.png
+   Audio: bottle.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: bottle.png
+Original size: 2031.33 KB
+Target max size: 100.0 KB
+Original dimensions: 2160x3840 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x682 pixels
+
+Resizing to 384x682...
+Initial result size: 345.96 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 206x366
+  Result size: 99.57 KB
+
+============================================================
+✓ Success! Created temporary file: bottle_temp.png
+✓ Final size: 99.57 KB (target: ~100.0 KB)
+✓ Final dimensions: 206x366 pixels
+✓ Final width: 2.15 inches at 96 DPI
+✓ Size reduction: 95.1%
+✓ Aspect ratio maintained: 1.778
+============================================================
+
+Renaming original file to: bottle.png.bak
+Renaming temporary file to: bottle.png
+
+✓ Complete! Original saved as bottle.png.bak
+✓ Resized file is now bottle.png
+   MP3 OK for bottle
+✅ Completed bottle
+▶ Processing container ...
+[OK] Image saved as container.png
+[OK] Audio saved as container.mp3 (response_format=)
+
+✅ Done.
+   Image: container.png
+   Audio: container.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: container.png
+Original size: 53.05 KB
+Target max size: 100.0 KB
+
+✓ File is already 53.05 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for container
+✅ Completed container
+▶ Processing lid_for_jars ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/lid_for_jars.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: lid_for_jars.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for lid_for_jars
+✅ Completed lid_for_jars
+▶ Processing shelf ...
+[OK] Image saved as shelf.png
+[OK] Audio saved as shelf.mp3 (response_format=)
+
+✅ Done.
+   Image: shelf.png
+   Audio: shelf.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: shelf.png
+Original size: 646.82 KB
+Target max size: 100.0 KB
+Original dimensions: 1200x1049 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x335 pixels
+
+Resizing to 384x335...
+Initial result size: 222.09 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 257x224
+  Result size: 105.21 KB
+
+============================================================
+✓ Success! Created temporary file: shelf_temp.png
+✓ Final size: 105.21 KB (target: ~100.0 KB)
+✓ Final dimensions: 257x224 pixels
+✓ Final width: 2.68 inches at 96 DPI
+✓ Size reduction: 83.7%
+✓ Aspect ratio maintained: 0.874
+============================================================
+
+Renaming original file to: shelf.png.bak
+Renaming temporary file to: shelf.png
+
+✓ Complete! Original saved as shelf.png.bak
+✓ Resized file is now shelf.png
+   MP3 OK for shelf
+✅ Completed shelf
+▶ Processing drawer ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/drawer.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: drawer.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for drawer
+✅ Completed drawer
+▶ Processing cupboard ...
+[OK] Image saved as cupboard.png
+[OK] Audio saved as cupboard.mp3 (response_format=)
+
+✅ Done.
+   Image: cupboard.png
+   Audio: cupboard.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: cupboard.png
+Original size: 3794.48 KB
+Target max size: 100.0 KB
+Original dimensions: 5312x2988 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x216 pixels
+
+Resizing to 384x216...
+Initial result size: 100.82 KB
+
+============================================================
+✓ Success! Created temporary file: cupboard_temp.png
+✓ Final size: 100.82 KB (target: ~100.0 KB)
+✓ Final dimensions: 384x216 pixels
+✓ Final width: 4.00 inches at 96 DPI
+✓ Size reduction: 97.3%
+✓ Aspect ratio maintained: 0.562
+============================================================
+
+Renaming original file to: cupboard.png.bak
+Renaming temporary file to: cupboard.png
+
+✓ Complete! Original saved as cupboard.png.bak
+✓ Resized file is now cupboard.png
+   MP3 OK for cupboard
+✅ Completed cupboard
+▶ Processing counter ...
+[OK] Image saved as counter.png
+[OK] Audio saved as counter.mp3 (response_format=)
+
+✅ Done.
+   Image: counter.png
+   Audio: counter.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: counter.png
+Original size: 428.17 KB
+Target max size: 100.0 KB
+Original dimensions: 1280x857 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x257 pixels
+
+Resizing to 384x257...
+Initial result size: 187.24 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 280x187
+  Result size: 103.35 KB
+
+============================================================
+✓ Success! Created temporary file: counter_temp.png
+✓ Final size: 103.35 KB (target: ~100.0 KB)
+✓ Final dimensions: 280x187 pixels
+✓ Final width: 2.92 inches at 96 DPI
+✓ Size reduction: 75.9%
+✓ Aspect ratio maintained: 0.670
+============================================================
+
+Renaming original file to: counter.png.bak
+Renaming temporary file to: counter.png
+
+✓ Complete! Original saved as counter.png.bak
+✓ Resized file is now counter.png
+   MP3 OK for counter
+✅ Completed counter
+▶ Processing sink ...
+[OK] Image saved as sink.png
+[OK] Audio saved as sink.mp3 (response_format=)
+
+✅ Done.
+   Image: sink.png
+   Audio: sink.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: sink.png
+Original size: 135.94 KB
+Target max size: 100.0 KB
+Original dimensions: 1075x1540 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x550 pixels
+
+Resizing to 384x550...
+Initial result size: 218.94 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 259x371
+  Result size: 112.56 KB
+  Attempt 2: Trying 246x353
+  Result size: 103.33 KB
+
+============================================================
+✓ Success! Created temporary file: sink_temp.png
+✓ Final size: 103.33 KB (target: ~100.0 KB)
+✓ Final dimensions: 246x353 pixels
+✓ Final width: 2.56 inches at 96 DPI
+✓ Size reduction: 24.0%
+✓ Aspect ratio maintained: 1.433
+============================================================
+
+Renaming original file to: sink.png.bak
+Renaming temporary file to: sink.png
+
+✓ Complete! Original saved as sink.png.bak
+✓ Resized file is now sink.png
+   MP3 OK for sink
+✅ Completed sink
+▶ Processing sponge ...
+[OK] Image saved as sponge.png
+[OK] Audio saved as sponge.mp3 (response_format=)
+
+✅ Done.
+   Image: sponge.png
+   Audio: sponge.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: sponge.png
+Original size: 213.60 KB
+Target max size: 100.0 KB
+Original dimensions: 1080x1920 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x682 pixels
+
+Resizing to 384x682...
+Initial result size: 70.39 KB
+
+============================================================
+✓ Success! Created temporary file: sponge_temp.png
+✓ Final size: 70.39 KB (target: ~100.0 KB)
+✓ Final dimensions: 384x682 pixels
+✓ Final width: 4.00 inches at 96 DPI
+✓ Size reduction: 67.0%
+✓ Aspect ratio maintained: 1.778
+============================================================
+
+Renaming original file to: sponge.png.bak
+Renaming temporary file to: sponge.png
+
+✓ Complete! Original saved as sponge.png.bak
+✓ Resized file is now sponge.png
+   MP3 OK for sponge
+✅ Completed sponge
+▶ Processing dish_soap ...
+[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/dish_soap.jpg
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: dish_soap.png
+Original size: 0.00 KB
+Target max size: 100.0 KB
+
+✓ File is already 0.00 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for dish_soap
+✅ Completed dish_soap
+▶ Processing towel ...
+[OK] Image saved as towel.png
+[OK] Audio saved as towel.mp3 (response_format=)
+
+✅ Done.
+   Image: towel.png
+   Audio: towel.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: towel.png
+Original size: 664.62 KB
+Target max size: 100.0 KB
+Original dimensions: 2048x1536 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x288 pixels
+
+Resizing to 384x288...
+Initial result size: 167.28 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 296x222
+  Result size: 94.68 KB
+
+============================================================
+✓ Success! Created temporary file: towel_temp.png
+✓ Final size: 94.68 KB (target: ~100.0 KB)
+✓ Final dimensions: 296x222 pixels
+✓ Final width: 3.08 inches at 96 DPI
+✓ Size reduction: 85.8%
+✓ Aspect ratio maintained: 0.750
+============================================================
+
+Renaming original file to: towel.png.bak
+Renaming temporary file to: towel.png
+
+✓ Complete! Original saved as towel.png.bak
+✓ Resized file is now towel.png
+   MP3 OK for towel
+✅ Completed towel
+▶ Processing trash_can ...
+[OK] Image saved as trash_can.png
+[OK] Audio saved as trash_can.mp3 (response_format=)
+
+✅ Done.
+   Image: trash_can.png
+   Audio: trash_can.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: trash_can.png
+Original size: 150.92 KB
+Target max size: 100.0 KB
+Original dimensions: 600x800 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x512 pixels
+
+Resizing to 384x512...
+Initial result size: 389.57 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 194x259
+  Result size: 104.56 KB
+
+============================================================
+✓ Success! Created temporary file: trash_can_temp.png
+✓ Final size: 104.56 KB (target: ~100.0 KB)
+✓ Final dimensions: 194x259 pixels
+✓ Final width: 2.02 inches at 96 DPI
+✓ Size reduction: 30.7%
+✓ Aspect ratio maintained: 1.333
+============================================================
+
+Renaming original file to: trash_can.png.bak
+Renaming temporary file to: trash_can.png
+
+✓ Complete! Original saved as trash_can.png.bak
+✓ Resized file is now trash_can.png
+   MP3 OK for trash_can
+✅ Completed trash_can
+▶ Processing broom ...
+[OK] Image saved as broom.png
+[OK] Audio saved as broom.mp3 (response_format=)
+
+✅ Done.
+   Image: broom.png
+   Audio: broom.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: broom.png
+Original size: 70.46 KB
+Target max size: 100.0 KB
+
+✓ File is already 70.46 KB (≤ 100.0 KB)
+No resizing needed. Exiting.
+   MP3 OK for broom
+✅ Completed broom
+▶ Processing mop ...
+[OK] Image saved as mop.png
+[OK] Audio saved as mop.mp3 (response_format=)
+
+✅ Done.
+   Image: mop.png
+   Audio: mop.mp3
+   Found PNG → resizing to 100 px
+============================================================
+PNG Resizer - Target: 4" wide, max 100.0 KB
+============================================================
+Original file: mop.png
+Original size: 229.99 KB
+Target max size: 100.0 KB
+Original dimensions: 1600x1000 pixels
+
+Target dimensions for 4" width at 96 DPI:
+  384x240 pixels
+
+Resizing to 384x240...
+Initial result size: 126.52 KB
+
+File still larger than 100.0 KB, applying additional compression...
+  Attempt 1: Trying 341x213
+  Result size: 99.50 KB
+
+============================================================
+✓ Success! Created temporary file: mop_temp.png
+✓ Final size: 99.50 KB (target: ~100.0 KB)
+✓ Final dimensions: 341x213 pixels
+✓ Final width: 3.55 inches at 96 DPI
+✓ Size reduction: 56.7%
+✓ Aspect ratio maintained: 0.625
+============================================================
+
+Renaming original file to: mop.png.bak
+Renaming temporary file to: mop.png
+
+✓ Complete! Original saved as mop.png.bak
+✓ Resized file is now mop.png
+   MP3 OK for mop
+✅ Completed mop

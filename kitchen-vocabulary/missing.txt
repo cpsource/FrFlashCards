@@ -1,0 +1,10 @@
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/napkin.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/dish.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/lid.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/grater.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/peeler.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/oven_mitt.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/knife_block.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/lid_for_jars.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/drawer.jpg
+(standard input):[ERROR] Image error: Image download failed: 404 Client Error: Not Found for url: https://commons.wikimedia.org/wiki/Special:Redirect/file/dish_soap.jpg
