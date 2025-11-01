@@ -3,256 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nommez cette image</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>Nommez cette image (Debug)</title>
   <style>
-    :root { --gap: 16px; }
-    * { box-sizing: border-box; }
-    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background: #f7f7fb; color: #0f172a; }
-    .wrap { max-width: 900px; margin: 0 auto; padding: 32px 20px 64px; }
-    h1 { font-weight: 800; letter-spacing: -0.01em; text-align: center; margin: 0 0 18px; }
-    .card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 6px 30px rgba(2, 6, 23, .08); }
-    .image-zone { display: grid; place-items: center; min-height: 280px; padding: 12px; }
-    .image-zone img { width: min(640px, 90%); height: auto; border-radius: 12px; box-shadow: 0 4px 18px rgba(2, 6, 23, .08); background:#fafafa; }
-    hr { border: none; height: 1px; background: #e5e7eb; margin: 18px 0; }
-
-    .row { display: flex; flex-wrap: wrap; gap: var(--gap); align-items: center; justify-content: center; }
-    button { cursor: pointer; border: 0; padding: 12px 16px; border-radius: 12px; font-weight: 700; letter-spacing: .2px; box-shadow: 0 2px 8px rgba(2, 6, 23, .08); transition: transform .05s ease, box-shadow .2s ease, background .2s ease; }
-    button:active { transform: translateY(1px); }
-    .btn-primary { background: #2563eb; color: #fff; }
-    .btn-primary[disabled] { background: #93c5fd; cursor: not-allowed; }
-    .btn-ghost { background: #eef2ff; color: #1e293b; }
-    .btn-green { background: #10b981; color: #fff; }
-    .btn-amber { background: #f59e0b; color: #fff; }
-    .btn-slate { background: #334155; color: #fff; }
-
-    .answer { display: none; text-align: center; font-size: 1.4rem; font-weight: 700; }
-    .note { text-align:center; font-size: .9rem; color:#475569; margin-top: 8px; }
-
-    .footer { margin-top: 26px; display:flex; gap:12px; align-items:center; justify-content:center; color:#475569; font-size:.9rem; }
-    .pill { padding: 6px 10px; border-radius: 999px; background:#f1f5f9; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #222; margin: 0; padding: 20px; text-align: center; }
+    img { max-width: 400px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); margin: 20px auto; }
+    button { margin: 10px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }
+    .btn-primary { background: #007bff; color: white; }
+    .btn-green { background: #28a745; color: white; }
+    .btn-yellow { background: #ffc107; color: black; }
+    hr { margin: 20px auto; width: 80%; border: 0; border-top: 1px solid #ccc; }
+    .answer { display: none; font-size: 1.4em; font-weight: bold; margin-top: 10px; }
+    #debug { margin-top: 20px; background: #eee; padding: 10px; border-radius: 5px; text-align: left; font-family: monospace; max-width: 700px; margin-left: auto; margin-right: auto; overflow-y: auto; max-height: 300px; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>nommez cette image</h1>
+  <h1>nommez cette image</h1>
+  <img id="mainImage" src="" alt="image" />
+  <hr>
+  <button id="revealBtn" class="btn-primary">response revelee</button>
+  <div id="answer" class="answer"></div>
+  <audio id="audio" preload="auto"></audio>
+  <hr>
+  <button id="repeatBtn">répéter</button>
+  <button id="facileBtn" class="btn-yellow">facile</button>
+  <button id="nextBtn" class="btn-green">image suivante</button>
 
-    <div class="card">
-      <div class="image-zone">
-        <img id="mainImage" alt="image" src="" onerror="this.onerror=null; this.src='fallback.png';" />
-      </div>
-
-      <hr />
-
-      <div class="row" style="justify-content:center;">
-        <button id="revealBtn" class="btn-primary">response revelee</button>
-      </div>
-
-      <div id="answer" class="answer">
-        <div id="answerText"></div>
-        <div class="note">(lecture audio automatique)</div>
-      </div>
-
-      <audio id="audio" preload="auto"></audio>
-
-      <hr />
-
-      <div class="row" style="justify-content:center;">
-        <button id="repeatBtn" class="btn-ghost">répéter</button>
-        <button id="facileBtn" class="btn-amber">facile</button>
-        <button id="nextBtn" class="btn-green">image suivante</button>
-      </div>
-    </div>
-
-    <div class="footer">
-      <span class="pill">Astuce : les éléments marqués « facile » sont ignorés au prochain passage.</span>
-    </div>
-  </div>
+  <div id="debug"></div>
 
   <script>
-    // ===== Configuration =====
-    const CSV_PATH = 'french_kitchen_vocabulary.csv'; // two columns per row: [basename, french_text]
+    const BASE_PATH = '/kitchen-vocabulary/';
+    const CSV_PATH = BASE_PATH + 'french_kitchen_vocabulary.csv';
     const IMG_EXT = '.png';
     const MP3_EXT = '.mp3';
-    const STORAGE_IDX = 'nommez:idx';
-    const STORAGE_EASY = 'nommez:facile:set';
+    let rows = [];
+    let idx = 1; // start at 1 to skip CSV header row
+    let facileSet = new Set(JSON.parse(localStorage.getItem('facileSet') || '[]'));
 
-    // ===== State =====
-    let rows = [];          // array of [basename, answer]
-    let idx = 0;            // current index into rows
-    let facileSet = new Set();
-
-    // ===== Elements =====
     const imgEl = document.getElementById('mainImage');
     const revealBtn = document.getElementById('revealBtn');
-    const answerBox = document.getElementById('answer');
-    const answerText = document.getElementById('answerText');
+    const answerEl = document.getElementById('answer');
     const audioEl = document.getElementById('audio');
-    const repeatBtn = document.getElementById('repeatBtn');
-    const facileBtn = document.getElementById('facileBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    // ===== Utils =====
-    function loadEasySet() {
-      try {
-        const raw = localStorage.getItem(STORAGE_EASY);
-        if (raw) {
-          const arr = JSON.parse(raw);
-          if (Array.isArray(arr)) facileSet = new Set(arr);
-        }
-      } catch (e) { console.warn('facile set load failed', e); }
-    }
-    function saveEasySet() {
-      try { localStorage.setItem(STORAGE_EASY, JSON.stringify(Array.from(facileSet))); } catch {}
-    }
-    function saveIdx() {
-      try { localStorage.setItem(STORAGE_IDX, String(idx)); } catch {}
-    }
-    function loadIdx() {
-      const raw = localStorage.getItem(STORAGE_IDX);
-      if (raw !== null && !Number.isNaN(Number(raw))) idx = Math.max(0, Math.min(Number(raw), rows.length - 1));
-    }
+    const debugEl = document.getElementById('debug');
 
     function parseCSV(text) {
-      const out = [];
-      // Simple CSV: two columns, optional quotes, ignore empty lines.
-      for (const line of text.split(/\r?\n/)) {
-        const trimmed = line.trim();
-        if (!trimmed) continue;
-        // naive split respecting simple quotes
-        let cells = [];
-        let cur = '';
-        let inQ = false;
-        for (let i = 0; i < trimmed.length; i++) {
-          const ch = trimmed[i];
-          if (ch === '"') { inQ = !inQ; continue; }
-          if (ch === ',' && !inQ) { cells.push(cur); cur = ''; continue; }
-          cur += ch;
-        }
-        cells.push(cur);
-        if (cells.length < 2) continue;
-        const base = cells[0].trim();
-        const ans = cells[1].trim();
-        if (base) out.push([base, ans]);
+      const lines = text.trim().split(/\r?\n/);
+      const data = [];
+      for (let line of lines) {
+        const parts = line.split(',').map(p => p.trim().replace(/^"|"$/g, ''));
+        if (parts.length >= 2) data.push([parts[0], parts[1]]); // ignore 3rd column
       }
-      return out;
+      return data;
+    }
+
+    function showDebug() {
+      let html = `<strong>Debug Info:</strong><br>Current idx: ${idx}<br><br>`;
+      rows.forEach((row, i) => {
+        const png = BASE_PATH + row[0] + IMG_EXT;
+        const mp3 = BASE_PATH + row[0] + MP3_EXT;
+        html += `${i}: [${row[0]}] , [${row[1]}] → PNG: ${png}, MP3: ${mp3}`;
+        if (i === idx) html += '  ⟵ CURRENT';
+        html += '<br>';
+      });
+      debugEl.innerHTML = html;
     }
 
     function showCurrent() {
-      if (!rows.length) return;
-      const [base, ans] = rows[idx];
-      imgEl.src = base + IMG_EXT;
-      answerText.textContent = ans;
-      answerBox.style.display = 'none';
-      revealBtn.disabled = false;
-      revealBtn.textContent = 'response revelee';
-      // preload audio source, but don't autoplay yet
-      audioEl.src = base + MP3_EXT;
-      audioEl.pause();
-      audioEl.currentTime = 0;
+      if (!rows.length || idx >= rows.length) return;
+      const [base, answer] = rows[idx];
+      const imgName = BASE_PATH + (base.endsWith('.png') ? base : base + IMG_EXT);
+      const mp3Name = BASE_PATH + (base.endsWith('.mp3') ? base : base + MP3_EXT);
+      imgEl.src = imgName + '?v=' + Date.now();
+      answerEl.style.display = 'none';
+      answerEl.textContent = answer;
+      audioEl.src = mp3Name + '?v=' + Date.now();
+      showDebug();
     }
 
-    function reveal() {
-      answerBox.style.display = 'block';
-      // Attempt audio play; guard against 0-byte or missing files
-      const playTry = () => audioEl.play().catch(() => {/* ignore */});
-      // If the audio errors (e.g., 0-length), suppress
-      audioEl.onerror = () => { /* keep UI going even if audio missing */ };
-      playTry();
-      revealBtn.disabled = true;
-      revealBtn.textContent = 'réponse révélée';
+    function revealAnswer() {
+      answerEl.style.display = 'block';
+      audioEl.play().catch(() => {});
     }
 
-    function resetView() {
-      // repeat current page
-      answerBox.style.display = 'none';
-      revealBtn.disabled = false;
-      revealBtn.textContent = 'response revelee';
-      audioEl.pause();
-      audioEl.currentTime = 0;
+    function repeatImage() {
+      showCurrent();
     }
 
     function markFacile() {
-      if (!rows.length) return;
-      const [base] = rows[idx];
-      facileSet.add(base);
-      saveEasySet();
-      goNextNonFacile(true); // advance immediately
+      facileSet.add(rows[idx][0]);
+      localStorage.setItem('facileSet', JSON.stringify(Array.from(facileSet)));
+      nextImage();
     }
 
-    function nextIndex(i) { return (i + 1) % rows.length; }
-
-    function findNextNonFacile(start) {
-      if (!rows.length) return 0;
-      let i = nextIndex(start);
-      // Loop until we return to start
-      while (i !== start) {
-        const [base] = rows[i];
-        if (!facileSet.has(base)) return i;
-        i = nextIndex(i);
-      }
-      // If the current one is non-facile, stay; else return start (all facile)
-      const [curBase] = rows[start];
-      return facileSet.has(curBase) ? start : start;
-    }
-
-    function goNextNonFacile(fromReveal = false) {
-      if (!rows.length) return;
-      // Move ahead by one, then wrap until first non-facile, including wrap-around
-      const start = idx;
-      let i = nextIndex(start);
-      // If everything is facile, detect and notify
-      let looped = false;
-      while (true) {
-        const [base] = rows[i];
-        if (!facileSet.has(base)) { idx = i; break; }
-        i = nextIndex(i);
-        if (i === start) { looped = true; break; }
-      }
-      if (looped) {
-        alert('Bravo ! Tous les mots sont marqués « facile ». Vous pouvez réinitialiser la liste en vidant les éléments faciles dans le stockage local du navigateur.');
-      }
-      saveIdx();
+    function nextImage() {
+      let start = idx;
+      do {
+        idx = (idx + 1) % rows.length;
+        if (idx === 0) idx = 1; // skip header row
+      } while (facileSet.has(rows[idx][0]) && idx !== start);
       showCurrent();
-      if (fromReveal) {
-        // keep answer hidden on next card
-        resetView();
-      }
     }
 
-    // ===== Wire up =====
-    revealBtn.addEventListener('click', reveal);
-    repeatBtn.addEventListener('click', resetView);
-    facileBtn.addEventListener('click', markFacile);
-    nextBtn.addEventListener('click', () => goNextNonFacile(true));
+    revealBtn.addEventListener('click', revealAnswer);
+    document.getElementById('repeatBtn').addEventListener('click', repeatImage);
+    document.getElementById('facileBtn').addEventListener('click', markFacile);
+    document.getElementById('nextBtn').addEventListener('click', nextImage);
 
-    // ===== Boot =====
-    (async function boot() {
-      loadEasySet();
-      try {
-        const res = await fetch(CSV_PATH, { cache: 'no-store' });
-        const text = await res.text();
+    fetch(CSV_PATH + '?v=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.text())
+      .then(text => {
         rows = parseCSV(text);
-      } catch (e) {
-        console.error('CSV load failed:', e);
-        rows = [];
-      }
-      if (!rows.length) {
-        document.querySelector('.card').innerHTML = '<p style="text-align:center">Impossible de charger le CSV. Assurez-vous que <code>' + CSV_PATH + '</code> est présent et accessible.</p>';
-        return;
-      }
-      loadIdx();
-      // If current idx points to a facile item, jump forward until a non-facile item is found.
-      const [curBase] = rows[idx];
-      if (facileSet.has(curBase)) {
-        goNextNonFacile();
-      } else {
         showCurrent();
-      }
-    })();
+      })
+      .catch(err => console.error('Failed to load CSV:', err));
   </script>
 </body>
 </html>
-
