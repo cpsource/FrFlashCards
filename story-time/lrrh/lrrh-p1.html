@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <title>L’heure du conte — L’histoire du Petit Chaperon rouge</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bootstrap v4 -->
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-MEVo3mHlmLxgqH96ZZtDcEoxz2X1rplPQdkN2vRC7czQvO3hRHRZtA95vM5m6tgi"
           crossorigin="anonymous">
+
     <style>
       body {
         background-color: #fffdfd;
@@ -61,8 +63,8 @@
       .controls {
         margin-top: 1.5rem;
       }
-      .next {
-        margin-top: 1rem;
+      .nav-buttons {
+        margin-top: 1.5rem;
       }
     </style>
   </head>
@@ -107,8 +109,9 @@
         <button id="repeatBtn" class="btn btn-outline-secondary btn-sm ml-2">Répéter</button>
       </div>
 
-      <div class="next">
-        <button id="nextBtn" class="btn btn-primary btn-sm mt-3">Page suivante</button>
+      <div class="nav-buttons">
+        <button id="nextBtn" class="btn btn-primary btn-sm mt-3 mr-2">Page suivante</button>
+        <a href="../index.html" class="btn btn-secondary btn-sm mt-3">Retour</a>
       </div>
     </div>
 
@@ -117,20 +120,23 @@
       const speed = document.getElementById('speed');
       const speedVal = document.getElementById('speedVal');
       const repeatBtn = document.getElementById('repeatBtn');
+
       speed.addEventListener('input', () => {
         const v = parseFloat(speed.value);
         player.playbackRate = v;
         speedVal.textContent = v.toFixed(2) + '×';
       });
+
       repeatBtn.addEventListener('click', () => {
         player.currentTime = 0;
         player.play();
       });
+
       document.getElementById('nextBtn').addEventListener('click', () => {
         window.location.href = 'lrrh-p2.html';
       });
 
-      // hover phrase audio
+      // Hover phrase audio playback
       let hoverAudio = null;
       function playHover(src, rate) {
         if (hoverAudio) { hoverAudio.pause(); hoverAudio = null; }
@@ -138,6 +144,7 @@
         hoverAudio.playbackRate = rate || 1.0;
         hoverAudio.play().catch(() => {});
       }
+
       document.querySelectorAll('.gloss').forEach(node => {
         node.addEventListener('mouseenter', () => {
           const file = node.getAttribute('data-audio');
