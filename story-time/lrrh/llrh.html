@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>story time — L’histoire du Petit Chaperon rouge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { --fg:#222; --bg:#fff; --accent:#8b0000; --muted:#666; --tipbg:#111; --tipfg:#fff; }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;color:var(--fg);background:var(--bg);margin:32px;max-width:900px}
+    h1{margin:0 0 .2rem 0;font-size:1.8rem}
+    h2{margin:.2rem 0 1.2rem 0;color:var(--muted);font-weight:500}
+    .story{font-size:1.15rem}
+    .gloss{border-bottom:2px solid var(--accent); text-decoration:none; cursor:help; position:relative;}
+    /* Tooltip */
+    .gloss[data-en]:hover::after{
+      content: attr(data-en);
+      position:absolute; left:0; top:100%; margin-top:.35rem;
+      white-space:nowrap;
+      background:var(--tipbg); color:var(--tipfg);
+      padding:.35rem .5rem; border-radius:.35rem; font-size:.9rem; z-index:10;
+      box-shadow:0 6px 20px rgba(0,0,0,.2);
+    }
+    .controls{margin-top:1.2rem; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .controls label{font-size:.95rem;color:var(--muted)}
+    .btn{appearance:none;border:1px solid #ccc;background:#f7f7f7;border-radius:.5rem;padding:.45rem .75rem;cursor:pointer}
+    .btn:hover{background:#eee}
+    .next{margin-top:1rem}
+    audio{width:100%; margin-top:.6rem}
+  </style>
+</head>
+<body>
+  <h1>story time</h1>
+  <h2>L’histoire du Petit Chaperon rouge</h2>
+
+  <div class="story" id="story">
+    <p>
+      <span class="gloss" data-en="One day" data-audio="lrrh_un_jour.mp3">Un jour</span>,
+      <span class="gloss" data-en="Little Red Riding Hood" data-audio="lrrh_petit_chaperon_rouge.mp3">le Petit Chaperon rouge</span>
+      <span class="gloss" data-en="went to see (passé composé)" data-audio="lrrh_est_allee_voir.mp3">est allée voir</span>
+      <span class="gloss" data-en="her grandmother" data-audio="lrrh_sa_grand_mere.mp3">sa grand-mère</span>.
+    </p>
+    <p>
+      Elle <span class="gloss" data-en="is carrying (present)" data-audio="lrrh_porte.mp3">porte</span>
+      <span class="gloss" data-en="a basket" data-audio="lrrh_un_panier.mp3">un panier</span> avec
+      <span class="gloss" data-en="a knife" data-audio="lrrh_un_couteau.mp3">un couteau</span>,
+      <span class="gloss" data-en="a baguette" data-audio="lrrh_une_baguette.mp3">une baguette</span>,
+      <span class="gloss" data-en="some cheese" data-audio="lrrh_du_fromage.mp3">du fromage</span> et
+      <span class="gloss" data-en="a bottle of wine" data-audio="lrrh_une_bouteille_de_vin.mp3">une bouteille de vin</span>.
+    </p>
+    <p>
+      <span class="gloss" data-en="It is a gift (present)" data-audio="lrrh_cest_un_cadeau.mp3">C’est un cadeau</span>
+      <span class="gloss" data-en="for her grandmother" data-audio="lrrh_pour_sa_grand_mere.mp3">pour sa grand-mère</span>.
+    </p>
+    <p>
+      <span class="gloss" data-en="Soon" data-audio="lrrh_bientot.mp3">Bientôt</span>, elle
+      <span class="gloss" data-en="is going to knock (futur proche)" data-audio="lrrh_va_frapper.mp3">va frapper</span> à la porte et
+      elle <span class="gloss" data-en="is going to say hello (futur proche)" data-audio="lrrh_va_dire_bonjour.mp3">va dire bonjour</span>.
+    </p>
+  </div>
+
+  <!-- Full story audio -->
+  <audio id="player" controls preload="auto" src="lrrh_full.mp3"></audio>
+
+  <div class="controls">
+    <label for="speed">vitesse&nbsp;:</label>
+    <input id="speed" type="range" min="0.6" max="1.4" step="0.05" value="1.0">
+    <span id="speedVal">1.00×</span>
+    <button id="repeatBtn" class="btn">répéter</button>
+  </div>
+
+  <div class="next">
+    <button id="nextBtn" class="btn">page suivante</button>
+  </div>
+
+  <script>
+    // --- Full story controls ---
+    const player = document.getElementById('player');
+    const speed = document.getElementById('speed');
+    const speedVal = document.getElementById('speedVal');
+    const repeatBtn = document.getElementById('repeatBtn');
+
+    speed.addEventListener('input', () => {
+      const v = parseFloat(speed.value);
+      player.playbackRate = v;
+      speedVal.textContent = v.toFixed(2) + '×';
+    });
+    repeatBtn.addEventListener('click', () => {
+      player.currentTime = 0;
+      player.play();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      // Adjust when page 2 exists
+      window.location.href = 'lrrh_page2.html';
+    });
+
+    // --- Phrase hover audio (pre-generated MP3s) ---
+    let hoverAudio = null;
+    function playHover(src, rate) {
+      try {
+        if (hoverAudio) {
+          hoverAudio.pause();
+          hoverAudio = null;
+        }
+        hoverAudio = new Audio(src);
+        hoverAudio.playbackRate = rate || 1.0;
+        hoverAudio.play().catch(() => {});
+      } catch(e) {}
+    }
+
+    document.querySelectorAll('.gloss').forEach(node => {
+      node.addEventListener('mouseenter', () => {
+        const file = node.getAttribute('data-audio');
+        if (!file) return;
+        const rate = parseFloat(speed.value || '1') || 1;
+        playHover(file, rate);
+      });
+    });
+  </script>
+</body>
+</html>
+
