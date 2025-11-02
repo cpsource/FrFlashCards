@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>L’heure du conte — L’histoire du Petit Chaperon rouge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap v4 -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-MEVo3mHlmLxgqH96ZZtDcEoxz2X1rplPQdkN2vRC7czQvO3hRHRZtA95vM5m6tgi"
+          crossorigin="anonymous">
+    <style>
+      body {
+        background-color: #fffdfd;
+        color: #222;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      .story-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        text-align: center;
+      }
+      h1 {
+        font-size: 2.5rem;
+        color: #8b0000;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        font-weight: 500;
+        color: #666;
+        margin-bottom: 2rem;
+      }
+      .story {
+        text-align: left;
+        font-size: 1.15rem;
+      }
+      .gloss {
+        border-bottom: 2px solid #8b0000;
+        text-decoration: none;
+        cursor: pointer;
+        position: relative;
+      }
+      .gloss[data-en]:hover::after {
+        content: attr(data-en);
+        position: absolute;
+        left: 0;
+        top: 100%;
+        margin-top: .35rem;
+        white-space: nowrap;
+        background: #111;
+        color: #fff;
+        padding: .35rem .6rem;
+        border-radius: .35rem;
+        font-size: .9rem;
+        z-index: 10;
+      }
+      audio {
+        width: 100%;
+        margin-top: 1rem;
+      }
+      .controls {
+        margin-top: 1.5rem;
+      }
+      .next {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="story-container">
+      <h1>L’heure du conte</h1>
+      <img src="little_red_riding_hood.png" alt="Petit Chaperon rouge" class="img-fluid mb-3" style="max-width:300px;">
+      <h2>L’histoire du Petit Chaperon rouge</h2>
+
+      <div class="story">
+        <p>
+          <span class="gloss" data-en="One day" data-audio="lrrh_un_jour.mp3">Un jour</span>,
+          <span class="gloss" data-en="Little Red Riding Hood" data-audio="lrrh_petit_chaperon_rouge.mp3">le Petit Chaperon rouge</span>
+          <span class="gloss" data-en="went to see (passé composé)" data-audio="lrrh_est_allee_voir.mp3">est allée voir</span>
+          <span class="gloss" data-en="her grandmother" data-audio="lrrh_sa_grand_mere.mp3">sa grand-mère</span>.
+        </p>
+        <p>
+          Elle <span class="gloss" data-en="is carrying (present)" data-audio="lrrh_porte.mp3">porte</span>
+          <span class="gloss" data-en="a basket" data-audio="lrrh_un_panier.mp3">un panier</span> avec
+          <span class="gloss" data-en="a knife" data-audio="lrrh_un_couteau.mp3">un couteau</span>,
+          <span class="gloss" data-en="a baguette" data-audio="lrrh_une_baguette.mp3">une baguette</span>,
+          <span class="gloss" data-en="some cheese" data-audio="lrrh_du_fromage.mp3">du fromage</span> et
+          <span class="gloss" data-en="a bottle of wine" data-audio="lrrh_une_bouteille_de_vin.mp3">une bouteille de vin</span>.
+        </p>
+        <p>
+          <span class="gloss" data-en="It is a gift (present)" data-audio="lrrh_cest_un_cadeau.mp3">C’est un cadeau</span>
+          <span class="gloss" data-en="for her grandmother" data-audio="lrrh_pour_sa_grand_mere.mp3">pour sa grand-mère</span>.
+        </p>
+        <p>
+          <span class="gloss" data-en="Soon" data-audio="lrrh_bientot.mp3">Bientôt</span>, elle
+          <span class="gloss" data-en="is going to knock (futur proche)" data-audio="lrrh_va_frapper.mp3">va frapper</span> à la porte et
+          elle <span class="gloss" data-en="is going to say hello (futur proche)" data-audio="lrrh_va_dire_bonjour.mp3">va dire bonjour</span>.
+        </p>
+      </div>
+
+      <audio id="player" controls preload="auto" src="lrrh_full.mp3"></audio>
+
+      <div class="controls">
+        <label for="speed">Vitesse :</label>
+        <input id="speed" type="range" min="0.6" max="1.4" step="0.05" value="1.0">
+        <span id="speedVal">1.00×</span>
+        <button id="repeatBtn" class="btn btn-outline-secondary btn-sm ml-2">Répéter</button>
+      </div>
+
+      <div class="next">
+        <button id="nextBtn" class="btn btn-primary btn-sm mt-3">Page suivante</button>
+      </div>
+    </div>
+
+    <script>
+      const player = document.getElementById('player');
+      const speed = document.getElementById('speed');
+      const speedVal = document.getElementById('speedVal');
+      const repeatBtn = document.getElementById('repeatBtn');
+      speed.addEventListener('input', () => {
+        const v = parseFloat(speed.value);
+        player.playbackRate = v;
+        speedVal.textContent = v.toFixed(2) + '×';
+      });
+      repeatBtn.addEventListener('click', () => {
+        player.currentTime = 0;
+        player.play();
+      });
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        window.location.href = 'lrrh_page2.html';
+      });
+
+      // hover phrase audio
+      let hoverAudio = null;
+      function playHover(src, rate) {
+        if (hoverAudio) { hoverAudio.pause(); hoverAudio = null; }
+        hoverAudio = new Audio(src);
+        hoverAudio.playbackRate = rate || 1.0;
+        hoverAudio.play().catch(() => {});
+      }
+      document.querySelectorAll('.gloss').forEach(node => {
+        node.addEventListener('mouseenter', () => {
+          const file = node.getAttribute('data-audio');
+          if (!file) return;
+          const rate = parseFloat(speed.value || '1') || 1;
+          playHover(file, rate);
+        });
+      });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-LtrjvnR4Twt/qOuYxV0t2tUHZhbz9N2CblxR+7dUVF0QK3Zo2mtnV+8nhDkYvj8D"
+            crossorigin="anonymous"></script>
+  </body>
+</html>
+
