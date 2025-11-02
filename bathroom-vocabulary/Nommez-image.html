@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nommez cette image (Debug)</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #222; margin: 0; padding: 20px; text-align: center; }
+    img { max-width: 400px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); margin: 20px auto; }
+    button { margin: 10px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }
+    .btn-primary { background: #007bff; color: white; }
+    .btn-green { background: #28a745; color: white; }
+    .btn-yellow { background: #ffc107; color: black; }
+    hr { margin: 20px auto; width: 80%; border: 0; border-top: 1px solid #ccc; }
+    .answer { display: none; font-size: 1.4em; font-weight: bold; margin-top: 10px; }
+    #debug { margin-top: 20px; background: #eee; padding: 10px; border-radius: 5px; text-align: left; font-family: monospace; max-width: 700px; margin-left: auto; margin-right: auto; overflow-y: auto; max-height: 300px; }
+  </style>
+</head>
+<body>
+  <h1>nommez cette image</h1>
+  <img id="mainImage" src="" alt="image" />
+  <hr>
+  <button id="revealBtn" class="btn-primary">response revelee</button>
+  <div id="answer" class="answer"></div>
+  <audio id="audio" preload="auto"></audio>
+  <hr>
+  <button id="repeatBtn">répéter</button>
+  <button id="facileBtn" class="btn-yellow">facile</button>
+  <button id="nextBtn" class="btn-green">image suivante</button>
+
+  <div id="debug"></div>
+
+  <script>
+    const BASE_PATH = '/bathroom-vocabulary/';
+    const CSV_PATH = BASE_PATH + 'bathroom-vocabulary.csv';
+    const IMG_EXT = '.png';
+    const MP3_EXT = '.mp3';
+    let rows = [];
+    let idx = 1; // start at 1 to skip CSV header row
+    let facileSet = new Set(JSON.parse(localStorage.getItem('facileSet') || '[]'));
+
+    const imgEl = document.getElementById('mainImage');
+    const revealBtn = document.getElementById('revealBtn');
+    const answerEl = document.getElementById('answer');
+    const audioEl = document.getElementById('audio');
+    const debugEl = document.getElementById('debug');
+
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/);
+      const data = [];
+      for (let line of lines) {
+        const parts = line.split(',').map(p => p.trim().replace(/^"|"$/g, ''));
+        if (parts.length >= 2) data.push([parts[0], parts[1]]); // ignore 3rd column
+      }
+      return data;
+    }
+
+    function showDebug() {
+      let html = `<strong>Debug Info:</strong><br>Current idx: ${idx}<br><br>`;
+      rows.forEach((row, i) => {
+        const png = BASE_PATH + row[0] + IMG_EXT;
+        const mp3 = BASE_PATH + row[0] + MP3_EXT;
+        html += `${i}: [${row[0]}] , [${row[1]}] → PNG: ${png}, MP3: ${mp3}`;
+        if (i === idx) html += '  ⟵ CURRENT';
+        html += '<br>';
+      });
+      debugEl.innerHTML = html;
+    }
+
+    function showCurrent() {
+      if (!rows.length || idx >= rows.length) return;
+      const [base, answer] = rows[idx];
+      const imgName = BASE_PATH + (base.endsWith('.png') ? base : base + IMG_EXT);
+      const mp3Name = BASE_PATH + (base.endsWith('.mp3') ? base : base + MP3_EXT);
+      imgEl.src = imgName + '?v=' + Date.now();
+      answerEl.style.display = 'none';
+      answerEl.textContent = answer;
+      audioEl.src = mp3Name + '?v=' + Date.now();
+      showDebug();
+    }
+
+    function revealAnswer() {
+      answerEl.style.display = 'block';
+      audioEl.play().catch(() => {});
+    }
+
+    function repeatImage() {
+      showCurrent();
+    }
+
+    function markFacile() {
+      facileSet.add(rows[idx][0]);
+      localStorage.setItem('facileSet', JSON.stringify(Array.from(facileSet)));
+      nextImage();
+    }
+
+    function nextImage() {
+      let start = idx;
+      do {
+        idx = (idx + 1) % rows.length;
+        if (idx === 0) idx = 1; // skip header row
+      } while (facileSet.has(rows[idx][0]) && idx !== start);
+      showCurrent();
+    }
+
+    revealBtn.addEventListener('click', revealAnswer);
+    document.getElementById('repeatBtn').addEventListener('click', repeatImage);
+    document.getElementById('facileBtn').addEventListener('click', markFacile);
+    document.getElementById('nextBtn').addEventListener('click', nextImage);
+
+    fetch(CSV_PATH + '?v=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.text())
+      .then(text => {
+        rows = parseCSV(text);
+        showCurrent();
+      })
+      .catch(err => console.error('Failed to load CSV:', err));
+  </script>
+</body>
+</html>
