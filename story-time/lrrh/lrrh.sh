@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-TTS="../tools/make_mp3_single.py"
+TTS="../../tools/make_mp3_single.py"
 INSTR="clear, formal, use a woman's voice"
 
 # ---- Full story (as presented on the page) ----
