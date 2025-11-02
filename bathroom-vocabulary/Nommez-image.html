@@ -55,30 +55,44 @@
       return data;
     }
 
+    function safeName(name) {
+	return name.trim().replace(/\s+/g, '_');
+    }
+
     function showDebug() {
-      let html = `<strong>Debug Info:</strong><br>Current idx: ${idx}<br><br>`;
-      rows.forEach((row, i) => {
-        const png = BASE_PATH + row[0] + IMG_EXT;
-        const mp3 = BASE_PATH + row[0] + MP3_EXT;
-        html += `${i}: [${row[0]}] , [${row[1]}] → PNG: ${png}, MP3: ${mp3}`;
-        if (i === idx) html += '  ⟵ CURRENT';
-        html += '<br>';
-      });
-      debugEl.innerHTML = html;
+	let html = `<strong>Debug Info:</strong><br>Current idx: ${idx}<br><br>`;
+	rows.forEach((row, i) => {
+	    const base = safeName(row[0]);
+	    const png = BASE_PATH + base + IMG_EXT;
+	    const mp3 = BASE_PATH + base + MP3_EXT;
+	    html += `${i}: [${row[0]}] , [${row[1]}] → PNG: ${png}, MP3: ${mp3}`;
+	    if (i === idx) html += '  ⟵ CURRENT';
+	    html += '<br>';
+	});
+	debugEl.innerHTML = html;
     }
 
     function showCurrent() {
-      if (!rows.length || idx >= rows.length) return;
-      const [base, answer] = rows[idx];
-      const imgName = BASE_PATH + (base.endsWith('.png') ? base : base + IMG_EXT);
-      const mp3Name = BASE_PATH + (base.endsWith('.mp3') ? base : base + MP3_EXT);
-      imgEl.src = imgName + '?v=' + Date.now();
-      answerEl.style.display = 'none';
-      answerEl.textContent = answer;
-      audioEl.src = mp3Name + '?v=' + Date.now();
-      showDebug();
+	if (!rows.length || idx >= rows.length) return;
+	const [baseName, answer] = rows[idx];
+	const safeBase = safeName(baseName);
+	const imgName = BASE_PATH + safeBase + IMG_EXT;
+	const mp3Name = BASE_PATH + safeBase + MP3_EXT;
+	imgEl.src = imgName + '?v=' + Date.now();
+	answerEl.style.display = 'none';
+	answerEl.textContent = answer;
+	audioEl.src = mp3Name + '?v=' + Date.now();
+	showDebug();
     }
 
+    function markFacile() {
+	const safeBase = safeName(rows[idx][0]);
+	facileSet.add(safeBase);
+	localStorage.setItem('facileSet', JSON.stringify(Array.from(facileSet)));
+	nextImage();
+    }
+
+    
     function revealAnswer() {
       answerEl.style.display = 'block';
       audioEl.play().catch(() => {});
@@ -86,12 +100,6 @@
 
     function repeatImage() {
       showCurrent();
-    }
-
-    function markFacile() {
-      facileSet.add(rows[idx][0]);
-      localStorage.setItem('facileSet', JSON.stringify(Array.from(facileSet)));
-      nextImage();
     }
 
     function nextImage() {
