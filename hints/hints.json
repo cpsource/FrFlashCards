@@ -1,7 +1,12 @@
 [
   {
-    "title": "Hint: “L’heure du conte” vs “l’histoire”",
     "file": "L-heure-du-conte-hint.html",
-    "description": "A quick guide to understanding why French sometimes uses “L’heure du conte” instead of just “l’histoire”."
+    "title": "“L’heure du conte” vs “l’histoire”",
+    "summary": "A quick guide to understanding why French sometimes uses \n            “L’heure du conte” instead of just \n            “l’histoire”."
+  },
+  {
+    "file": "helpful-hints.html",
+    "title": "📚 Helpful Hints - Conseils Utiles 📚",
+    "summary": "Bonjour à toutes et à tous,"
   }
 ]

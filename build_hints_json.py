@@ -1,69 +1,150 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+build_hints_json.py
+
+Scan Jinja/HTML hint templates under templates/hints/ and build a hints.json
+file that build_site.py can consume.
+
+Expected by build_site.py:
+  hints = json.load(open("hints/hints.json"))
+  for hint in hints:
+      fname = hint["file"]   # e.g. "L-heure-du-conte-hint.html"
+
+So our output is a top-level JSON *list* of dicts like:
+[
+  {
+    "file": "L-heure-du-conte-hint.html",
+    "title": "L’heure du conte",
+    "summary": "..."
+  },
+  ...
+]
+
+Usage:
+
+  cd /var/www/FrFlashCards
+  python3 build_hints_json.py
+
+"""
+
+import argparse
 import json
-from pathlib import Path
-from datetime import datetime
-from jinja2 import Environment, FileSystemLoader, select_autoescape, TemplateNotFound
-
-BASE_DIR = Path(__file__).resolve().parent
-TEMPLATES_DIR = BASE_DIR / "templates"
-HINTS_DIR = BASE_DIR / "hints"
-HINTS_JSON = HINTS_DIR / "hints.json"
-
-env = Environment(
-    loader=FileSystemLoader(str(TEMPLATES_DIR)),
-    autoescape=select_autoescape(["html", "xml"]),
-    trim_blocks=True,
-    lstrip_blocks=True,
-)
+import pathlib
+import re
+import sys
+import html
+from typing import Optional
 
 
-def build_hints():
-    if not HINTS_JSON.exists():
-        print(f"⚠️  {HINTS_JSON} not found, skipping hints.")
-        return
+def extract_tag_text(source: str, tag: str) -> Optional[str]:
+    """
+    Pull out inner text of the first <tag>...</tag>.
+    Very simple: strips nested tags, unescapes HTML entities, trims whitespace.
+    """
+    pattern = rf"<{tag}[^>]*>(.*?)</{tag}>"
+    m = re.search(pattern, source, flags=re.IGNORECASE | re.DOTALL)
+    if not m:
+        return None
+    inner = m.group(1)
+    # Strip other tags
+    inner = re.sub(r"<[^>]+>", "", inner)
+    inner = html.unescape(inner)
+    inner = inner.strip()
+    return inner or None
 
-    try:
-        raw = HINTS_JSON.read_text(encoding="utf-8")
-        data = json.loads(raw)
-    except json.JSONDecodeError as e:
-        print(f"❌ Error parsing {HINTS_JSON}: {e}")
-        print("Here is the file content for debugging:\n")
-        print(raw)
-        raise
 
-    print(f"Building {len(data)} hint page(s) from {HINTS_JSON}.")
+def extract_title(html_text: str, fallback: str) -> str:
+    """Try <h1>, then <title>. If nothing, fall back to provided string."""
+    title = extract_tag_text(html_text, "h1")
+    if not title:
+        title = extract_tag_text(html_text, "title")
+    return title or fallback
 
-    ctx_base = {"current_year": datetime.now().year}
 
-    for hint in data:
-        fname = hint["file"]          # e.g. "L-heure-du-conte-hint.html"
-        tpl_name = f"hints/{fname}"   # templates/hints/L-heure-du-conte-hint.html
-        tpl_path = TEMPLATES_DIR / tpl_name
-        out_path = HINTS_DIR / fname  # hints/L-heure-du-conte-hint.html
+def extract_summary(html_text: str) -> Optional[str]:
+    """Use the first <p> as a short description/summary, if present."""
+    return extract_tag_text(html_text, "p")
 
-        if not tpl_path.exists():
-            print(f"  ⚠️  Template not found for {fname} ({tpl_path}), skipping.")
-            continue
 
-        print(f"  Rendering {tpl_name} -> {out_path}")
+def build_hints_list(templates_dir: pathlib.Path) -> list[dict]:
+    """
+    Walk templates_dir for *.html and build hint metadata.
+
+    Returns a list of dicts, each with at least:
+      - file    : filename, e.g. "L-heure-du-conte-hint.html"
+      - title   : human-friendly title
+      - summary : first paragraph (optional, may be empty string)
+    """
+    if not templates_dir.exists() or not templates_dir.is_dir():
+        print(f"[FATAL] templates dir not found: {templates_dir}", file=sys.stderr)
+        sys.exit(1)
+
+    hints: list[dict] = []
+
+    html_files = sorted(templates_dir.glob("*.html"))
+    if not html_files:
+        print(f"[WARN] No .html files found in {templates_dir}", file=sys.stderr)
+
+    for f in html_files:
+        fname = f.name                     # e.g. "L-heure-du-conte-hint.html"
+        hint_id = f.stem                   # e.g. "L-heure-du-conte-hint"
 
         try:
-            template = env.get_template(tpl_name)
-        except TemplateNotFound:
-            print(f"  ⚠️  Jinja could not find template {tpl_name}, skipping.")
+            text = f.read_text(encoding="utf-8")
+        except Exception as e:
+            print(f"[WARN] Could not read {f}: {e}", file=sys.stderr)
             continue
 
-        html = template.render(**ctx_base, hint=hint)
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(html, encoding="utf-8")
-        print(f"    ✓ wrote {out_path}")
+        title = extract_title(text, fallback=hint_id)
+        summary = extract_summary(text) or ""
+
+        hints.append(
+            {
+                "file": fname,
+                "title": title,
+                "summary": summary,
+            }
+        )
+
+        print(f"[OK] Added hint: file={fname!r}, title={title!r}")
+
+    return hints
 
 
-def main():
-    print(f"Templates dir: {TEMPLATES_DIR}")
-    print(f"Hints dir:     {HINTS_DIR}")
-    build_hints()
-    print("Done.")
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Build hints/hints.json from templates/hints/*.html"
+    )
+    parser.add_argument(
+        "--templates-dir",
+        default="templates/hints",
+        help="Directory containing hint templates (default: templates/hints)",
+    )
+    parser.add_argument(
+        "--output",
+        default="hints/hints.json",
+        help="Output JSON path (default: hints/hints.json)",
+    )
+    args = parser.parse_args()
+
+    templates_dir = pathlib.Path(args.templates_dir)
+    output_path = pathlib.Path(args.output)
+
+    hints_list = build_hints_list(templates_dir)
+
+    # Ensure parent dir exists
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    output_path.write_text(
+        json.dumps(hints_list, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+    print("\n[SUMMARY]")
+    print(f"  total hints : {len(hints_list)}")
+    print(f"  output file : {output_path.resolve()}")
 
 
 if __name__ == "__main__":
