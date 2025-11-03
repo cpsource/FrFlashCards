@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .hints-root {
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+  }
+  .hints-root .content-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  .hints-root h1 {
+      text-align: center;
+      color: #764ba2;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #667eea;
+      font-size: 2.5em;
+  }
+  .hints-root h2 {
+      color: #667eea;
+      margin-top: 35px;
+      margin-bottom: 20px;
+      padding-left: 10px;
+      border-left: 4px solid #764ba2;
+  }
+  .hints-root .intro-section {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      border-left: 5px solid #667eea;
+  }
+  .hints-root .tips-section {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+  }
+  .hints-root .tip-box {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .hints-root .tip-box strong {
+      color: #764ba2;
+  }
+  .hints-root .resource-section {
+      margin-bottom: 30px;
+  }
+  .hints-root .resource-card {
+      background: #f8f9fa;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #667eea;
+      transition: transform 0.3s ease;
+  }
+  .hints-root .resource-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .hints-root .resource-title {
+      font-weight: bold;
+      color: #764ba2;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+  }
+  .hints-root .video-list {
+      margin-left: 20px;
+      margin-top: 10px;
+  }
+  .hints-root .video-list li {
+      margin-bottom: 8px;
+  }
+  .hints-root a {
+      color: #667eea;
+      text-decoration: none;
+      transition: color 0.3s ease;
+  }
+  .hints-root a:hover {
+      color: #764ba2;
+      text-decoration: underline;
+  }
+  .hints-root .icon {
+      margin-right: 8px;
+  }
+  .hints-root .pronunciation-section {
+      background: #fff5f5;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+  }
+  .hints-root .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+  }
+  .hints-root .sound-card {
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+  }
+  .hints-root .sound-card:hover {
+      transform: scale(1.05);
+  }
+  .hints-root .sound-card strong {
+      color: #764ba2;
+      font-size: 1.1em;
+  }
+  .hints-root .greeting {
+      font-style: italic;
+      color: #666;
+      margin-bottom: 20px;
+  }
+</style>
+
+<div class="hints-root">
+  <div class="content-container">
+      <h1>📚 Helpful Hints - Conseils Utiles 📚</h1>
+      
+      <div class="intro-section">
+          <p class="greeting">Bonjour à toutes et à tous,</p>
+          <p>J'espère que vous allez bien!</p>
+          <p>Sorry I'm a bit late but, as promised, here are my audio recommendations to help you train your ear, expand your vocabulary, and improve your pronunciation.</p>
+      </div>
+
+      <div class="tips-section">
+          <h2>💡 Conseils d'Écoute - Listening Tips</h2>
+          
+          <div class="tip-box">
+              <strong>Tip 1:</strong> On YouTube, you can adjust the playback speed to 0.75x or 0.50x if you'd like to listen more slowly. If you have time, I recommend listening 3 times:
+              <ol>
+                  <li>First at normal speed</li>
+                  <li>Then at 0.75x</li>
+                  <li>Finally at 0.50x</li>
+              </ol>
+          </div>
+          
+          <div class="tip-box">
+              <strong>Tip 2:</strong> Watch the video first without subtitles, then with French subtitles, and then again with English subtitles.
+          </div>
+      </div>
+
+      <div class="resource-section">
+          <h2>🎥 Chaînes YouTube Recommandées</h2>
+          
+          <div class="resource-card">
+              <div class="resource-title">
+                  <span class="icon">📺</span>1 jour, 1 question
+              </div>
+              <p>Channel: <a href="https://www.youtube.com/@InfoouMytho" target="_blank">@InfoouMytho</a></p>
+              <p><strong>Animal-themed videos:</strong></p>
+              <ul class="video-list">
+                  <li>🐾 <a href="https://youtu.be/RAUSbOR3PdA?si=h-8-pPTo3Fv4hEbb" target="_blank">Les animaux pleurent-ils ?</a></li>
+                  <li>🐼 <a href="https://youtu.be/oPnzvqySXZg?si=4AhCSEKtN7XGi61D" target="_blank">Comment la Chine protège-t-elle les pandas ?</a></li>
+                  <li>🐺 <a href="https://youtu.be/_PmBYyRrErA?si=0gh7yXajKe1Tzi_R" target="_blank">Pourquoi certains sont contre les loups en France ?</a></li>
+              </ul>
+          </div>
+
+          <div class="resource-card">
+              <div class="resource-title">
+                  <span class="icon">📺</span>Easy French
+              </div>
+              <p>Channel: <a href="https://www.youtube.com/@EasyFrench" target="_blank">@EasyFrench</a></p>
+              <p>Featured video: <a href="https://youtu.be/SVG1yak8T9E?si=4JexeGmwtUsT4WOd" target="_blank">Easy French 156 | Do the French like pets?</a></p>
+          </div>
+
+          <div class="resource-card">
+              <div class="resource-title">
+                  <span class="icon">🎙️</span>French BlaBla Podcast
+              </div>
+              <p>Channel: <a href="https://www.youtube.com/@CaroFrenchBlabla" target="_blank">@CaroFrenchBlabla</a></p>
+          </div>
+
+          <div class="resource-card">
+              <div class="resource-title">
+                  <span class="icon">📺</span>Les essentiels de Jamy - Lumni
+              </div>
+              <p>Playlist: <a href="https://youtube.com/playlist?list=PLaBhcH5THSyBLMUz0ZJVbqlqmclPrWef6&si=EDb6CgrsJeo1wxOh" target="_blank">Accéder à la playlist</a></p>
+          </div>
+
+          <div class="resource-card">
+              <div class="resource-title">
+                  <span class="icon">🌍</span>TV5Monde
+              </div>
+              <p>Great for improving your French on many aspects with programs and exercises designed for A1 to B2 levels:</p>
+              <ul class="video-list">
+                  <li>📖 <a href="https://apprendre.tv5monde.com/fr/exercices/a1-debutant" target="_blank">A1 - Débutant</a></li>
+                  <li>📖 <a href="https://apprendre.tv5monde.com/fr/exercices/a2-elementaire" target="_blank">A2 - Élémentaire</a></li>
+              </ul>
+          </div>
+      </div>
+
+      <div class="pronunciation-section">
+          <h2>🗣️ Améliorer la Prononciation - Pronunciation Practice</h2>
+          
+          <div class="resource-card">
+              <div class="resource-title">
+                  <span class="icon">👶</span>Kidi Fun (YouTube Shorts)
+              </div>
+              <p>YouTube Channel originally meant for kids but great to improve your pronunciation!</p>
+              <p>Channel: <a href="https://www.youtube.com/@KidiFun" target="_blank">@KidiFun</a></p>
+              
+              <div class="sound-grid">
+                  <div class="sound-card">
+                      <strong>"GN"</strong><br>
+                      <a href="https://youtube.com/shorts/XidVUcV1p7I?feature=shared" target="_blank">Practice →</a>
+                  </div>
+                  <div class="sound-card">
+                      <strong>"OUIL"</strong><br>
+                      <a href="https://youtube.com/shorts/xJkZ2_V8wMs?feature=shared" target="_blank">Practice →</a>
+                  </div>
+                  <div class="sound-card">
+                      <strong>"AIL"</strong><br>
+                      <a href="https://youtube.com/shorts/W0jEyp-FZg4?feature=shared" target="_blank">Practice →</a>
+                  </div>
+                  <div class="sound-card">
+                      <strong>"CH"</strong><br>
+                      <a href="https://youtube.com/shorts/Fz63Jy4itF4?feature=shared" target="_blank">Practice →</a>
+                  </div>
+                  <div class="sound-card">
+                      <strong>"IN"</strong><br>
+                      <a href="https://youtube.com/shorts/MkIsAjF8uu0?feature=shared" target="_blank">Practice →</a>
+                  </div>
+                  <div class="sound-card">
+                      <strong>"OU"</strong><br>
+                      <a href="https://youtube.com/shorts/OhbuVueoogI?si=HU65e-bUghyOcLiw" target="_blank">Practice →</a>
+                  </div>
+                  <div class="sound-card">
+                      <strong>"AN"</strong><br>
+                      <a href="https://youtube.com/shorts/fNVEgIa-PSE?si=tCna0i02u3iul5Bi" target="_blank">Practice →</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid #dee2e6;">
+          <p style="color: #666; font-style: italic;">Bonne chance dans votre apprentissage du français! 🇫🇷</p>
+          <a href="../index.html" class="btn btn-primary btn-lg" style="margin-top: 20px;">
+              ↩️ Retour
+          </a>
+      </div>
+  </div>
+</div>
+{% endblock %}
+
