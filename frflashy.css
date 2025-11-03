@@ -1,0 +1,22 @@
+/* frflashy.css */
+
+.page-title {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #666;
+}
+
+.badge-hints {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.section-title {
+    margin-top: 2rem;
+}
+

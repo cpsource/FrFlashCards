@@ -1,101 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends "base.html" %}
 
-<title>frflashy.com — Learn French with stories, hints, and images</title>
+{% block title %}Hint: “L’heure du conte” vs “l’histoire” – frflashy.com{% endblock %}
 
-<meta name="description" content="Practice French the natural way — stories, vocabulary, and cultural hints for A1–A2 learners.">
-<meta name="author" content="frflashy.com">
-<meta property="og:title" content="frflashy.com — Learn French with stories, hints, and images">
-<meta property="og:description" content="Learn French naturally with stories and vocabulary hints.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="/static/img/frflashy-social.png">
-
-<link rel="icon" href="/static/img/favicon.ico" type="image/x-icon">
-
-<link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-  integrity="sha384-MCw98/SFnGE8fJT3GXwE5G5YdNVr7sA7Zp7uC2iZxE0A7f9vbz7YvoRSaRw5G5S1"
-  crossorigin="anonymous"
-/>
-
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  integrity="sha512-dym3zGgETNPh70c2eV7VWVh7kFzVekmpuUpuFmQz1nW8VQFjthkHBxWlz6Ww1KcVxDsK5VPCs4bOQb1YZf+AAQ=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
-
-<link rel="stylesheet" href="/frflashy.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 border-bottom">
-  <div class="container">
-
-    <!-- Brand -->
-    <a class="navbar-brand font-weight-bold" href="/index.html">
-      frflashy<span class="text-primary">.com</span>
-    </a>
-
-    <!-- Toggler (for mobile) -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarMain" aria-controls="navbarMain"
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarMain">
-      <ul class="navbar-nav ml-auto">
-
-        <!-- Home -->
-        <li class="nav-item">
-          <a class="nav-link" href="/index.html">
-            <i class="fas fa-home mr-1"></i>Home
-          </a>
-        </li>
-
-        <!-- Hints -->
-        <li class="nav-item">
-          <a class="nav-link" href="/hints/hints.html">
-            <i class="fas fa-lightbulb mr-1"></i>Hints
-          </a>
-        </li>
-
-        <!-- Stories -->
-        <li class="nav-item">
-          <a class="nav-link" href="/stories/index.html">
-            <i class="fas fa-book-open mr-1"></i>Stories
-          </a>
-        </li>
-
-        <!-- Vocabulary -->
-        <li class="nav-item">
-          <a class="nav-link" href="/kitchen-vocabulary/index.html">
-            <i class="fas fa-utensils mr-1"></i>Vocabulary
-          </a>
-        </li>
-
-        <!-- About -->
-        <li class="nav-item">
-          <a class="nav-link" href="/about.html">
-            <i class="fas fa-info-circle mr-1"></i>About
-          </a>
-        </li>
-
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  <main class="container my-4">
+{% block content %}
     <div class="text-center">
         <span class="badge badge-info badge-hints">Hints</span>
         <h1 class="page-title">“L’heure du conte” vs “l’histoire”</h1>
@@ -237,19 +144,5 @@
             &larr; Back to hints
         </a>
     </section>
-  </main>
+{% endblock %}
 
-<footer class="bg-dark text-light py-3 mt-auto">
-  <div class="container text-center">
-    <p class="mb-1">
-      &copy; 2025 frflashy.com &mdash; Learn French with stories, hints, and images.
-    </p>
-    <p class="mb-0">
-      <a href="/index.html" class="text-light">Home</a> ·
-      <a href="/hints/hints.html" class="text-light">Hints</a> ·
-      <a href="/stories/index.html" class="text-light">Stories</a>
-    </p>
-  </div>
-</footer>
-</body>
-</html>
