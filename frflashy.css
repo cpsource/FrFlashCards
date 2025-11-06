@@ -1,22 +1,312 @@
-/* frflashy.css */
+/* frflashy.css - Lake-inspired design system */
+
+:root {
+  /* Colors inspired by Willoughby Lake */
+  --sky-blue: #87CEEB;
+  --deep-water: #1e5e8e;
+  --shallow-water: #4a90e2;
+  --cloud-white: #f8f9fa;
+  --forest-green: #2d5a3d;
+  --sand: #f5e6d3;
+  --rock-gray: #6c757d;
+  --morning-mist: rgba(135, 206, 235, 0.1);
+  
+  /* Typography */
+  --font-main: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background: linear-gradient(180deg, var(--cloud-white) 0%, #ffffff 100%);
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--deep-water);
+  margin-bottom: 1rem;
+}
 
 .page-title {
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--deep-water);
+  font-weight: 600;
 }
 
 .subtitle {
-    font-size: 1rem;
-    color: #666;
+  font-size: 1.1rem;
+  color: var(--rock-gray);
+  font-style: italic;
 }
 
-.badge-hints {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+/* Header Banner */
+.site-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.header-banner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.header-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, 
+    rgba(30, 94, 142, 0.3) 0%, 
+    rgba(30, 94, 142, 0.5) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.site-tagline {
+  font-size: 1.25rem;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Navigation */
+.main-nav {
+  background: linear-gradient(90deg, 
+    var(--shallow-water) 0%, 
+    var(--sky-blue) 50%, 
+    var(--shallow-water) 100%);
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  margin: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  color: white !important;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  position: relative;
+}
+
+.nav-link i {
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Hover effect for navigation */
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: white !important;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.nav-link:active {
+  transform: translateY(0);
+}
+
+.nav-item.active .nav-link {
+  background: var(--deep-water);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Main Content Area */
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.story-main {
+  padding: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Cards and Sections */
+.content-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.content-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .section-title {
-    margin-top: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--sky-blue);
+  color: var(--deep-water);
+}
+
+/* Badges and Labels */
+.badge-hints {
+  background: var(--sky-blue);
+  color: var(--deep-water);
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Links */
+a {
+  color: var(--shallow-water);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--deep-water);
+  text-decoration: underline;
+}
+
+/* Buttons */
+.btn-lake {
+  background: linear-gradient(135deg, var(--shallow-water), var(--sky-blue));
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-lake:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, var(--deep-water), var(--shallow-water));
+  color: white;
+}
+
+/* Footer */
+footer {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  background: var(--deep-water);
+  color: white;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .site-title {
+    font-size: 2rem;
+  }
+  
+  .site-tagline {
+    font-size: 1rem;
+  }
+  
+  .header-banner {
+    height: 150px;
+  }
+  
+  .nav-list {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  main {
+    padding: 0 1rem;
+  }
+  
+  .story-main {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-list {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .nav-item {
+    width: 100%;
+  }
+  
+  .nav-link {
+    justify-content: center;
+  }
 }
 

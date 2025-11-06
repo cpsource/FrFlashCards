@@ -1,92 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light lake-nav shadow-sm sticky-top">
-  <div class="container">
-
-    <!-- Brand -->
-    <a class="navbar-brand font-weight-bold text-uppercase" href="/index.html">
-      frflashy<span class="text-primary">.com</span>
-      <small class="text-secondary ml-2">avec la science, apprenez le français</small>
-    </a>
-
-    <!-- Toggler (mobile) -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain"
-            aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Navbar Links -->
-    <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
-      <ul class="navbar-nav align-items-center">
-
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="/index.html"><i class="fas fa-home mr-1"></i>Accueil</a>
-        </li>
-
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="/hints/hints.html"><i class="fas fa-lightbulb mr-1"></i>Conseils</a>
-        </li>
-
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="/stories/index.html"><i class="fas fa-book-open mr-1"></i>Histoires</a>
-        </li>
-
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="/kitchen-vocabulary/index.html"><i class="fas fa-utensils mr-1"></i>Vocabulaire</a>
-        </li>
-
-        <li class="nav-item mx-2">
-          <a class="nav-link" href="/about.html"><i class="fas fa-info-circle mr-1"></i>À propos</a>
-        </li>
-
-      </ul>
-    </div>
+<nav class="main-nav">
+  <div class="nav-container">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a class="nav-link" href="/index.html">
+          <i class="fas fa-home"></i>Accueil
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/hints/hints.html">
+          <i class="fas fa-lightbulb"></i>Conseils
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/stories/index.html">
+          <i class="fas fa-book-open"></i>Histoires
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/kitchen-vocabulary/index.html">
+          <i class="fas fa-utensils"></i>Vocabulaire
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about.html">
+          <i class="fas fa-info-circle"></i>À propos
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>
-
-<style>
-  /* ===== Lake-themed Navbar Colors ===== */
-  .lake-nav {
-    background: linear-gradient(90deg, #a8d0e6 0%, #bfe9ff 50%, #a8d0e6 100%);
-    border-bottom: 2px solid #8ecae6;
-  }
-
-  .navbar-brand {
-    color: #023047 !important;
-  }
-
-  .navbar-brand small {
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-  }
-
-  /* Menu item appearance */
-  .navbar-nav .nav-link {
-    color: #03506f !important;
-    font-weight: 500;
-    border-radius: 6px;
-    padding: 6px 12px;
-    transition: all 0.25s ease-in-out;
-  }
-
-  /* Hover effect — gentle white glow */
-  .navbar-nav .nav-link:hover {
-    color: #fff !important;
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-  }
-
-  /* Active item highlight */
-  .navbar-nav .nav-item.active .nav-link {
-    color: #fff !important;
-    background: #219ebc;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Mobile styling tweak */
-  @media (max-width: 576px) {
-    .navbar-nav .nav-link {
-      text-align: center;
-      margin-bottom: 4px;
-    }
-  }
-</style>
 
