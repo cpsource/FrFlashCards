@@ -267,6 +267,66 @@ a:hover {
   color: white;
 }
 
+/* Dropdown Menu Styling */
+.nav-item.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  margin-left: 0.25rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 200px;
+  padding: 0.5rem 0;
+  margin-top: 0.125rem;
+  background: white;
+  border: 1px solid var(--sky-blue);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: var(--deep-water) !important;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item i {
+  margin-right: 0.5rem;
+  width: 20px;
+  text-align: center;
+  color: var(--shallow-water);
+}
+
+.dropdown-item:hover {
+  background: var(--morning-mist);
+  color: var(--deep-water) !important;
+  text-decoration: none;
+  padding-left: 1.25rem;
+}
+
+/* Show dropdown on hover or click */
+.nav-item.dropdown:hover .dropdown-menu,
+.dropdown-menu.show {
+  display: block;
+}
+
+/* Active state for dropdown toggle */
+.nav-item.dropdown.active .nav-link,
+.nav-item.dropdown .nav-link:focus {
+  background: rgba(255, 255, 255, 0.25);
+}
+
 /* Footer */
 footer {
   margin-top: 3rem;
@@ -288,14 +348,22 @@ footer .container {
 
 /* Responsive Design */
 @media (max-width: 1500px) {
-  main, .story-main, .nav-container, footer .container {
+  main, .story-main, footer .container {
     width: 40%;
+  }
+  .nav-container {
+    width: 45%;  /* Slightly wider for dropdown */
+    max-width: 750px;
   }
 }
 
 @media (max-width: 1200px) {
-  main, .story-main, .nav-container, footer .container {
+  main, .story-main, footer .container {
     width: 50%;
+  }
+  .nav-container {
+    width: 60%;  /* More room for navigation */
+    max-width: none;
   }
 }
 
@@ -322,13 +390,37 @@ footer .container {
     font-size: 0.95rem;
   }
   
-  main, .story-main, .nav-container, footer .container {
+  main, .story-main, footer .container {
     width: 80%;
+    min-width: auto;
+  }
+  
+  .nav-container {
+    width: 90%;
     min-width: auto;
   }
   
   main, .story-main {
     padding: 1.5rem;
+  }
+  
+  /* Dropdown adjustments for tablets */
+  .dropdown-menu {
+    position: relative;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 0;
+  }
+  
+  .dropdown-item {
+    color: white !important;
+    padding-left: 2rem;
+  }
+  
+  .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -346,13 +438,35 @@ footer .container {
     justify-content: center;
   }
   
-  main, .story-main, .nav-container, footer .container {
+  main, .story-main, footer .container {
     width: 95%;
     min-width: auto;
   }
   
+  .nav-container {
+    width: 95%;
+  }
+  
   main, .story-main {
     padding: 1rem;
+  }
+  
+  /* Mobile dropdown styling */
+  .dropdown-menu {
+    display: none !important;
+    position: static;
+    background: rgba(30, 94, 142, 0.9);
+    border-radius: 0;
+    margin: 0;
+  }
+  
+  .dropdown-menu.show {
+    display: block !important;
+  }
+  
+  .dropdown-item {
+    text-align: center;
+    color: white !important;
   }
 }
 
