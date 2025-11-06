@@ -58,7 +58,7 @@ def build_static_pages():
     """
     ctx_base = {"current_year": datetime.now().year}
 
-    pages = ["about.html"]  # extend this list as you add new static pages
+    pages = ["about.html", "index.html"]  # extend this list as you add new static pages
     for page in pages:
         tpl_name = page
         out_path = OUTPUT_DIR / page
