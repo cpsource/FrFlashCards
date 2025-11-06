@@ -4,11 +4,9 @@ build_site.py
 
 Build static HTML from Jinja templates.
 
-Right now this:
-  - Reads hints/hints.json
-  - Renders each templates/hints/<file> to hints/<file>
-
-Later you can add other sections (index, stories, etc.).
+Now this:
+  - Builds hint pages listed in hints/hints.json
+  - Builds static top-level pages like about.html, index.html, etc.
 """
 
 import json
@@ -20,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 HINTS_DIR = BASE_DIR / "hints"
 HINTS_JSON = HINTS_DIR / "hints.json"
+OUTPUT_DIR = BASE_DIR  # where to write about.html, index.html, etc.
 
 env = Environment(
     loader=FileSystemLoader(str(TEMPLATES_DIR)),
@@ -52,11 +51,29 @@ def build_hints():
         out_path.write_text(html, encoding="utf-8")
         print(f"    ✓ wrote {out_path}")
 
+def build_static_pages():
+    """
+    Render static templates like about.html, index.html, etc.
+    These should live in templates/ and NOT require dynamic JSON.
+    """
+    ctx_base = {"current_year": datetime.now().year}
+
+    pages = ["about.html"]  # extend this list as you add new static pages
+    for page in pages:
+        tpl_name = page
+        out_path = OUTPUT_DIR / page
+
+        print(f"Rendering {tpl_name} -> {out_path}")
+        template = env.get_template(tpl_name)
+        html = template.render(**ctx_base)
+        out_path.write_text(html, encoding="utf-8")
+        print(f"  ✓ wrote {out_path}")
 
 def main():
     print(f"Templates dir: {TEMPLATES_DIR}")
     print(f"Hints dir:     {HINTS_DIR}")
     build_hints()
+    build_static_pages()
     print("Done.")
 
 if __name__ == "__main__":
