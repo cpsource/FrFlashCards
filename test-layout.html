@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout Test - frflashy.com</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Visual guide to show the three columns */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(90deg, 
+        #f0f8ff 0%, 
+        #f0f8ff 33.33%,
+        #ffffff 33.33%,
+        #ffffff 66.66%,
+        #f0f8ff 66.66%,
+        #f0f8ff 100%);
+      font-family: 'Open Sans', sans-serif;
+      position: relative;
+    }
+    
+    /* Visual column dividers */
+    .column-guide {
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: 1px;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: -1;
+    }
+    
+    .column-guide.left {
+      left: 33.33%;
+    }
+    
+    .column-guide.right {
+      left: 66.66%;
+    }
+    
+    /* Header */
+    .header-banner {
+      width: 100%;
+      height: 200px;
+      background: url('img/willoughby-lake.png') center/cover;
+      position: relative;
+    }
+    
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(30, 94, 142, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .site-title {
+      font-size: 3rem;
+      color: white;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .site-tagline {
+      font-size: 1.25rem;
+      color: white;
+      margin-top: 0.5rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    /* Navigation - constrained to middle third */
+    nav {
+      background: linear-gradient(90deg, #4a90e2, #87CEEB, #4a90e2);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .nav-container {
+      width: 33.33%;
+      margin: 0 auto;
+      min-width: 500px;
+      max-width: 600px;
+    }
+    
+    .nav-list {
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+    
+    /* Main content - exactly in middle third */
+    main {
+      width: 33.33%;
+      margin: 2rem auto;
+      min-width: 500px;
+      max-width: 600px;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .content-card {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+    }
+    
+    /* Footer - constrained to middle third */
+    footer {
+      background: #1e5e8e;
+      color: white;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+    
+    footer .container {
+      width: 33.33%;
+      margin: 0 auto;
+      min-width: 500px;
+      max-width: 600px;
+      text-align: center;
+    }
+    
+    /* Column labels */
+    .column-label {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 14px;
+      z-index: -1;
+    }
+    
+    .column-label.left {
+      left: 10%;
+    }
+    
+    .column-label.right {
+      right: 10%;
+    }
+    
+    .column-label.middle {
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Visual guides -->
+  <div class="column-guide left"></div>
+  <div class="column-guide right"></div>
+  
+  <!-- Column labels -->
+  <div class="column-label left">Left Third (Empty)</div>
+  <div class="column-label middle">Middle Third (Content)</div>
+  <div class="column-label right">Right Third (Empty)</div>
+  
+  <!-- Header -->
+  <header>
+    <div class="header-banner">
+      <div class="header-overlay">
+        <h1 class="site-title">frflashy.com</h1>
+        <p class="site-tagline">in science, learn french</p>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <ul class="nav-list">
+        <li><a href="#" class="nav-link">Accueil</a></li>
+        <li><a href="#" class="nav-link">Conseils</a></li>
+        <li><a href="#" class="nav-link">Histoires</a></li>
+        <li><a href="#" class="nav-link">Vocabulaire</a></li>
+        <li><a href="#" class="nav-link">À propos</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Main Content -->
+  <main>
+    <h1>Content in Middle Third</h1>
+    <p>This content should appear exactly in the middle third of your screen. The left and right thirds are intentionally left empty for visual balance.</p>
+    
+    <div class="content-card">
+      <h2>Test Section</h2>
+      <p>This demonstrates how all your content - navigation, main area, and footer - align vertically through the center third of the page.</p>
+    </div>
+    
+    <div class="content-card">
+      <h2>Visual Guides</h2>
+      <p>The vertical lines and background colors help show the three-column division. The blue-tinted areas are the empty left and right thirds, while the white background marks the middle third where content appears.</p>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 frflashy.com — In science, learn French</p>
+      <p>Footer also constrained to middle third</p>
+    </div>
+  </footer>
+</body>
+</html>
