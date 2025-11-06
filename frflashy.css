@@ -128,8 +128,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-container {
-  width: 33.33%;
-  max-width: 600px;
+  width: 40%;  /* Increased from 33.33% to accommodate 6 items */
+  max-width: 700px;  /* Increased from 600px */
   min-width: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -144,7 +144,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   margin: 0;
   padding: 0;
-  gap: 0.5rem;
+  gap: 0.25rem;  /* Reduced gap to fit more items */
 }
 
 .nav-item {
@@ -154,13 +154,15 @@ h1, h2, h3, h4, h5, h6 {
 .nav-link {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1rem;  /* Slightly reduced horizontal padding */
   color: white !important;
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.95rem;  /* Slightly smaller font */
   transition: all 0.3s ease;
   border-radius: 4px;
   position: relative;
+  white-space: nowrap;  /* Prevent text wrapping */
 }
 
 .nav-link i {
