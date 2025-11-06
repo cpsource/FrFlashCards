@@ -1,0 +1,45 @@
+<header class="site-header position-relative">
+  <div class="header-banner">
+    <img src="/img/willoughby-lake.png" alt="Willoughby Lake" class="img-fluid w-100 header-image">
+    <div class="header-caption text-center text-white">
+      <h1 class="display-5 font-weight-bold mb-0">frflashy.com</h1>
+      <p class="lead mb-0">avec la science, apprenez le français</p>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Ensure the header image covers full width and fixed height */
+  .header-banner {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-image {
+    width: 100%;
+    height: auto;
+    max-height: 180px; /* about 1.5–2 inches on most screens */
+    object-fit: cover; /* crop instead of stretching */
+  }
+
+  .header-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.45); /* subtle overlay */
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+  }
+
+  .header-caption h1, .header-caption p {
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+  }
+
+  @media (max-width: 576px) {
+    .header-caption h1 { font-size: 1.4rem; }
+    .header-caption p { font-size: 1rem; }
+  }
+</style>
+
