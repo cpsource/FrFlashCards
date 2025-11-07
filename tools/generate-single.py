@@ -2,22 +2,22 @@
 # -*- coding: utf-8 -*-
 
 """
-generate_image_single.py
+generate-single.py
 
 Generate a single image, MP3, and HTML flash card for a French word or idiom.
 
 Usage:
-  python3 generate_image_single.py "french expression"
+  python3 generate-single.py "french expression"
 
 Example:
-  python3 generate_image_single.py "être bien dans ses baskets"
+  python3 generate-single.py "être bien dans ses baskets"
 
 Behavior:
   - Uses OpenAI to generate <base>.png (unless it already exists).
   - Calls resize_png.py to resize the PNG to 64px (when generated).
   - Calls make_mp3_single.py to generate <base>.mp3 (unless it already exists).
-  - Calls generate-french-examples.py 3 "<french expression>" and
-    embeds the resulting HTML into <base>.html.
+  - Calls generate-french-examples.py 3 "<french expression>" and embeds the resulting HTML into <base>.html.
+  - Includes footer.html at the bottom of the page.
 """
 
 import os
@@ -29,14 +29,9 @@ from dotenv import load_dotenv
 from openai import OpenAI, BadRequestError, APIError, APIConnectionError, RateLimitError
 
 
-# ------------------------------------------------------------
-# Configuration
-# ------------------------------------------------------------
 MODEL = "gpt-image-1"
 IMAGE_SIZE = "1024x1024"
-STYLE = "photorealistic"
 BACKGROUND = "plain white background"
-# ------------------------------------------------------------
 
 
 def load_api_key() -> str:
@@ -49,33 +44,21 @@ def load_api_key() -> str:
 
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
-        print("[FATAL] OPENAI_API_KEY not found in ~/.env or environment.")
-        print("→ Add a line like this to your ~/.env file:")
-        print("   OPENAI_API_KEY=sk-...")
+        print("[FATAL] OPENAI_API_KEY not found.")
         sys.exit(1)
     return api_key
 
 
 def generate_filename(french_expression: str) -> str:
-    """Generate a filename from the French expression.
-    Replace spaces with '-', apostrophes with '-', and add .png extension."""
-    filename = french_expression.replace("'", "-")
-    filename = filename.replace(" ", "-")
-    # Remove any other special characters that might cause issues
-    filename = filename.replace("é", "e").replace("è", "e").replace("ê", "e")
-    filename = filename.replace("à", "a").replace("â", "a")
-    filename = filename.replace("ç", "c")
-    filename = filename.replace("î", "i").replace("ï", "i")
-    filename = filename.replace("ô", "o")
-    filename = filename.replace("ù", "u").replace("û", "u")
-    # Convert to lowercase
-    filename = filename.lower()
-    # Remove any double dashes
-    while "--" in filename:
-        filename = filename.replace("--", "-")
-    # Remove leading/trailing dashes
-    filename = filename.strip("-")
-    # Add .png extension
+    """Return sanitized filename based on expression."""
+    filename = french_expression.replace("'", "-").replace(" ", "-")
+    replacements = {
+        "é": "e", "è": "e", "ê": "e", "à": "a", "â": "a",
+        "ç": "c", "î": "i", "ï": "i", "ô": "o", "ù": "u", "û": "u",
+    }
+    for k, v in replacements.items():
+        filename = filename.replace(k, v)
+    filename = filename.lower().strip("-").replace("--", "-")
     return f"{filename}.png"
 
 
@@ -84,44 +67,27 @@ def explain_openai_error(e: Exception, context: str = ""):
     if context:
         print(f"Context: {context}")
     print(f"Type: {type(e).__name__}")
-    msg = getattr(e, "message", None) or str(e)
-    print(f"Message: {msg}")
-    code = getattr(e, 'code', None)
-    if code:
-        print(f"Code: {code}")
-    status = getattr(e, 'status_code', None)
-    if status:
-        print(f"HTTP Status: {status}")
+    print(f"Message: {getattr(e, 'message', None) or str(e)}")
     print("====== END ERROR ======\n")
 
 
-def build_prompt(french_expression: str) -> str:
-    """Return a polished English image prompt for the given expression."""
+def build_prompt(expr: str) -> str:
     return (
-        f"Photorealistic illustration of the French expression '{french_expression}'. "
-        f"Depict the meaning visually in a simple, clear way. "
-        f"Use a {BACKGROUND}, good lighting, and balanced composition. "
-        f"No text, captions, or labels in the image."
+        f"Photorealistic illustration of the French expression '{expr}'. "
+        f"Depict its meaning visually in a clear, simple way. "
+        f"Use a {BACKGROUND}, balanced lighting, no text or captions."
     )
 
 
 def generate_image(client: OpenAI, prompt: str, size: str = IMAGE_SIZE) -> bytes:
-    """Call OpenAI API and return decoded PNG bytes."""
+    """Generate and return image bytes."""
     result = client.images.generate(model=MODEL, prompt=prompt, size=size)
-    b64 = result.data[0].b64_json
-    return base64.b64decode(b64)
+    return base64.b64decode(result.data[0].b64_json)
 
 
-def build_html_page(
-    french_expression: str,
-    base_name: str,
-    png_name: str,
-    mp3_name: str,
-    examples_html: str,
-) -> str:
-    """Build a simple HTML flash card page including image, audio, and examples."""
-    title = french_expression
-    # We insert examples_html as-is (already HTML from generate-french-examples.py)
+def build_html_page(expr: str, png: str, mp3: str, examples_html: str, footer_html: str) -> str:
+    """Generate full HTML content including footer.html."""
+    title = expr
     return (
         "<!DOCTYPE html>\n"
         '<html lang="fr">\n'
@@ -129,164 +95,88 @@ def build_html_page(
         '  <meta charset="utf-8">\n'
         f"  <title>{title}</title>\n"
         '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
-        '  <link rel="stylesheet"\n'
-        '        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">\n'
+        '  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">\n'
         "  <style>\n"
         "    body {\n"
-        "      font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n"
-        "      background-color: #ffffff;\n"
+        "      font-family: Helvetica, Arial, sans-serif;\n"
+        "      background-color: #fff;\n"
         "      margin-top: 40px;\n"
         "      text-align: center;\n"
         "    }\n"
-        "    img.card-image {\n"
-        "      max-width: 300px;\n"
-        "      margin: 20px auto;\n"
-        "      display: block;\n"
-        "    }\n"
-        "    .examples-block {\n"
-        "      margin-top: 30px;\n"
-        "    }\n"
+        "    img.card-image { max-width: 300px; margin: 20px auto; display: block; }\n"
+        "    .examples-block { margin-top: 30px; }\n"
         "  </style>\n"
         "</head>\n"
         "<body>\n"
         f"  <h1>{title}</h1>\n"
-        f'  <img src="{png_name}" alt="{title}" class="card-image img-fluid">\n'
+        f'  <img src="{png}" alt="{title}" class="card-image img-fluid">\n'
         "  <p>\n"
         "    <audio controls>\n"
-        f'      <source src="{mp3_name}" type="audio/mpeg">\n'
+        f'      <source src="{mp3}" type="audio/mpeg">\n'
         "      Votre navigateur ne supporte pas la lecture audio.\n"
         "    </audio>\n"
         "  </p>\n"
-        '  <div class="examples-block">\n'
-        f"{examples_html}\n"
-        "  </div>\n"
-        '  <hr>\n'
-        '  <a href="../index.html" class="btn btn-secondary">↩️ Retour</a>\n'
-        "</body>\n"
-        "</html>\n"
+        f'  <div class="examples-block">\n{examples_html}\n  </div>\n'
+        f"{footer_html}\n"
+        "</body>\n</html>\n"
     )
 
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python3 generate_image_single.py \"french expression\"")
+        print("Usage: python3 generate-single.py \"french expression\"")
         sys.exit(1)
 
-    french_expression = sys.argv[1]
+    expr = sys.argv[1]
+    png_path = Path(generate_filename(expr))
+    base = png_path.stem
+    mp3_path = Path(f"{base}.mp3")
+    html_path = Path(f"{base}.html")
 
-    # Base PNG filename and paths
-    png_path = Path(generate_filename(french_expression))
-    base_name = png_path.stem  # e.g. "etre-bien-dans-ses-baskets"
-    mp3_path = Path(f"{base_name}.mp3")
-    html_path = Path(f"{base_name}.html")
+    print(f"→ Generating: {expr}")
+    client = OpenAI(api_key=load_api_key())
 
-    print(f"→ Processing expression: {french_expression}")
-    print(f"  Base name  : {base_name}")
-    print(f"  PNG file   : {png_path}")
-    print(f"  MP3 file   : {mp3_path}")
-    print(f"  HTML file  : {html_path}")
-
-    api_key = load_api_key()
-    client = OpenAI(api_key=api_key)
-
-    # ------------------------------------------------------------
-    # 1. Image generation (skip if PNG already exists)
-    # ------------------------------------------------------------
+    # 1️⃣ Image
     if png_path.exists():
-        print(f"✔ PNG already exists, skipping image generation: {png_path}")
+        print(f"✔ PNG already exists: {png_path}")
     else:
-        prompt = build_prompt(french_expression)
-        print(f"  Model: {MODEL}")
-        print(f"  Prompt: {prompt[:100]}...")
-
+        print("⏳ Generating image...")
         try:
-            print("\n⏳ Calling OpenAI API for image...")
-            png_bytes = generate_image(client, prompt)
-            png_path.write_bytes(png_bytes)
-            print(f"✅ Saved image: {png_path.resolve()}")
-
-            # Resize the image to 64px
-            print(f"\n⏳ Resizing image to 64px...")
-            resize_command = ["python3", "resize_png.py", str(png_path), "64"]
-            print(f"  Running: {' '.join(resize_command)}")
-
-            result = subprocess.run(resize_command, capture_output=True, text=True)
-            if result.returncode == 0:
-                print("✅ Resize successful")
-                if result.stdout:
-                    print(f"  Output: {result.stdout.strip()}")
-            else:
-                print(f"❌ Resize failed with code {result.returncode}")
-                if result.stderr:
-                    print(f"  Error: {result.stderr.strip()}")
-        except (BadRequestError, APIError, APIConnectionError, RateLimitError) as e:
-            explain_openai_error(e, "Image generation failed")
-            sys.exit(2)
+            img = generate_image(client, build_prompt(expr))
+            png_path.write_bytes(img)
+            print(f"✅ Saved {png_path}")
+            subprocess.run(["python3", "resize_png.py", str(png_path), "64"])
         except Exception as e:
-            print(f"[ERROR] Unexpected during image step: {e}")
-            sys.exit(3)
+            explain_openai_error(e, "image")
+            sys.exit(2)
 
-    # ------------------------------------------------------------
-    # 2. MP3 generation (skip if MP3 already exists)
-    # ------------------------------------------------------------
+    # 2️⃣ Audio
     if mp3_path.exists():
-        print(f"✔ MP3 already exists, skipping audio generation: {mp3_path}")
+        print(f"✔ MP3 already exists: {mp3_path}")
     else:
-        print(f"\n⏳ Generating MP3 for: {french_expression}")
-        mp3_command = [
-            "python3",
-            "make_mp3_single.py",
-            base_name,
-            "clear, natural, use a calm woman's French voice",
-            french_expression,
-        ]
-        print(f"  Running: {' '.join(mp3_command)}")
-        mp3_result = subprocess.run(mp3_command, capture_output=True, text=True)
+        print("⏳ Generating MP3...")
+        subprocess.run(
+            ["python3", "make_mp3_single.py", base, "clear, natural, use a calm woman's French voice", expr],
+            check=False,
+        )
 
-        if mp3_result.returncode == 0:
-            print("✅ MP3 generation successful")
-            if mp3_result.stdout:
-                print(f"  Output: {mp3_result.stdout.strip()}")
-        else:
-            print(f"❌ MP3 generation failed with code {mp3_result.returncode}")
-            if mp3_result.stderr:
-                print(f"  Error: {mp3_result.stderr.strip()}")
-
-    # ------------------------------------------------------------
-    # 3. Generate French examples HTML (using external script)
-    # ------------------------------------------------------------
-    print("\n⏳ Generating French examples HTML...")
-    examples_cmd = [
-        "python3",
-        "generate-french-examples.py",
-        "3",
-        french_expression,
-    ]
-    print(f"  Running: {' '.join(examples_cmd)}")
-    examples_result = subprocess.run(examples_cmd, capture_output=True, text=True)
-
-    if examples_result.returncode != 0:
-        print(f"❌ Example generation failed with code {examples_result.returncode}")
-        if examples_result.stderr:
-            print(f"  Error: {examples_result.stderr.strip()}")
-        examples_html = "<!-- examples could not be generated -->"
-    else:
-        examples_html = examples_result.stdout.strip()
-        print("✅ Examples generated successfully")
-
-    # ------------------------------------------------------------
-    # 4. Build HTML card file
-    # ------------------------------------------------------------
-    print("\n⏳ Building HTML flash card...")
-    html_content = build_html_page(
-        french_expression=french_expression,
-        base_name=base_name,
-        png_name=png_path.name,
-        mp3_name=mp3_path.name,
-        examples_html=examples_html,
+    # 3️⃣ Examples
+    print("⏳ Generating French examples...")
+    examples_proc = subprocess.run(
+        ["python3", "generate-french-examples.py", "3", expr],
+        capture_output=True,
+        text=True,
     )
+    examples_html = examples_proc.stdout.strip() if examples_proc.returncode == 0 else "<!-- examples failed -->"
+
+    # 4️⃣ Include footer.html
+    footer_path = Path("footer.html")
+    footer_html = footer_path.read_text(encoding="utf-8") if footer_path.exists() else "<!-- footer missing -->"
+
+    # 5️⃣ Write HTML page
+    html_content = build_html_page(expr, png_path.name, mp3_path.name, examples_html, footer_html)
     html_path.write_text(html_content, encoding="utf-8")
-    print(f"✅ HTML flash card written to: {html_path.resolve()}")
+    print(f"✅ Wrote HTML page: {html_path}")
 
 
 if __name__ == "__main__":
