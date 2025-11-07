@@ -10,7 +10,7 @@ Usage:
 Example:
   python3 get-french-examples.py 3 "courbes du corps"
 
-Generates HTML with each example sentence and its English translation (one translation API call).
+Generates a centered HTML table with light box outlines for each example pair.
 """
 
 import sys
@@ -27,12 +27,12 @@ TRACE_ENABLED = False
 
 
 def trace(msg: str):
-    """Print trace messages only if enabled."""
     if TRACE_ENABLED:
         print(f"[TRACE] {msg}", file=sys.stderr, flush=True)
 
 
 def load_api_key() -> str:
+    """Load the OpenAI key from ~/.env or environment."""
     home_env = Path.home() / ".env"
     if home_env.exists():
         load_dotenv(home_env)
@@ -43,13 +43,13 @@ def load_api_key() -> str:
 
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
-        print("[FATAL] OPENAI_API_KEY not found.", file=sys.stderr)
+        print("[FATAL] OPENAI_API_KEY not found in environment.", file=sys.stderr)
         sys.exit(1)
     return api_key
 
 
 def clean_and_split_examples(raw_lines: list[str]) -> list[str]:
-    """Takes raw lines and ensures each example is a clean, separate sentence."""
+    """Clean raw lines and split multiple sentences into separate items."""
     examples = []
     for line in raw_lines:
         line = re.sub(r"^[\d\-\*\.\s]+", "", line).strip()
@@ -64,7 +64,7 @@ def clean_and_split_examples(raw_lines: list[str]) -> list[str]:
 
 
 def get_examples(client: OpenAI, n: int, expr: str) -> list[str]:
-    """Generate French example sentences."""
+    """Generate French examples using GPT."""
     trace(f"Requesting {n} examples for '{expr}' using {MODEL_EXAMPLES}")
     system_prompt = (
         "Tu es un professeur de français. "
@@ -87,24 +87,21 @@ def get_examples(client: OpenAI, n: int, expr: str) -> list[str]:
 
     content = resp.choices[0].message.content or ""
     lines = [ln.strip() for ln in content.splitlines() if ln.strip()]
-    trace(f"Got {len(lines)} raw lines")
-
     examples = clean_and_split_examples(lines)
-    trace(f"Expanded to {len(examples)} examples")
+    trace(f"Got {len(examples)} French examples")
     return examples[:n]
 
 
 def translate_all_to_english(client: OpenAI, french_sentences: list[str]) -> list[str]:
-    """Translate multiple French sentences in one call to English."""
+    """Translate all French sentences to English in one API call."""
     if not french_sentences:
         return []
-
     joined_text = "\n".join(french_sentences)
-    trace(f"Translating {len(french_sentences)} sentences using {MODEL_TRANSLATE}")
+    trace(f"Translating {len(french_sentences)} sentences with {MODEL_TRANSLATE}")
 
     system_prompt = (
         "You are a precise and concise French-to-English translator. "
-        "Translate each line separately into clear, natural English. "
+        "Translate each line into clear, natural English. "
         "Return the translations in the same order, one per line."
     )
     user_prompt = f"Translate the following French sentences:\n{joined_text}"
@@ -122,17 +119,13 @@ def translate_all_to_english(client: OpenAI, french_sentences: list[str]) -> lis
     translations = [ln.strip() for ln in translations_raw.splitlines() if ln.strip()]
     trace(f"Got {len(translations)} translation lines")
 
-    # Ensure same count
     if len(translations) < len(french_sentences):
         translations += [""] * (len(french_sentences) - len(translations))
-
     return translations
 
 
 def main():
     global TRACE_ENABLED
-
-    # handle --trace flag
     args = sys.argv[1:]
     if "--trace" in args:
         TRACE_ENABLED = True
@@ -150,33 +143,36 @@ def main():
         sys.exit(1)
 
     expr = " ".join(args[1:]).strip()
-    trace(f"Arguments -> n={n}, expr='{expr}'")
+    trace(f"Args -> n={n}, expr='{expr}'")
 
     api_key = load_api_key()
     client = OpenAI(api_key=api_key)
 
-    # Generate French examples
     try:
         examples = get_examples(client, n, expr)
     except Exception as e:
-        print(f"[ERROR] Failed to generate examples: {e}", file=sys.stderr)
+        print(f"[ERROR] Example generation failed: {e}", file=sys.stderr)
         sys.exit(2)
 
-    # Translate them all at once
     try:
         translations = translate_all_to_english(client, examples)
     except Exception as e:
         print(f"[ERROR] Translation failed: {e}", file=sys.stderr)
         translations = [""] * len(examples)
 
-    # Build HTML output
     esc_expr = html.escape(expr)
-    print('<div class="french-examples">')
-    print(f'  <h2>Exemples pour « {esc_expr} »</h2>')
-    print('  <ul>')
+
+    # ---- HTML OUTPUT ----
+    print(f'<div class="french-examples" style="text-align:center;">')
+    print(f'  <h3>Exemples pour « {esc_expr} »</h2>')
+    print('  <table style="margin:auto; border-collapse:collapse; border:1px solid #ccc;">')
     for ex, en in zip(examples, translations):
-        print(f'    <li>{html.escape(ex)}<br><em>{html.escape(en)}</em></li>')
-    print('  </ul>')
+        print('    <tr style="border:1px solid #ccc;">')
+        print('      <td style="text-align:left; padding:10px; border:1px solid #ccc;">')
+        print(f'        {html.escape(ex)}<br><em>{html.escape(en)}</em>')
+        print('      </td>')
+        print('    </tr>')
+    print('  </table>')
     print('</div>')
 
     trace("Program done")
