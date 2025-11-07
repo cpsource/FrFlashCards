@@ -7,11 +7,11 @@ generate-french-examples.py
 Usage:
   python3 generate-french-examples.py [--trace] <number-of-examples> "<french-expression>"
 
-Example:
-  python3 generate-french-examples.py 3 "courbes du corps"
-
-If <expression>.txt already exists, reuses it instead of calling the LLM.
-Otherwise, generates examples, saves them to <expression>.txt, and prints HTML to stdout.
+Behavior:
+  - Checks for <expression>.html cache file first.
+  - If it exists → print its content and log that cache was used.
+  - If not → generate examples and translations, build HTML, print it,
+             and write that HTML to <expression>.html.
 """
 
 import sys
@@ -50,7 +50,6 @@ def load_api_key() -> str:
 
 
 def clean_and_split_examples(raw_lines: list[str]) -> list[str]:
-    """Clean raw lines and split multiple sentences into separate items."""
     examples = []
     for line in raw_lines:
         line = re.sub(r"^[\d\-\*\.\s]+", "", line).strip()
@@ -65,7 +64,6 @@ def clean_and_split_examples(raw_lines: list[str]) -> list[str]:
 
 
 def get_examples(client: OpenAI, n: int, expr: str) -> list[str]:
-    """Generate French examples using GPT."""
     trace(f"Requesting {n} examples for '{expr}' using {MODEL_EXAMPLES}")
     system_prompt = (
         "Tu es un professeur de français. "
@@ -88,13 +86,10 @@ def get_examples(client: OpenAI, n: int, expr: str) -> list[str]:
 
     content = resp.choices[0].message.content or ""
     lines = [ln.strip() for ln in content.splitlines() if ln.strip()]
-    examples = clean_and_split_examples(lines)
-    trace(f"Got {len(examples)} French examples")
-    return examples[:n]
+    return clean_and_split_examples(lines)[:n]
 
 
 def translate_all_to_english(client: OpenAI, french_sentences: list[str]) -> list[str]:
-    """Translate all French sentences to English in one API call."""
     if not french_sentences:
         return []
     joined_text = "\n".join(french_sentences)
@@ -118,8 +113,6 @@ def translate_all_to_english(client: OpenAI, french_sentences: list[str]) -> lis
 
     translations_raw = resp.choices[0].message.content or ""
     translations = [ln.strip() for ln in translations_raw.splitlines() if ln.strip()]
-    trace(f"Got {len(translations)} translation lines")
-
     if len(translations) < len(french_sentences):
         translations += [""] * (len(french_sentences) - len(translations))
     return translations
@@ -146,26 +139,25 @@ def main():
     expr = " ".join(args[1:]).strip()
     trace(f"Args -> n={n}, expr='{expr}'")
 
-    # Determine .txt filename
     base_name = expr.replace(" ", "_").replace("'", "_")
-    txt_path = Path(f"{base_name}.txt")
+    html_path = Path(f"{base_name}.html")
 
+    # ✅ If cached HTML exists, just print and exit
+    if html_path.exists():
+        html_content = html_path.read_text(encoding="utf-8")
+        print(html_content)
+        print(f"[INFO] Cache used: {html_path}", file=sys.stderr)
+        return
+
+    # Otherwise generate new HTML
     api_key = load_api_key()
     client = OpenAI(api_key=api_key)
 
-    # If .txt exists, load it; otherwise, generate
-    if txt_path.exists():
-        trace(f"Using cached examples from {txt_path}")
-        content = txt_path.read_text(encoding="utf-8")
-        examples = [line.strip() for line in content.splitlines() if line.strip()]
-    else:
-        try:
-            examples = get_examples(client, n, expr)
-            txt_path.write_text("\n".join(examples), encoding="utf-8")
-            trace(f"Wrote new examples to {txt_path}")
-        except Exception as e:
-            print(f"[ERROR] Example generation failed: {e}", file=sys.stderr)
-            sys.exit(2)
+    try:
+        examples = get_examples(client, n, expr)
+    except Exception as e:
+        print(f"[ERROR] Example generation failed: {e}", file=sys.stderr)
+        sys.exit(2)
 
     try:
         translations = translate_all_to_english(client, examples)
@@ -175,20 +167,27 @@ def main():
 
     esc_expr = html.escape(expr)
 
-    # ---- HTML OUTPUT ----
-    print(f'<div class="french-examples" style="text-align:center;">')
-    print(f'  <h3>Exemples pour « {esc_expr} »</h3>')
-    print('  <table style="margin:auto; border-collapse:collapse; border:1px solid #ccc;">')
+    # Build HTML output
+    html_output = [
+        f'<div class="french-examples" style="text-align:center;">',
+        f'  <h3>Exemples pour « {esc_expr} »</h3>',
+        '  <table style="margin:auto; border-collapse:collapse; border:1px solid #ccc;">'
+    ]
     for ex, en in zip(examples, translations):
-        print('    <tr style="border:1px solid #ccc;">')
-        print('      <td style="text-align:left; padding:10px; border:1px solid #ccc;">')
-        print(f'        {html.escape(ex)}<br><em>{html.escape(en)}</em>')
-        print('      </td>')
-        print('    </tr>')
-    print('  </table>')
-    print('</div>')
+        html_output.append('    <tr style="border:1px solid #ccc;">')
+        html_output.append('      <td style="text-align:left; padding:10px; border:1px solid #ccc;">')
+        html_output.append(f'        {html.escape(ex)}<br><em>{html.escape(en)}</em>')
+        html_output.append('      </td>')
+        html_output.append('    </tr>')
+    html_output.append('  </table>')
+    html_output.append('</div>')
 
-    trace("Program done")
+    html_content = "\n".join(html_output)
+
+    # Print and save cache
+    print(html_content)
+    html_path.write_text(html_content, encoding="utf-8")
+    print(f"[INFO] Generated new examples and cached to {html_path}", file=sys.stderr)
 
 
 if __name__ == "__main__":
