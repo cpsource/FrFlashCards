@@ -85,14 +85,22 @@ def generate_image(client: OpenAI, prompt: str, size: str = IMAGE_SIZE) -> bytes
     return base64.b64decode(result.data[0].b64_json)
 
 def build_html_page(expr: str, png: str, mp3: str, examples_html: str, footer_html: str) -> str:
-    """Generate full HTML content including footer.html."""
-    title = expr
+    """
+    Generate full HTML content including footer.html.
+
+    New behavior:
+      - Page title is always "Nommez Celle Image".
+      - Initially shows ONLY the image and a button "Clique pour la réponse".
+      - When the button is clicked, reveals the true expression title, audio,
+        examples, and footer.
+    """
+    page_title = "Nommez Celle Image"
     return (
         "<!DOCTYPE html>\n"
         '<html lang="fr">\n'
         "<head>\n"
         '  <meta charset="utf-8">\n'
-        f"  <title>{title}</title>\n"
+        f"  <title>{page_title}</title>\n"
         '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
         '  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">\n'
         "  <style>\n"
@@ -108,27 +116,47 @@ def build_html_page(expr: str, png: str, mp3: str, examples_html: str, footer_ht
         "      display: block;\n"
         "    }\n"
         "    .examples-block {\n"
-        "      margin-top: 10px; /* reduced vertical gap */\n"
-        "      margin-bottom: 0; /* remove extra space above footer */\n"
+        "      margin-top: 10px;\n"
+        "      margin-bottom: 0;\n"
         "    }\n"
         "    footer {\n"
-        "      margin-top: 10px; /* minimal space above footer */\n"
+        "      margin-top: 10px;\n"
         "    }\n"
         "  </style>\n"
         "</head>\n"
         "<body>\n"
-        f"  <h1>{title}</h1>\n"
-        f'  <img src="{png}" alt="{title}" class="card-image img-fluid">\n'
+        f"  <h1>{page_title}</h1>\n"
+        f'  <img src="{png}" alt="{page_title}" class="card-image img-fluid">\n'
         "  <p>\n"
-        "    <audio controls>\n"
-        f'      <source src="{mp3}" type="audio/mpeg">\n'
-        "      Votre navigateur ne supporte pas la lecture audio.\n"
-        "    </audio>\n"
+        "    <button id=\"show-answer-btn\" class=\"btn btn-primary\">Clique pour la réponse</button>\n"
         "  </p>\n"
-        f'  <div class="examples-block">\n{examples_html}\n  </div>\n'
+        '  <div id="answer-section" style="display:none; margin-top: 20px;">\n'
+        f"    <h2>{expr}</h2>\n"
+        "    <p>\n"
+        "      <audio controls>\n"
+        f'        <source src="{mp3}" type="audio/mpeg">\n'
+        "        Votre navigateur ne supporte pas la lecture audio.\n"
+        "      </audio>\n"
+        "    </p>\n"
+        f'    <div class="examples-block">\n{examples_html}\n    </div>\n'
         f"{footer_html}\n"
-        "</body>\n</html>\n"
+        "  </div>\n"
+        "  <script>\n"
+        "    document.addEventListener('DOMContentLoaded', function () {\n"
+        "      var btn = document.getElementById('show-answer-btn');\n"
+        "      var section = document.getElementById('answer-section');\n"
+        "      if (btn && section) {\n"
+        "        btn.addEventListener('click', function () {\n"
+        "          section.style.display = 'block';\n"
+        "          btn.style.display = 'none';\n"
+        "        });\n"
+        "      }\n"
+        "    });\n"
+        "  </script>\n"
+        "</body>\n"
+        "</html>\n"
     )
+
 
 def main():
     if len(sys.argv) < 2:
