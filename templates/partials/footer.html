@@ -2,62 +2,18 @@
   <hr>
   <div class="container">
     <p>&copy; 2024 frflashy.com — Grâce à la science, vous pouvez apprendre le français facilement.</p>
-
-  <!-- Navigation -->
-  <nav class="main-nav">
-    <div class="nav-container">
-      <ul class="nav-list">
-        <li class="nav-item active">
-          <a class="nav-link" href="/index.html">
-            <i class="fas fa-home"></i>Accueil
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/texts/index.html">
-            <i class="fas fa-lightbulb"></i>Textes
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/hints/hints.html">
-            <i class="fas fa-lightbulb"></i>Conseils
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/learn-your-verbs/index.html">
-            <i class="fas fa-book-open"></i>Verbes
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/stories/index.html">
-            <i class="fas fa-clock"></i>L'heure du conte
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="vocabulaireDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-utensils"></i>Vocabulaire
-          </a>
-          <div class="dropdown-menu" aria-labelledby="vocabulaireDropdown">
-            <a class="dropdown-item" href="/lesanimaux-vocabulary/index.html">
-              <i class="fas fa-paw"></i> Les Animaux
-            </a>
-            <a class="dropdown-item" href="/kitchen-vocabulary/index.html">
-              <i class="fas fa-utensils"></i> Cuisine
-            </a>
-            <a class="dropdown-item" href="/bathroom-vocabulary/index.html">
-              <i class="fas fa-bath"></i> Salle de Bain
-            </a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about.html">
-            <i class="fas fa-info-circle"></i>À propos
-        </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    <p class="footer-links">
+      <a href="/index.html">Accueil</a> · 
+      <a href="/texts/index.html">Textes</a> · 
+      <a href="/hints/hints.html">Conseils</a> · 
+      <a href="/learn-your-verbs/index.html">Verbes</a> · 
+      <a href="/stories/index.html">L'heure du conte</a> · 
+      <a href="/lesanimaux-vocabulary/index.html">Les Animaux</a> · 
+      <a href="/kitchen-vocabulary/index.html">Cuisine</a> · 
+      <a href="/bathroom-vocabulary/index.html">Salle de Bain</a> · 
+      <a href="/about.html">À propos</a>
+    </p>
+  </div>
 </footer>
 
 <style>
@@ -82,6 +38,7 @@ footer a:hover {
 .footer-links {
   margin-top: 0.5rem;
   font-size: 0.95rem;
+  white-space: nowrap; /* ensures all links stay on one line */
 }
 </style>
 
