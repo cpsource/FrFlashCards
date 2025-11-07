@@ -84,7 +84,6 @@ def generate_image(client: OpenAI, prompt: str, size: str = IMAGE_SIZE) -> bytes
     result = client.images.generate(model=MODEL, prompt=prompt, size=size)
     return base64.b64decode(result.data[0].b64_json)
 
-
 def build_html_page(expr: str, png: str, mp3: str, examples_html: str, footer_html: str) -> str:
     """Generate full HTML content including footer.html."""
     title = expr
@@ -103,8 +102,18 @@ def build_html_page(expr: str, png: str, mp3: str, examples_html: str, footer_ht
         "      margin-top: 40px;\n"
         "      text-align: center;\n"
         "    }\n"
-        "    img.card-image { max-width: 300px; margin: 20px auto; display: block; }\n"
-        "    .examples-block { margin-top: 30px; }\n"
+        "    img.card-image {\n"
+        "      max-width: 300px;\n"
+        "      margin: 20px auto;\n"
+        "      display: block;\n"
+        "    }\n"
+        "    .examples-block {\n"
+        "      margin-top: 10px; /* reduced vertical gap */\n"
+        "      margin-bottom: 0; /* remove extra space above footer */\n"
+        "    }\n"
+        "    footer {\n"
+        "      margin-top: 10px; /* minimal space above footer */\n"
+        "    }\n"
         "  </style>\n"
         "</head>\n"
         "<body>\n"
@@ -120,7 +129,6 @@ def build_html_page(expr: str, png: str, mp3: str, examples_html: str, footer_ht
         f"{footer_html}\n"
         "</body>\n</html>\n"
     )
-
 
 def main():
     if len(sys.argv) < 2:

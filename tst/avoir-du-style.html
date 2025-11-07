@@ -4,12 +4,11 @@
   <meta charset="utf-8">
   <title>avoir du style</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background-color: #ffffff;
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: #fff;
       margin-top: 40px;
       text-align: center;
     }
@@ -19,7 +18,11 @@
       display: block;
     }
     .examples-block {
-      margin-top: 30px;
+      margin-top: 10px; /* reduced vertical gap */
+      margin-bottom: 0; /* remove extra space above footer */
+    }
+    footer {
+      margin-top: 10px; /* minimal space above footer */
     }
   </style>
 </head>
@@ -38,7 +41,7 @@
   <table style="margin:auto; border-collapse:collapse; border:1px solid #ccc;">
     <tr style="border:1px solid #ccc;">
       <td style="text-align:left; padding:10px; border:1px solid #ccc;">
-        Elle marche toujours avec assurance, elle a vraiment du style.<br><em>She always walks with confidence; she really has style.</em>
+        Elle a vraiment du style avec sa nouvelle veste en cuir.<br><em>She really has style with her new leather jacket.</em>
       </td>
     </tr>
     <tr style="border:1px solid #ccc;">
@@ -48,13 +51,12 @@
     </tr>
     <tr style="border:1px solid #ccc;">
       <td style="text-align:left; padding:10px; border:1px solid #ccc;">
-        Cette maison a du style, chaque pièce est décorée avec goût.<br><em>This house has style; each room is tastefully decorated.</em>
+        Cette décoration intérieure a du style et du caractère.<br><em>This interior decoration has style and character.</em>
       </td>
     </tr>
   </table>
 </div>
-</div>
-
+  </div>
 <footer>
   <hr>
   <div class="container text-center">
@@ -87,17 +89,20 @@
 </footer>
 
 <!-- Style -->
+
 <style>
 footer {
   background: none;
   color: black;
-  padding: 1rem 0;
-  margin-top: 3rem;
+  padding: 0.5rem 0;      /* smaller padding */
+  margin-top: 0.75rem;    /* was 3rem; much tighter now */
+  text-align: center;
 }
 
 footer a {
   color: black;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 footer a:hover {
@@ -105,21 +110,23 @@ footer a:hover {
 }
 
 .footer-links {
+  margin-top: 0.25rem;
   font-size: 0.95rem;
-  white-space: nowrap;
+  white-space: nowrap;    /* keep all links on one line */
 }
 
-.dropdown-menu {
-  font-size: 0.9rem;
+/* Tighten the space around the horizontal rule */
+footer hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 </style>
+
 
 <!-- Bootstrap JS (if not already loaded) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
-  <hr>
-  <a href="../index.html" class="btn btn-secondary">↩️ Retour</a>
 </body>
 </html>
