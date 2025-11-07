@@ -1,0 +1,1 @@
+../tools/resize_png-2.py

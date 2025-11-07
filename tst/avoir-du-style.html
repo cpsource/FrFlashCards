@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Avoir du style</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      text-align: center;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #fffdfd;
+      margin-top: 40px;
+    }
+    img {
+      max-width: 300px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Avoir du style</h1>
+  <img src="avoir-du-style.png" alt="Avoir du style" class="img-fluid">
+
+  <p class="lead">Signification : (ajoutez la signification ici.)</p>
+
+  <audio controls>
+    <source src="avoir-du-style.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas la lecture audio.
+  </audio>
+
+  <hr>
+  <a href="../index.html" class="btn btn-secondary">↩️ Retour</a>
+
+  <footer>
+    {% include "footer.html" %}
+  </footer>
+</body>
+</html>
