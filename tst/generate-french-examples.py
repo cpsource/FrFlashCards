@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*-
 
 """
-get-french-examples.py
+generate-french-examples.py
 
 Usage:
-  python3 get-french-examples.py [--trace] <number-of-examples> "<french-expression>"
+  python3 generate-french-examples.py [--trace] <number-of-examples> "<french-expression>"
 
 Example:
-  python3 get-french-examples.py 3 "courbes du corps"
+  python3 generate-french-examples.py 3 "courbes du corps"
 
-Generates a centered HTML table with light box outlines for each example pair.
+If <expression>.txt already exists, reuses it instead of calling the LLM.
+Otherwise, generates examples, saves them to <expression>.txt, and prints HTML to stdout.
 """
 
 import sys
@@ -19,7 +20,7 @@ import re
 import html
 from pathlib import Path
 from dotenv import load_dotenv
-from openai import OpenAI, BadRequestError, APIError, APIConnectionError, RateLimitError
+from openai import OpenAI
 
 MODEL_EXAMPLES = "gpt-4o"
 MODEL_TRANSLATE = "gpt-4o-mini"
@@ -133,7 +134,7 @@ def main():
         trace("Trace mode enabled")
 
     if len(args) < 2:
-        print("Usage: python3 get-french-examples.py [--trace] <number-of-examples> \"<french-expression>\"")
+        print("Usage: python3 generate-french-examples.py [--trace] <number-of-examples> \"<french-expression>\"")
         sys.exit(1)
 
     try:
@@ -145,14 +146,26 @@ def main():
     expr = " ".join(args[1:]).strip()
     trace(f"Args -> n={n}, expr='{expr}'")
 
+    # Determine .txt filename
+    base_name = expr.replace(" ", "_").replace("'", "_")
+    txt_path = Path(f"{base_name}.txt")
+
     api_key = load_api_key()
     client = OpenAI(api_key=api_key)
 
-    try:
-        examples = get_examples(client, n, expr)
-    except Exception as e:
-        print(f"[ERROR] Example generation failed: {e}", file=sys.stderr)
-        sys.exit(2)
+    # If .txt exists, load it; otherwise, generate
+    if txt_path.exists():
+        trace(f"Using cached examples from {txt_path}")
+        content = txt_path.read_text(encoding="utf-8")
+        examples = [line.strip() for line in content.splitlines() if line.strip()]
+    else:
+        try:
+            examples = get_examples(client, n, expr)
+            txt_path.write_text("\n".join(examples), encoding="utf-8")
+            trace(f"Wrote new examples to {txt_path}")
+        except Exception as e:
+            print(f"[ERROR] Example generation failed: {e}", file=sys.stderr)
+            sys.exit(2)
 
     try:
         translations = translate_all_to_english(client, examples)
@@ -164,7 +177,7 @@ def main():
 
     # ---- HTML OUTPUT ----
     print(f'<div class="french-examples" style="text-align:center;">')
-    print(f'  <h3>Exemples pour « {esc_expr} »</h2>')
+    print(f'  <h3>Exemples pour « {esc_expr} »</h3>')
     print('  <table style="margin:auto; border-collapse:collapse; border:1px solid #ccc;">')
     for ex, en in zip(examples, translations):
         print('    <tr style="border:1px solid #ccc;">')
@@ -180,3 +193,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
