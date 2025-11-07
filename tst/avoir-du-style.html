@@ -2,88 +2,138 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Avoir du style</title>
+  <title>avoir du style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     body {
-      text-align: center;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background-color: #fffdfd;
+      background-color: #ffffff;
       margin-top: 40px;
+      text-align: center;
     }
-    img {
+    img.card-image {
       max-width: 300px;
       margin: 20px auto;
+      display: block;
+    }
+    .examples-block {
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>Avoir du style</h1>
-  <img src="avoir-du-style.png" alt="Avoir du style" class="img-fluid">
-
-  <p class="lead">Signification : (ajoutez la signification ici.)</p>
-
-  <audio controls>
-    <source src="avoir-du-style.mp3" type="audio/mpeg">
-    Votre navigateur ne supporte pas la lecture audio.
-  </audio>
-
+  <h1>avoir du style</h1>
+  <img src="avoir-du-style.png" alt="avoir du style" class="card-image img-fluid">
+  <p>
+    <audio controls>
+      <source src="avoir-du-style.mp3" type="audio/mpeg">
+      Votre navigateur ne supporte pas la lecture audio.
+    </audio>
+  </p>
+  <div class="examples-block">
 <div class="french-examples" style="text-align:center;">
   <h3>Exemples pour « avoir du style »</h2>
   <table style="margin:auto; border-collapse:collapse; border:1px solid #ccc;">
     <tr style="border:1px solid #ccc;">
       <td style="text-align:left; padding:10px; border:1px solid #ccc;">
-        Elle a du style avec cette nouvelle robe.<br><em>She has style with that new dress.</em>
+        Elle a vraiment du style avec sa nouvelle robe.<br><em>She really has style with her new dress.</em>
       </td>
     </tr>
     <tr style="border:1px solid #ccc;">
       <td style="text-align:left; padding:10px; border:1px solid #ccc;">
-        Il sait s&#x27;habiller, vraiment il a du style.<br><em>He knows how to dress, he really has style.</em>
+        Même en tenue décontractée, il a toujours du style.<br><em>Even in casual attire, he always has style.</em>
       </td>
     </tr>
     <tr style="border:1px solid #ccc;">
       <td style="text-align:left; padding:10px; border:1px solid #ccc;">
-        Même avec un simple t-shirt, elle a du style.<br><em>Even with a simple t-shirt, she has style.</em>
+        Ce designer a du style, ses créations sont uniques.<br><em>This designer has style; his creations are unique.</em>
       </td>
     </tr>
   </table>
 </div>
-  
+  </div>
   <hr>
   <a href="../index.html" class="btn btn-secondary">↩️ Retour</a>
-
 <footer>
+  <hr>
   <div class="container">
     <p>&copy; 2024 frflashy.com — Grâce à la science, vous pouvez apprendre le français facilement.</p>
-    <p class="footer-links">
-      <a href="/index.html">Home</a> · 
-      <a href="/hints/hints.html">Hints</a> · 
-      <a href="/learn-your-verbs/index.html">Verbes</a> · 
-      <a href="/stories/index.html">L'heure du conte</a> · 
-      <a href="/kitchen-vocabulary/index.html">Vocabulary</a>
-    </p>
-  </div>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <ul class="nav-list">
+        <li class="nav-item active">
+          <a class="nav-link" href="/index.html">
+            <i class="fas fa-home"></i>Accueil
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/texts/index.html">
+            <i class="fas fa-lightbulb"></i>Textes
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/hints/hints.html">
+            <i class="fas fa-lightbulb"></i>Conseils
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/learn-your-verbs/index.html">
+            <i class="fas fa-book-open"></i>Verbes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/stories/index.html">
+            <i class="fas fa-clock"></i>L'heure du conte
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="vocabulaireDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-utensils"></i>Vocabulaire
+          </a>
+          <div class="dropdown-menu" aria-labelledby="vocabulaireDropdown">
+            <a class="dropdown-item" href="/lesanimaux-vocabulary/index.html">
+              <i class="fas fa-paw"></i> Les Animaux
+            </a>
+            <a class="dropdown-item" href="/kitchen-vocabulary/index.html">
+              <i class="fas fa-utensils"></i> Cuisine
+            </a>
+            <a class="dropdown-item" href="/bathroom-vocabulary/index.html">
+              <i class="fas fa-bath"></i> Salle de Bain
+            </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about.html">
+            <i class="fas fa-info-circle"></i>À propos
+        </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </footer>
 
 <style>
-
 footer {
-  background: linear-gradient(135deg, #1e5e8e, #2d5a3d);
-  color: white;
-  padding: 2rem 0;
-  margin-top: 4rem;
+  background: none;
+  color: black;
+  padding: 1rem 0;
+  margin-top: 3rem;
   text-align: center;
 }
 
 footer a {
-  color: #87CEEB;
+  color: black;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: white;
   text-decoration: underline;
 }
 
@@ -92,6 +142,7 @@ footer a:hover {
   font-size: 0.95rem;
 }
 </style>
+
 
 </body>
 </html>
