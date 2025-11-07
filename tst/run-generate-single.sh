@@ -187,23 +187,23 @@ python3 generate-single.py 'le tissu synthétique'
 echo "=== Processing: rouge ==="
 python3 generate-single.py 'rouge'
 
-echo "=== Processing: bleu / bleue ==="
-python3 generate-single.py 'bleu / bleue'
+echo "=== Processing: bleu bleue ==="
+python3 generate-single.py 'bleu bleue'
 
-echo "=== Processing: vert / verte ==="
-python3 generate-single.py 'vert / verte'
+echo "=== Processing: vert verte ==="
+python3 generate-single.py 'vert verte'
 
 echo "=== Processing: jaune ==="
 python3 generate-single.py 'jaune'
 
-echo "=== Processing: noir / noire ==="
-python3 generate-single.py 'noir / noire'
+echo "=== Processing: noir noire ==="
+python3 generate-single.py 'noir noire'
 
-echo "=== Processing: blanc / blanche ==="
-python3 generate-single.py 'blanc / blanche'
+echo "=== Processing: blanc blanche ==="
+python3 generate-single.py 'blanc blanche'
 
-echo "=== Processing: gris / grise ==="
-python3 generate-single.py 'gris / grise'
+echo "=== Processing: gris grise ==="
+python3 generate-single.py 'gris grise'
 
 echo "=== Processing: marron ==="
 python3 generate-single.py 'marron'
@@ -211,8 +211,8 @@ python3 generate-single.py 'marron'
 echo "=== Processing: rose ==="
 python3 generate-single.py 'rose'
 
-echo "=== Processing: violet / violette ==="
-python3 generate-single.py 'violet / violette'
+echo "=== Processing: violet violette ==="
+python3 generate-single.py 'violet violette'
 
 echo "=== Processing: orange ==="
 python3 generate-single.py 'orange'
