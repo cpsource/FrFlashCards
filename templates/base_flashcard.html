@@ -7,7 +7,7 @@
 
   <!-- Minimal Bootstrap 4 CSS for layout -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/frflashy.css') }}">
+  <link rel="stylesheet" href="/frflashy.css">
 
   <style>
     body {
@@ -43,6 +43,17 @@
 <body>
   <div class="flashcard-container">
     {% block content %}{% endblock %}
+
+    <div class="mt-4 d-flex justify-content-between">
+      {% if prev_url %}
+        <a href="{{ prev_url }}" class="btn btn-secondary">&larr; Carte précédente</a>
+      {% else %}
+        <span></span>
+      {% endif %}
+      {% if next_url %}
+        <a href="{{ next_url }}" class="btn btn-primary">Carte suivante &rarr;</a>
+      {% endif %}
+    </div>    
   </div>
 
   {% include "partials/footer.html" %}
