@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Flashcard{% endblock %}</title>
+
+  <!-- Minimal Bootstrap 4 CSS for layout -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/frflashy.css') }}">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      text-align: center;
+    }
+    .flashcard-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .flashcard-image {
+      max-width: 80%;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    .reveal-btn {
+      margin-top: 1.5rem;
+    }
+    .answer-section {
+      display: none;
+      margin-top: 1rem;
+    }
+  </style>
+
+  {% block head_extra %}{% endblock %}
+</head>
+
+<body>
+  <div class="flashcard-container">
+    {% block content %}{% endblock %}
+  </div>
+
+  {% include "partials/footer.html" %}
+
+  <!-- Bootstrap JS (loaded once site-wide) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Simple toggle behavior for flashcards
+    function revealAnswer() {
+      document.querySelector('.answer-section').style.display = 'block';
+      document.querySelector('.reveal-btn').style.display = 'none';
+    }
+  </script>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
+
