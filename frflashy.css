@@ -279,11 +279,13 @@ a:hover {
 }
 
 .dropdown-menu {
-  position: absolute;
+  /* Let Bootstrap JS and CSS handle display: none/block */
+  /* Remove position: absolute; if you want it to flow with the content, 
+     but typically it's absolute for overlays */
   top: 100%;
   left: 0;
   z-index: 1000;
-  display: none;
+  /* display: none;  <-- REMOVE THIS - Bootstrap handles it */
   min-width: 200px;
   padding: 0.5rem 0;
   margin-top: 0.125rem;
@@ -317,17 +319,24 @@ a:hover {
   padding-left: 1.25rem;
 }
 
-/* Show dropdown on hover or click */
+/*
+*   REMOVED: This was interfering with Bootstrap's JavaScript for click-based dropdowns.
+*   If you specifically want hover functionality, you'll need to re-implement it carefully
+*   or use a Bootstrap-compatible hover solution.
+*
 .nav-item.dropdown:hover .dropdown-menu,
 .dropdown-menu.show {
   display: block;
 }
+*/
 
 /* Active state for dropdown toggle */
+/* This is fine as it targets appearance, not display logic */
 .nav-item.dropdown.active .nav-link,
 .nav-item.dropdown .nav-link:focus {
   background: rgba(255, 255, 255, 0.25);
 }
+
 
 /* Footer */
 footer {
@@ -408,12 +417,13 @@ footer .container {
   
   /* Dropdown adjustments for tablets */
   .dropdown-menu {
-    position: relative;
+    position: relative; /* Often useful to change position for mobile */
     width: 100%;
     box-shadow: none;
     border: none;
     background: rgba(255, 255, 255, 0.1);
     margin-top: 0;
+    /* REMOVE display: block; or display: none; rules here. Let Bootstrap handle it. */
   }
   
   .dropdown-item {
@@ -455,7 +465,9 @@ footer .container {
   
   /* Mobile dropdown styling */
   .dropdown-menu {
-    display: none !important;
+    /* Critical: REMOVE or comment out `display: none !important;` */
+    /* Let Bootstrap JS toggle the `show` class which then applies `display: block;` */
+    /* display: none !important;  <-- COMMENT/REMOVE THIS */
     position: static;
     background: rgba(30, 94, 142, 0.9);
     border-radius: 0;
@@ -463,7 +475,9 @@ footer .container {
   }
   
   .dropdown-menu.show {
-    display: block !important;
+    /* Critical: REMOVE or comment out `display: block !important;` */
+    /* The `show` class *already* makes it display block. `!important` is overkill and can cause issues. */
+    /* display: block !important;  <-- COMMENT/REMOVE THIS */
   }
   
   .dropdown-item {
@@ -471,4 +485,3 @@ footer .container {
     color: white !important;
   }
 }
-
