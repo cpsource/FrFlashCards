@@ -179,8 +179,8 @@ def main():
     text = sys.argv[3].strip()
 
     # 👇 ADDITION: if there's only one word, prepend "En français, on dit ..."
-    if len(text.split()) == 1:
-        text = f"En français, on dit {text}"
+    #if len(text.split()) == 1:
+    text = f"En français, on dit << {text} >>"
 
     voice = choose_voice(instructions)
 
