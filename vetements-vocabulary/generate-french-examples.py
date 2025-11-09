@@ -29,7 +29,7 @@ from openai import OpenAI
 
 MODEL_EXAMPLES = "gpt-4o"
 MODEL_TRANSLATE = "gpt-4o-mini"
-TRACE_ENABLED = False
+TRACE_ENABLED = True
 
 
 def trace(msg: str):

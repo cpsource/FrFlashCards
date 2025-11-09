@@ -13,7 +13,7 @@
     .btn-yellow { background: #ffc107; color: black; }
     hr { margin: 20px auto; width: 80%; border: 0; border-top: 1px solid #ccc; }
     .answer { display: none; font-size: 1.4em; font-weight: bold; margin-top: 10px; }
-    #debug { margin-top: 20px; background: #eee; padding: 10px; border-radius: 5px; text-align: left; font-family: monospace; max-width: 700px; margin-left: auto; margin-right: auto; overflow-y: auto; max-height: 300px; }
+    #debug { display: none; margin-top: 20px; background: #eee; padding: 10px; border-radius: 5px; text-align: left; font-family: monospace; max-width: 700px; margin-left: auto; margin-right: auto; overflow-y: auto; max-height: 300px; }
   </style>
 </head>
 <body>
@@ -36,6 +36,10 @@
     const IMG_EXT = '.png';
     const MP3_EXT = '.mp3';
 
+    // Enable debug mode if URL has ?debug=True
+    const params = new URLSearchParams(window.location.search);
+    const DEBUG_MODE = params.get('debug')?.toLowerCase() === 'true';
+
     let rows = [];
     let idx = 0;
     let facileSet = new Set(JSON.parse(localStorage.getItem('facileSet') || '[]'));
@@ -45,6 +49,11 @@
     const answerEl = document.getElementById('answer');
     const audioEl = document.getElementById('audio');
     const debugEl = document.getElementById('debug');
+
+    if (DEBUG_MODE) {
+      debugEl.style.display = 'block';
+      console.log('✅ Debug mode ON');
+    }
 
     // Skip the first CSV line (headers)
     function parseCSV(text) {
@@ -67,6 +76,7 @@
     }
 
     function showDebug() {
+      if (!DEBUG_MODE) return;
       let html = `<strong>Debug Info:</strong><br>Current idx: ${idx}<br><br>`;
       rows.forEach((row, i) => {
         const english = row[0];
@@ -93,7 +103,7 @@
       answerEl.textContent = french;
       audioEl.src = mp3Name + '?v=' + Date.now();
 
-<!--      showDebug(); -->
+      showDebug();
     }
 
     function markFacile() {
