@@ -1,3 +1,5 @@
+--- START OF FILE Nommez-image.html ---
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,9 +15,14 @@
 
   <!-- Your custom frflashy.css should be loaded AFTER Bootstrap CSS -->
   <link rel="stylesheet" href="/frflashy.css" /> 
-  <!-- Replace "path/to/your/" with the actual path to your CSS file -->
   
   <style>
+    /* 
+     * REMOVE THIS INLINE STYLE BLOCK!
+     * Your frflashy.css now handles all footer styling.
+     * Keeping this here will override frflashy.css.
+     */
+    /*
     body {
       font-family: Arial, sans-serif;
       background: #f5f5f5;
@@ -67,13 +74,15 @@
       overflow-y: auto;
       max-height: 300px;
     }
+    */
 
-    /* Footer styling */
+    /* Footer styling - These are now in frflashy.css, REMOVE from here */
+    /*
     footer {
       background: none;
       color: black;
-      padding: 0.5rem 0;      /* smaller padding */
-      margin-top: 0.75rem;    /* tighter above footer */
+      padding: 0.5rem 0;
+      margin-top: 0.75rem;
       text-align: center;
     }
 
@@ -90,23 +99,21 @@
     .footer-links {
       margin-top: 0.25rem;
       font-size: 0.95rem;
-      /* allow wrapping on small screens */
       white-space: normal;
     }
 
-    /* On wider screens, keep links on one line if possible */
     @media (min-width: 768px) {
       .footer-links {
         white-space: nowrap;
       }
     }
 
-    /* Tighten the space around the horizontal rule in footer */
     footer hr {
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;
       width: 80%;
     }
+    */
   </style>
 </head>
 <body>
@@ -244,29 +251,29 @@
     <div class="container text-center">
       <p>&copy; 2024 frflashy.com — Grâce à la science, vous pouvez apprendre le français facilement.</p>
 
-      <div class="footer-links d-inline-block">
-        <!-- Normal links -->
-        <a href="/index.html">Accueil</a> ·
-        <a href="/texts/index.html">Textes</a> ·
-        <a href="/hints/hints.html">Conseils</a> ·
-
-        <!-- Dropdown: Vocabulary -->
-        <div class="dropdown d-inline">
-          <a class="dropdown-toggle" href="#" role="button" id="vocabDropdown"
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Vocabulaire
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="vocabDropdown">
-            <a class="dropdown-item" href="/lesanimaux-vocabulary/index.html">Les Animaux</a>
-            <a class="dropdown-item" href="/kitchen-vocabulary/index.html">Cuisine</a>
-            <a class="dropdown-item" href="/bathroom-vocabulary/index.html">Salle de Bain</a>
-            <a class="dropdown-item" href="/vocab/vetements/index.html">vêtements</a>
-          </div>
-        </div>
-
-        <a href="/learn-your-verbs/index.html">Verbes</a> ·
-        <a href="/stories/index.html">L'heure du conte</a> ·
-        <a href="/about.html">À propos</a>
+      <div class="footer-links">
+        <ul class="list-unstyled d-flex flex-wrap justify-content-center">
+          <li><a href="/index.html">Accueil</a></li>
+          <li><a href="/texts/index.html">Textes</a></li>
+          <li><a href="/hints/hints.html">Conseils</a></li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" id="vocabDropdown"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Vocabulaire
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="vocabDropdown">
+              <a class="dropdown-item" href="/lesanimaux-vocabulary/index.html">Les Animaux</a>
+              <a class="dropdown-item" href="/kitchen-vocabulary/index.html">Cuisine</a>
+              <a class="dropdown-item" href="/bathroom-vocabulary/index.html">Salle de Bain</a>
+              <a class="dropdown-item" href="/vocab/vetements/index.html">vêtements</a>
+            </div>
+          </li>
+          
+          <li><a href="/learn-your-verbs/index.html">Verbes</a></li>
+          <li><a href="/stories/index.html">L'heure du conte</a></li>
+          <li><a href="/about.html">À propos</a></li>
+        </ul>
       </div>
     </div>
   </footer>
@@ -278,4 +285,3 @@
 
 </body>
 </html>
-
