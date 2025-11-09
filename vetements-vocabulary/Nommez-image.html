@@ -61,10 +61,22 @@
       return data;
     }
 
+    // Replace spaces and apostrophes with '-' for filenames, including "l'"
+    function safeName(name) {
+	return name
+	    .trim()
+	    .replace(/^l'/i, "l-")    // convert l'xxx → l-xxx
+	    .replace(/\s+/g, '-')     // spaces → -
+	    .replace(/'/g, '-')       // any remaining apostrophes → -
+	    .replace(/\//g, '-');     // slashes → -
+    }
+
+<!---
     // Replace spaces with '-' for filenames
     function safeName(name) {
       return name.trim().replace(/\s+/g, '-');
     }
+    --->
 
     function showDebug() {
       let html = `<strong>Debug Info:</strong><br>Current idx: ${idx}<br><br>`;

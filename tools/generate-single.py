@@ -7,7 +7,7 @@ generate-single.py
 Generate a single image, MP3, and HTML flash card for a French word or idiom.
 
 Usage:
-  python3 generate-single.py [--only-mp3] [--trial-run] "french expression"
+  python3 generate-single.py [--only-mp3 | --only-png] [--trial-run] "french expression"
 """
 
 import os
@@ -131,6 +131,7 @@ def main():
     parser = argparse.ArgumentParser(description="Generate a French flashcard (image, mp3, html).")
     parser.add_argument("expression", help="French expression to generate")
     parser.add_argument("--only-mp3", action="store_true", help="Only generate/rebuild the MP3, skipping others")
+    parser.add_argument("--only-png", action="store_true", help="Only generate/rebuild the PNG, skipping others")
     parser.add_argument("--trial-run", action="store_true", help="Show what would be done without executing")
     args = parser.parse_args()
 
@@ -156,6 +157,25 @@ def main():
         cmd = ["python3", "make_mp3_single.py", safe_text_name, "clear, natural, use a calm woman's French voice", expr]
         run_subprocess(cmd)
         print(f"✅ MP3 regenerated as {safe_text_name}.mp3 for: {expr}")
+        sys.exit(0)
+
+    # --- ONLY PNG MODE ---
+    if args.only_png:
+        print("🖼️  Only-PNG mode enabled.")
+        client = OpenAI(api_key=load_api_key())
+        print("⏳ Generating image...")
+        if args.trial_run:
+            print(f"[TRIAL] Would generate image for '{expr}'")
+        else:
+            try:
+                img = generate_image(client, build_prompt(expr))
+                png_path.write_bytes(img)
+                print(f"✅ Saved {png_path}")
+                subprocess.run(["python3", "resize_png.py", str(png_path), "64"])
+            except Exception as e:
+                explain_openai_error(e, "image")
+                sys.exit(2)
+        print(f"✅ PNG regenerated as {png_path.name} for: {expr}")
         sys.exit(0)
 
     # --- Normal full generation ---

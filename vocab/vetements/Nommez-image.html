@@ -116,11 +116,23 @@
       return data;
     }
 
+    <!--
     // Replace spaces with '-' for filenames (French column)
     function safeName(name) {
       return name.trim().replace(/\s+/g, '-');
     }
-
+    -->
+    
+    // Replace spaces and apostrophes with '-' for filenames, including "l'"
+    function safeName(name) {
+	return name
+	    .trim()
+	    .replace(/^l'/i, "l-")    // convert l'xxx → l-xxx
+	    .replace(/\s+/g, '-')     // spaces → -
+	    .replace(/'/g, '-')       // any remaining apostrophes → -
+	    .replace(/\//g, '-');     // slashes → -
+    }
+    
     function showDebug() {
       if (!DEBUG_MODE) return;
       let html = `<strong>Debug Info:</strong><br>Current idx: ${idx}<br><br>`;
