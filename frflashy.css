@@ -37,6 +37,8 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  /* Ensure the body itself is not getting too narrow */
+  width: 100%; 
 }
 
 /* Typography */
@@ -279,13 +281,9 @@ a:hover {
 }
 
 .dropdown-menu {
-  /* Let Bootstrap JS and CSS handle display: none/block */
-  /* Remove position: absolute; if you want it to flow with the content, 
-     but typically it's absolute for overlays */
   top: 100%;
   left: 0;
   z-index: 1000;
-  /* display: none;  <-- REMOVE THIS - Bootstrap handles it */
   min-width: 200px;
   padding: 0.5rem 0;
   margin-top: 0.125rem;
@@ -319,31 +317,19 @@ a:hover {
   padding-left: 1.25rem;
 }
 
-/*
-*   REMOVED: This was interfering with Bootstrap's JavaScript for click-based dropdowns.
-*   If you specifically want hover functionality, you'll need to re-implement it carefully
-*   or use a Bootstrap-compatible hover solution.
-*
-.nav-item.dropdown:hover .dropdown-menu,
-.dropdown-menu.show {
-  display: block;
-}
-*/
-
 /* Active state for dropdown toggle */
-/* This is fine as it targets appearance, not display logic */
 .nav-item.dropdown.active .nav-link,
 .nav-item.dropdown .nav-link:focus {
   background: rgba(255, 255, 255, 0.25);
 }
 
 
-/* Footer */
+/* Footer - REVISED FOR NO BACKGROUND AND BLACK TEXT */
 footer {
   margin-top: 3rem;
   padding: 2rem 0;
-  background: var(--deep-water);
-  color: white;
+  background: none; /* Removed background color */
+  color: black;      /* Set default text color to black */
   text-align: center;
   width: 100%;
 }
@@ -356,6 +342,47 @@ footer .container {
   margin-right: auto;
   padding: 0 1rem;
 }
+
+/* Specific styling for footer links for consistency */
+footer a {
+    color: black; /* Ensure all footer links are black */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #555; /* Slightly darker on hover */
+    text-decoration: underline;
+}
+
+/* Adjust dropdown items within footer if needed */
+footer .dropdown-item {
+    color: black !important; /* Force dropdown items to be black */
+}
+
+footer .dropdown-item:hover {
+    background: #e9ecef; /* Lighter background on hover for black text */
+    color: black !important;
+}
+
+/* Styling for the list in the footer links */
+.footer-links ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* Spacing between footer links */
+}
+
+.footer-links li {
+    margin: 0; /* Remove default list item margins */
+    padding: 0;
+    /* Add a visual separator, if desired. For now, gap handles it. */
+    /* If you want "·" between items, you'll need to use pseudo-elements or HTML separators */
+}
+
 
 /* Responsive Design */
 @media (max-width: 1500px) {
@@ -423,11 +450,10 @@ footer .container {
     border: none;
     background: rgba(255, 255, 255, 0.1);
     margin-top: 0;
-    /* REMOVE display: block; or display: none; rules here. Let Bootstrap handle it. */
   }
   
   .dropdown-item {
-    color: white !important;
+    color: white !important; /* Keep dropdown items white in tablet nav (if nav is colored) */
     padding-left: 2rem;
   }
   
@@ -465,23 +491,20 @@ footer .container {
   
   /* Mobile dropdown styling */
   .dropdown-menu {
-    /* Critical: REMOVE or comment out `display: none !important;` */
-    /* Let Bootstrap JS toggle the `show` class which then applies `display: block;` */
-    /* display: none !important;  <-- COMMENT/REMOVE THIS */
     position: static;
     background: rgba(30, 94, 142, 0.9);
     border-radius: 0;
     margin: 0;
   }
   
-  .dropdown-menu.show {
-    /* Critical: REMOVE or comment out `display: block !important;` */
-    /* The `show` class *already* makes it display block. `!important` is overkill and can cause issues. */
-    /* display: block !important;  <-- COMMENT/REMOVE THIS */
-  }
-  
   .dropdown-item {
     text-align: center;
     color: white !important;
   }
+
+  @media (max-width: 768px) {
+  .nav-item.dropdown .dropdown-item {
+    color: black !important;
+  }
 }
+
