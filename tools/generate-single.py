@@ -137,9 +137,13 @@ def main():
 
     expr = args.expression
     safe_text_name = safe_filename_from_text(expr)
-    png_path = Path(generate_filename(expr))
-    base = png_path.stem
+
+    #png_path = Path(generate_filename(expr))
     mp3_path = Path(f"{safe_text_name}.mp3")
+    png_path = Path(f"{safe_text_name}.png")    
+    
+    base = png_path.stem
+    
     html_path = Path(f"{base}.html")
 
     print(f"→ Processing: {expr}")
@@ -165,7 +169,7 @@ def main():
         client = OpenAI(api_key=load_api_key())
         print("⏳ Generating image...")
         if args.trial_run:
-            print(f"[TRIAL] Would generate image for '{expr}'")
+            print(f"[TRIAL] Would generate image for '{expr}', file {str(png_path)}")
         else:
             try:
                 img = generate_image(client, build_prompt(expr))
