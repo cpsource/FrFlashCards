@@ -1,0 +1,48 @@
+<h3>Examples</h3>
+<div id="examples-container">
+  <!-- Table will be injected here -->
+</div>
+
+<script>
+  // the French key used in the DB - should match column 1 in examples.csv
+  const EXPRESSION_KEY = "le manteau";
+
+  function renderExamplesTable(examples) {
+    if (!examples.length) {
+      document.getElementById("examples-container").innerHTML =
+        "<p><em>Aucun exemple trouvé.</em></p>";
+      return;
+    }
+
+    let html = '<table class="table table-bordered" style="max-width: 700px; margin: 0 auto;">';
+    html += "<thead><tr><th>Français</th><th>Anglais</th></tr></thead><tbody>";
+
+    examples.forEach(row => {
+      html += "<tr>";
+      html += "<td>" + row.french + "</td>";
+      html += "<td>" + row.english + "</td>";
+      html += "</tr>";
+    });
+
+    html += "</tbody></table>";
+
+    document.getElementById("examples-container").innerHTML = html;
+  }
+
+  // Fetch examples from your Flask/Neon API
+  fetch("/api/examples?expression=" + encodeURIComponent(EXPRESSION_KEY))
+    .then(r => r.json())
+    .then(data => {
+      if (data.examples) {
+        renderExamplesTable(data.examples);
+      } else {
+        renderExamplesTable([]);
+      }
+    })
+    .catch(err => {
+      console.error("Error fetching examples:", err);
+      document.getElementById("examples-container").innerHTML =
+        "<p><em>Erreur lors du chargement des exemples.</em></p>";
+    });
+</script>
+

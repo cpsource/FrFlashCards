@@ -1,0 +1,15 @@
+#!/home/ubuntu/mnt/myproject/bin/python
+
+import sys
+
+def application(environ, start_response):
+    status = "200 OK"
+    python_version = sys.version.replace('\n', ' ')
+    body = f"WSGI is alive.\nPython version: {python_version}\n".encode("utf-8")
+    headers = [
+        ("Content-Type", "text/plain"),
+        ("Content-Length", str(len(body))),
+    ]
+    start_response(status, headers)
+    return [body]
+

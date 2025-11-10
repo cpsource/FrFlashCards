@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+grom flask import Flask, request, jsonify
+import psycopg
+import os
+from dotenv import load_dotenv
+from pathlib import Path
+
+# --- Load environment variables from ~/.env ---
+dotenv_path = Path.home() / ".env"
+if dotenv_path.exists():
+    load_dotenv(dotenv_path)
+else:
+    print("⚠️ Warning: ~/.env not found; relying on system environment")
+
+# --- Initialize Flask app ---
+app = Flask(__name__)
+
+# --- Get the Neon database URL ---
+DSN = os.getenv("NEON_DATABASE_URL")
+if not DSN:
+    raise RuntimeError("❌ NEON_DATABASE_URL not found in ~/.env or environment")
+
+def get_conn():
+    return psycopg.connect(DSN, autocommit=True)
+
+@app.route("/api/ping")
+def ping():
+    return jsonify({"status": "api-alive"})
+
+@app.route("/api/examples")
+def get_examples():
+    """
+    Example: GET /api/examples?expression=le%20manteau
+    Returns: JSON array of french/english examples
+    """
+    expression = request.args.get("expression", "").strip()
+    if not expression:
+        return jsonify({"error": "missing expression parameter"}), 400
+
+    rows = []
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT french, english
+                FROM examples
+                WHERE expression = %s
+                ORDER BY id
+                """,
+                (expression,),
+            )
+            for french, english in cur.fetchall():
+                rows.append({"french": french, "english": english})
+
+    return jsonify({"expression": expression, "examples": rows})
+
+
+@app.route("/api/test")
+def test():
+    return jsonify({"status": "ok"})
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=5000)
+
