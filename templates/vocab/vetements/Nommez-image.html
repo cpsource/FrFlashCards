@@ -115,21 +115,17 @@
       }
       return data;
     }
-    <!--
-    // Replace spaces with '-' for filenames (French column)
-    function safeName(name) {
-      return name.trim().replace(/\s+/g, '-');
-    }
-    -->
 
-    // Replace spaces and apostrophes with '-' for filenames, including "l'"
+    // Normalize French names into safe filenames
     function safeName(name) {
-	return name
-	    .trim()
-	    .replace(/^l'/i, "l-")    // convert l'xxx → l-xxx
-	    .replace(/\s+/g, '-')     // spaces → -
-	    .replace(/'/g, '-')       // any remaining apostrophes → -
-	    .replace(/\//g, '-');     // slashes → -
+      let result = name.trim()
+      .replace(/\s*\/\s*/g, "-")
+      .replace(/^l'/i, "l-")
+      .replace(/\s+/g, "-")
+      .replace(/'/g, "-")
+      .replace(/-+/g, "-");
+      console.log("Result:", result);
+    return result;
     }
     
     function showDebug() {

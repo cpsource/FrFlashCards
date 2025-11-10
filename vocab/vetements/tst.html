@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <script>
+  function safeName(name) {
+    let result = name.trim()
+      .replace(/\s*\/\s*/g, "-")
+      .replace(/^l'/i, "l-")
+      .replace(/\s+/g, "-")
+      .replace(/'/g, "-")
+      .replace(/-+/g, "-");
+    console.log("Result:", result);
+    return result;
+  }
+
+  console.log("Test:", safeName("l'imperméable"));
+  </script>
+</body>
+</html>
+
