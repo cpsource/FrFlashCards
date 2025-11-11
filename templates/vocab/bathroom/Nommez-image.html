@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nommez cette image (Debug)</title>
+
+  <!-- Bootstrap 4 CSS (for dropdown, container, etc.) -->
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+
+  <style>
+    body { background:#fff; text-align:center; }
+    .flashcard-container { margin:2rem auto; max-width:700px; }
+    .reveal-btn { background:#4a90e2; color:white; border:none; padding:0.5rem 1.5rem; }
+    footer { margin-top:2rem; font-size:0.9rem; color:#333; }
+
+    .footer-links .nav-item.dropdown {
+      display: inline-flex;       /* keep it on the same line as other links */
+      align-items: center;
+      margin: 0 10px;
+    }
+
+    .footer-links .nav-item .nav-link {
+      color: black !important;    /* match other footer links */
+      padding: 0;
+      text-decoration: none;
+    }
+
+    .footer-links .nav-item .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links ul {
+      gap: 20px;                 /* add space between all footer items */
+    }
+
+    .footer-links li {
+      margin: 0 10px;            /* fallback spacing if gap isn’t supported */
+    }
+
+    .footer-links .nav-item.dropdown {
+      display: inline-flex;       /* keep dropdown aligned with other links */
+      align-items: center;
+    }
+
+    .footer-links .nav-link {
+      color: black !important;
+      text-decoration: none;
+      padding: 0;
+    }
+
+    .footer-links .nav-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Wrap your main content in a <main> tag -->
+  <main class="container text-center">
+    <h1>nommez cette image</h1>
+    <img id="mainImage" src="" alt="image" />
+    <hr>
+    <button id="revealBtn" class="btn-primary">réponse révélée</button>
+    <div id="answer" class="answer"></div>
+    <audio id="audio" preload="auto"></audio>
+    <hr>
+    <button id="repeatBtn">répéter</button>
+    <button id="facileBtn" class="btn-yellow">facile</button>
+    <button id="nextBtn" class="btn-green">image suivante</button>
+
+    <div id="debug"></div>
+
+    <!-- Hidden examples section: becomes visible after Reveal -->
+    <div id="examples-section" style="display:none;">
+      {% include "partials/examples.html" %}
+    </div>
+  </main>
+
+  <script>
+    const BASE_PATH = '/bathroom-vocabulary/';
+    const CSV_PATH = BASE_PATH + 'bathroom-vocabulary.csv';
+    const IMG_EXT = '.png';
+    const MP3_EXT = '.mp3';
+
+    // Enable debug mode if URL has ?debug=True
+    const params = new URLSearchParams(window.location.search);
+    const DEBUG_MODE = params.get('debug')?.toLowerCase() === 'true';
+
+    let rows = [];
+    let idx = 0;
+    let facileSet = new Set(JSON.parse(localStorage.getItem('facileSet') || '[]'));
+
+    const imgEl = document.getElementById('mainImage');
+    const revealBtn = document.getElementById('revealBtn');
+    const answerEl = document.getElementById('answer');
+    const audioEl = document.getElementById('audio');
+    const debugEl = document.getElementById('debug');
+
+    if (DEBUG_MODE) {
+      debugEl.style.display = 'block';
+      console.log('✅ Debug mode ON');
+    }
+
+    // Skip the first CSV line (headers)
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/);
+      const data = [];
+      for (let i = 1; i < lines.length; i++) { // skip first line
+        const line = lines[i].trim();
+        if (!line) continue;
+        const parts = line.split(',').map(p => p.trim().replace(/^"|"$/g, ''));
+        if (parts.length >= 2) {
+          data.push([parts[0], parts[1]]);
+        }
+      }
+      return data;
+    }
+
+    // Normalize French names into safe filenames
+    function safeName(name) {
+      let result = name.trim()
+        .replace(/\s*\/\s*/g, "-")
+        .replace(/^l'/i, "l-")
+        .replace(/\s+/g, "-")
+        .replace(/'/g, "-")
+        .replace(/-+/g, "-");
+      console.log("Result:", result);
+      return result;
+    }
+    
+    function showDebug() {
+      if (!DEBUG_MODE) return;
+      let html = `<strong>Debug Info:</strong><br>Current idx: ${idx}<br><br>`;
+      rows.forEach((row, i) => {
+        const english = row[0];
+        const french = row[1];
+        const base = safeName(french);
+        const png = BASE_PATH + base + IMG_EXT;
+        const mp3 = BASE_PATH + base + MP3_EXT;
+        html += `${i}: [EN: ${english}] , [FR: ${french}] → PNG: ${png}, MP3: ${mp3}`;
+        if (i === idx) html += '  ⟵ CURRENT';
+        html += '<br>';
+      });
+      debugEl.innerHTML = html;
+    }
+
+    function showCurrent() {
+      if (!rows.length || idx >= rows.length) return;
+      const [english, french] = rows[idx];
+      const safeBase = safeName(french);
+      const imgName = BASE_PATH + safeBase + IMG_EXT;
+      const mp3Name = BASE_PATH + safeBase + MP3_EXT;
+
+      imgEl.src = imgName + '?v=' + Date.now();
+      answerEl.style.display = 'none';
+      answerEl.textContent = french;
+      audioEl.src = mp3Name + '?v=' + Date.now();
+
+      showDebug();
+    }
+
+    function markFacile() {
+      const french = rows[idx][1];
+      const safeBase = safeName(french);
+      facileSet.add(safeBase);
+      localStorage.setItem('facileSet', JSON.stringify(Array.from(facileSet)));
+      nextImage();
+    }
+
+    function revealAnswer() {
+      // Show the French word & play audio
+      answerEl.style.display = 'block';
+      audioEl.play().catch(() => {});
+
+      // Show the examples section
+      const examplesSection = document.getElementById('examples-section');
+      if (examplesSection) {
+        examplesSection.style.display = 'block';
+      }
+
+      // If the examples partial is present, copy the French word into the input
+      // and trigger the table load via /api/examples
+      const exprInput = document.getElementById('expressionInput');
+      const french = answerEl.textContent.trim();
+      if (exprInput && french) {
+        exprInput.value = french;
+        if (typeof display_table_entry === 'function') {
+          display_table_entry();  // uses the value in expressionInput
+        }
+      }
+    }
+
+    function repeatImage() {
+      showCurrent();
+    }
+
+    function nextImage() {
+      if (!rows.length) return;
+      let start = idx;
+      do {
+        idx = (idx + 1) % rows.length;
+      } while (facileSet.has(safeName(rows[idx][1])) && idx !== start);
+      showCurrent();
+    }
+
+    revealBtn.addEventListener('click', revealAnswer);
+    document.getElementById('repeatBtn').addEventListener('click', repeatImage);
+    document.getElementById('facileBtn').addEventListener('click', markFacile);
+    document.getElementById('nextBtn').addEventListener('click', nextImage);
+
+    fetch(CSV_PATH + '?v=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.text())
+      .then(text => {
+        rows = parseCSV(text);
+        showCurrent();
+      })
+      .catch(err => console.error('Failed to load CSV:', err));
+  </script>
+
+  {% include "partials/footer.html" %}
+
+</body>
+</html>
+
