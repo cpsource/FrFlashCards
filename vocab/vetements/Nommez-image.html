@@ -18,50 +18,50 @@
     footer { margin-top:2rem; font-size:0.9rem; color:#333; }
 
     .footer-links .nav-item.dropdown {
-  display: inline-flex;       /* keep it on the same line as other links */
-  align-items: center;
-  margin: 0 10px;
-}
+      display: inline-flex;       /* keep it on the same line as other links */
+      align-items: center;
+      margin: 0 10px;
+    }
 
-.footer-links .nav-item .nav-link {
-  color: black !important;    /* match other footer links */
-  padding: 0;
-  text-decoration: none;
-}
+    .footer-links .nav-item .nav-link {
+      color: black !important;    /* match other footer links */
+      padding: 0;
+      text-decoration: none;
+    }
 
-.footer-links .nav-item .nav-link:hover {
-  text-decoration: underline;
-}
+    .footer-links .nav-item .nav-link:hover {
+      text-decoration: underline;
+    }
 
     .footer-links ul {
-  gap: 20px;                 /* add space between all footer items */
-}
+      gap: 20px;                 /* add space between all footer items */
+    }
 
-.footer-links li {
-  margin: 0 10px;            /* fallback spacing if gap isn’t supported */
-}
+    .footer-links li {
+      margin: 0 10px;            /* fallback spacing if gap isn’t supported */
+    }
 
-.footer-links .nav-item.dropdown {
-  display: inline-flex;       /* keep dropdown aligned with other links */
-  align-items: center;
-}
+    .footer-links .nav-item.dropdown {
+      display: inline-flex;       /* keep dropdown aligned with other links */
+      align-items: center;
+    }
 
-.footer-links .nav-link {
-  color: black !important;
-  text-decoration: none;
-  padding: 0;
-}
+    .footer-links .nav-link {
+      color: black !important;
+      text-decoration: none;
+      padding: 0;
+    }
 
-.footer-links .nav-link:hover {
-  text-decoration: underline;
-}
+    .footer-links .nav-link:hover {
+      text-decoration: underline;
+    }
   </style>
 
 </head>
 
 <body>
   <!-- Wrap your main content in a <main> tag -->
-  <main class="container text-center"> <!-- Added container and text-center for initial layout -->
+  <main class="container text-center">
     <h1>nommez cette image</h1>
     <img id="mainImage" src="" alt="image" />
     <hr>
@@ -74,6 +74,91 @@
     <button id="nextBtn" class="btn-green">image suivante</button>
 
     <div id="debug"></div>
+
+    <!-- Hidden examples section: becomes visible after Reveal -->
+    <div id="examples-section" style="display:none;">
+<!-- templates/partials/examples.html -->
+<div class="container my-5">
+  <h3 class="text-center mb-4">Exemples de vocabulaire</h3>
+
+  <div class="input-group mb-3">
+    <input type="text" id="expressionInput" class="form-control" placeholder="Entrez une expression (ex : le manteau)">
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="button" onclick="display_table_entry()">Afficher</button>
+    </div>
+  </div>
+
+  <div id="results-area">
+    <div id="examples-message" class="text-muted mb-2"></div>
+
+    <table class="table table-striped table-sm" id="examples-table" style="display:none;">
+      <thead class="thead-light">
+        <tr>
+          <th>Français</th>
+          <th>Anglais</th>
+        </tr>
+      </thead>
+      <tbody id="examples-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+async function display_table_entry() {
+  const expression = document.getElementById("expressionInput").value.trim();
+  const msgEl = document.getElementById("examples-message");
+  const table = document.getElementById("examples-table");
+  const tbody = document.getElementById("examples-tbody");
+
+  msgEl.textContent = "";
+  tbody.innerHTML = "";
+  table.style.display = "none";
+
+  if (!expression) {
+    msgEl.textContent = "Veuillez entrer une expression.";
+    return;
+  }
+
+  msgEl.textContent = "Chargement des exemples pour « " + expression + " »…";
+
+  try {
+    const resp = await fetch("/api/examples?expression=" + encodeURIComponent(expression));
+    if (!resp.ok) {
+      msgEl.textContent = "Erreur serveur : " + resp.status + " " + resp.statusText;
+      return;
+    }
+
+    const data = await resp.json();
+    if (data.error) {
+      msgEl.textContent = "Erreur : " + data.error;
+      return;
+    }
+
+    if (!data.examples || data.examples.length === 0) {
+      msgEl.textContent = "Aucun exemple trouvé pour « " + expression + " ».";
+      return;
+    }
+
+    data.examples.forEach(row => {
+      const tr = document.createElement("tr");
+      const tdFr = document.createElement("td");
+      tdFr.textContent = row.french;
+      const tdEn = document.createElement("td");
+      tdEn.textContent = row.english;
+      tr.appendChild(tdFr);
+      tr.appendChild(tdEn);
+      tbody.appendChild(tr);
+    });
+
+    msgEl.textContent = "";
+    table.style.display = "";
+  } catch (e) {
+    console.error(e);
+    msgEl.textContent = "Erreur de connexion au serveur.";
+  }
+}
+</script>
+    </div>
   </main>
 
   <script>
@@ -119,13 +204,13 @@
     // Normalize French names into safe filenames
     function safeName(name) {
       let result = name.trim()
-      .replace(/\s*\/\s*/g, "-")
-      .replace(/^l'/i, "l-")
-      .replace(/\s+/g, "-")
-      .replace(/'/g, "-")
-      .replace(/-+/g, "-");
+        .replace(/\s*\/\s*/g, "-")
+        .replace(/^l'/i, "l-")
+        .replace(/\s+/g, "-")
+        .replace(/'/g, "-")
+        .replace(/-+/g, "-");
       console.log("Result:", result);
-    return result;
+      return result;
     }
     
     function showDebug() {
@@ -168,8 +253,26 @@
     }
 
     function revealAnswer() {
+      // Show the French word & play audio
       answerEl.style.display = 'block';
       audioEl.play().catch(() => {});
+
+      // Show the examples section
+      const examplesSection = document.getElementById('examples-section');
+      if (examplesSection) {
+        examplesSection.style.display = 'block';
+      }
+
+      // If the examples partial is present, copy the French word into the input
+      // and trigger the table load via /api/examples
+      const exprInput = document.getElementById('expressionInput');
+      const french = answerEl.textContent.trim();
+      if (exprInput && french) {
+        exprInput.value = french;
+        if (typeof display_table_entry === 'function') {
+          display_table_entry();  // uses the value in expressionInput
+        }
+      }
     }
 
     function repeatImage() {
