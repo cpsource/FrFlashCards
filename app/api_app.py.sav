@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-grom flask import Flask, request, jsonify
+from flask import Flask, request, jsonify
 import psycopg
 import os
 from dotenv import load_dotenv
