@@ -77,93 +77,13 @@
 
     <!-- Hidden examples section: becomes visible after Reveal -->
     <div id="examples-section" style="display:none;">
-<!-- templates/partials/examples.html -->
-<div class="container my-5">
-  <h3 class="text-center mb-4">Exemples de vocabulaire</h3>
-
-  <div class="input-group mb-3">
-    <input type="text" id="expressionInput" class="form-control" placeholder="Entrez une expression (ex : le manteau)">
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="button" onclick="display_table_entry()">Afficher</button>
-    </div>
-  </div>
-
-  <div id="results-area">
-    <div id="examples-message" class="text-muted mb-2"></div>
-
-    <table class="table table-striped table-sm" id="examples-table" style="display:none;">
-      <thead class="thead-light">
-        <tr>
-          <th>Français</th>
-          <th>Anglais</th>
-        </tr>
-      </thead>
-      <tbody id="examples-tbody"></tbody>
-    </table>
-  </div>
-</div>
-
-<script>
-async function display_table_entry() {
-  const expression = document.getElementById("expressionInput").value.trim();
-  const msgEl = document.getElementById("examples-message");
-  const table = document.getElementById("examples-table");
-  const tbody = document.getElementById("examples-tbody");
-
-  msgEl.textContent = "";
-  tbody.innerHTML = "";
-  table.style.display = "none";
-
-  if (!expression) {
-    msgEl.textContent = "Veuillez entrer une expression.";
-    return;
-  }
-
-  msgEl.textContent = "Chargement des exemples pour « " + expression + " »…";
-
-  try {
-    const resp = await fetch("/api/examples?expression=" + encodeURIComponent(expression));
-    if (!resp.ok) {
-      msgEl.textContent = "Erreur serveur : " + resp.status + " " + resp.statusText;
-      return;
-    }
-
-    const data = await resp.json();
-    if (data.error) {
-      msgEl.textContent = "Erreur : " + data.error;
-      return;
-    }
-
-    if (!data.examples || data.examples.length === 0) {
-      msgEl.textContent = "Aucun exemple trouvé pour « " + expression + " ».";
-      return;
-    }
-
-    data.examples.forEach(row => {
-      const tr = document.createElement("tr");
-      const tdFr = document.createElement("td");
-      tdFr.textContent = row.french;
-      const tdEn = document.createElement("td");
-      tdEn.textContent = row.english;
-      tr.appendChild(tdFr);
-      tr.appendChild(tdEn);
-      tbody.appendChild(tr);
-    });
-
-    msgEl.textContent = "";
-    table.style.display = "";
-  } catch (e) {
-    console.error(e);
-    msgEl.textContent = "Erreur de connexion au serveur.";
-  }
-}
-</script>
+      {% include "partials/examples.html" %}
     </div>
   </main>
 
   <script>
-    const BASE_PATH = '/vetements-vocabulary/';
-    const CSV_PATH = BASE_PATH + 'vetements-a1-a2.csv';
+    const BASE_PATH = '/kitchen-vocabulary/';
+    const CSV_PATH = BASE_PATH + 'kitchen-vocabulary.csv';
     const IMG_EXT = '.png';
     const MP3_EXT = '.mp3';
 
@@ -302,96 +222,8 @@ async function display_table_entry() {
       .catch(err => console.error('Failed to load CSV:', err));
   </script>
 
-<footer>
-  <hr>
-  <div class="container text-center">
-    <p>&copy; 2024 frflashy.com — Grâce à la science, vous pouvez apprendre le français facilement.</p>
+  {% include "partials/footer.html" %}
 
-    <div class="footer-links d-inline-block">
-      <!-- Normal links -->
-      <a href="/index.html">Accueil</a> ·
-      <a href="/texts/index.html">Textes</a> ·
-      <a href="/hints/hints.html">Conseils</a> ·
-
-      <!-- Dropdown: Vocabulary -->
-      <div class="dropdown d-inline">
-        <a class="dropdown-toggle" href="#" role="button" id="vocabDropdown"
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Vocabulaire
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="vocabDropdown">
-          <a class="dropdown-item" href="/lesanimaux-vocabulary/index.html">Les Animaux</a>
-          <a class="dropdown-item" href="/vocab/kitchen/index.html">Cuisine</a>
-          <a class="dropdown-item" href="/vocab/bathroom/index.html">Salle de Bain</a>
-	  <a class="dropdown-item" href="/vocab/vetements/index.html">vêtements</a>
-        </div>
-      </div>
-
-      · <a href="/learn-your-verbs/index.html">Verbes</a> ·
-      <a href="/stories/index.html">L'heure du conte</a> ·
-      <a href="/about.html">À propos</a>
-    </div>
-  </div>
-</footer>
-
-<!-- Style -->
-
-<style>
-/* --- Footer link alignment and spacing --- */
-.footer-links ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;              /* modern spacing between all items */
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.footer-links li {
-  margin: 0 10px;         /* fallback for browsers without gap */
-}
-
-/* Keep dropdown inline with other menu links */
-.footer-links .nav-item.dropdown {
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-}
-
-/* Footer link styling */
-.footer-links a,
-.footer-links .nav-link {
-  color: black !important;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0;
-}
-
-.footer-links a:hover,
-.footer-links .nav-link:hover {
-  text-decoration: underline;
-}
-
-/* Dropdown menu styling (optional for footer) */
-.footer-links .dropdown-menu {
-  background: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.footer-links .dropdown-item {
-  color: black !important;
-}
-
-.footer-links .dropdown-item:hover {
-  background: #f1f1f1;
-}
-</style>
-
-<!-- Bootstrap JS dependencies (for dropdown to work) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
