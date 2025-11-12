@@ -63,3 +63,31 @@ def get_examples():
                 rows.append({"french": french, "english": english})
 
     return jsonify({"expression": expression, "examples": rows})
+
+#
+# Audio Capture
+#
+
+from datetime import datetime
+
+@app.route('/upload-audio', methods=['POST'])
+def upload_audio():
+    if 'audio' not in request.files:
+        return jsonify({'error': 'No audio file'}), 400
+    
+    audio_file = request.files['audio']
+    
+    # Create recordings directory if it doesn't exist
+    recordings_dir = 'recordings'
+    os.makedirs(recordings_dir, exist_ok=True)
+    
+    # Save the file
+    filename = audio_file.filename
+    filepath = os.path.join(recordings_dir, filename)
+    audio_file.save(filepath)
+    
+    return jsonify({
+        'status': 'success',
+        'filename': filename,
+        'path': filepath
+    })    
