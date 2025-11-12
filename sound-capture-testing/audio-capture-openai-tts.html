@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Capture - frflashy.com</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .capture-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .expected-phrase {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .expected-phrase h5 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .expected-phrase p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+        
+        .btn-record {
+            background-color: #dc3545;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        .btn-record:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+        
+        .btn-stop {
+            background-color: #6c757d;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        .btn-stop:hover {
+            background-color: #5a6268;
+            transform: scale(1.05);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #6c757d;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .status-indicator.recording {
+            background-color: #dc3545;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+        
+        .visualizer {
+            width: 100%;
+            height: 100px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .visualizer.active {
+            display: block;
+        }
+        
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .status-text {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #6c757d;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .audio-player.active {
+            display: block;
+        }
+        
+        .feedback-section {
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .feedback-section.active {
+            display: block;
+        }
+        
+        .transcription-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .transcription-box h6 {
+            color: #1976d2;
+            margin-bottom: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .transcription-box p {
+            font-size: 18px;
+            color: #333;
+            margin: 0;
+        }
+        
+        .feedback-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .feedback-box h6 {
+            color: #f57c00;
+            margin-bottom: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .feedback-box p {
+            font-size: 16px;
+            color: #333;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .message {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+            display: none;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .phrase-input-group {
+            margin: 20px 0;
+        }
+        
+        .phrase-input-group input {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 16px;
+        }
+        
+        .phrase-input-group input:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <div class="capture-container">
+        <h2 class="text-center mb-4">🎤 French Pronunciation Practice</h2>
+        
+        <!-- Input for expected phrase -->
+        <div class="phrase-input-group">
+            <label for="phraseInput"><strong>Enter the French phrase to practice:</strong></label>
+            <input type="text" 
+                   class="form-control" 
+                   id="phraseInput" 
+                   placeholder="e.g., Bonjour, comment allez-vous?"
+                   value="le chat">
+        </div>
+        
+        <!-- Display expected phrase -->
+        <div class="expected-phrase" id="expectedPhraseBox" style="display: none;">
+            <h5>Try to Say:</h5>
+            <p id="expectedPhrase">le chat</p>
+        </div>
+        
+        <div class="status-text">
+            <span class="status-indicator" id="statusIndicator"></span>
+            <span id="statusText">Ready to record</span>
+        </div>
+        
+        <div class="timer" id="timer">00:00</div>
+        
+        <canvas class="visualizer" id="visualizer" width="520" height="100"></canvas>
+        
+        <div class="text-center">
+            <button class="btn btn-record btn-lg mr-2" id="startBtn">
+                ▶ Start Recording
+            </button>
+            <button class="btn btn-stop btn-lg" id="stopBtn" disabled>
+                ⏹ Stop Recording
+            </button>
+        </div>
+        
+        <!-- Loading indicator -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Processing your pronunciation...</p>
+        </div>
+        
+        <!-- Feedback section -->
+        <div class="feedback-section" id="feedbackSection">
+            <div class="transcription-box">
+                <h6>You Said:</h6>
+                <p id="transcription">...</p>
+            </div>
+            
+            <div class="feedback-box">
+                <h6>Feedback:</h6>
+                <p id="feedback">...</p>
+            </div>
+            
+            <div class="text-center mt-3">
+                <button class="btn btn-info" id="listenBtn" onclick="playPronunciation()">
+                    🔊 Listen to Correct Pronunciation
+                </button>
+            </div>
+        </div>
+        
+        <audio class="audio-player" id="audioPlayer" controls></audio>
+        
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+        let audioContext;
+        let analyser;
+        let dataArray;
+        let animationId;
+        let startTime;
+        let timerInterval;
+        let stream;
+        
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const statusIndicator = document.getElementById('statusIndicator');
+        const statusText = document.getElementById('statusText');
+        const timer = document.getElementById('timer');
+        const visualizer = document.getElementById('visualizer');
+        const canvasCtx = visualizer.getContext('2d');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const message = document.getElementById('message');
+        const phraseInput = document.getElementById('phraseInput');
+        const expectedPhraseBox = document.getElementById('expectedPhraseBox');
+        const expectedPhrase = document.getElementById('expectedPhrase');
+        const feedbackSection = document.getElementById('feedbackSection');
+        const transcription = document.getElementById('transcription');
+        const feedback = document.getElementById('feedback');
+        const loading = document.getElementById('loading');
+        
+        // Update expected phrase when input changes
+        phraseInput.addEventListener('input', (e) => {
+            const phrase = e.target.value.trim();
+            if (phrase) {
+                expectedPhrase.textContent = phrase;
+                expectedPhraseBox.style.display = 'block';
+            } else {
+                expectedPhraseBox.style.display = 'none';
+            }
+        });
+        
+        // Initialize with default phrase
+        if (phraseInput.value.trim()) {
+            expectedPhrase.textContent = phraseInput.value.trim();
+            expectedPhraseBox.style.display = 'block';
+        }
+        
+        // Start recording
+        startBtn.addEventListener('click', async () => {
+            try {
+                // Hide previous feedback
+                feedbackSection.classList.remove('active');
+                message.className = 'message';
+                
+                // Request microphone access
+                stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                
+                // Set up audio context for visualization
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                const source = audioContext.createMediaStreamSource(stream);
+                source.connect(analyser);
+                analyser.fftSize = 2048;
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+                
+                // Set up MediaRecorder
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+                
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+                
+                mediaRecorder.onstop = async () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    audioPlayer.src = audioUrl;
+                    audioPlayer.classList.add('active');
+                    
+                    // Send to server for processing
+                    await sendToServer(audioBlob);
+                    
+                    // Stop all tracks
+                    stream.getTracks().forEach(track => track.stop());
+                };
+                
+                // Start recording
+                mediaRecorder.start();
+                startTime = Date.now();
+                
+                // Update UI
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                statusIndicator.classList.add('recording');
+                statusText.textContent = 'Recording...';
+                visualizer.classList.add('active');
+                audioPlayer.classList.remove('active');
+                
+                // Start timer
+                timerInterval = setInterval(updateTimer, 100);
+                
+                // Start visualization
+                visualize();
+                
+            } catch (err) {
+                console.error('Error accessing microphone:', err);
+                showMessage('Error: Could not access microphone. Please check permissions.', 'error');
+            }
+        });
+        
+        // Stop recording
+        stopBtn.addEventListener('click', () => {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                
+                // Update UI
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                statusIndicator.classList.remove('recording');
+                statusText.textContent = 'Processing...';
+                visualizer.classList.remove('active');
+                
+                // Stop timer
+                clearInterval(timerInterval);
+                
+                // Stop visualization
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+                
+                // Close audio context
+                if (audioContext) {
+                    audioContext.close();
+                }
+            }
+        });
+        
+        // Update timer
+        function updateTimer() {
+            const elapsed = Date.now() - startTime;
+            const seconds = Math.floor(elapsed / 1000);
+            const milliseconds = Math.floor((elapsed % 1000) / 100);
+            timer.textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}.${milliseconds}`;
+        }
+        
+        // Visualize audio
+        function visualize() {
+            animationId = requestAnimationFrame(visualize);
+            
+            analyser.getByteTimeDomainData(dataArray);
+            
+            canvasCtx.fillStyle = '#f8f9fa';
+            canvasCtx.fillRect(0, 0, visualizer.width, visualizer.height);
+            
+            canvasCtx.lineWidth = 2;
+            canvasCtx.strokeStyle = '#667eea';
+            canvasCtx.beginPath();
+            
+            const sliceWidth = visualizer.width * 1.0 / dataArray.length;
+            let x = 0;
+            
+            for (let i = 0; i < dataArray.length; i++) {
+                const v = dataArray[i] / 128.0;
+                const y = v * visualizer.height / 2;
+                
+                if (i === 0) {
+                    canvasCtx.moveTo(x, y);
+                } else {
+                    canvasCtx.lineTo(x, y);
+                }
+                
+                x += sliceWidth;
+            }
+            
+            canvasCtx.lineTo(visualizer.width, visualizer.height / 2);
+            canvasCtx.stroke();
+        }
+        
+        // Send audio to server
+        async function sendToServer(audioBlob) {
+            const formData = new FormData();
+            const timestamp = new Date().getTime();
+            formData.append('audio', audioBlob, `recording_${timestamp}.wav`);
+            
+            // Get expected text from input
+            const expectedText = phraseInput.value.trim();
+            formData.append('expected_text', expectedText);
+            
+            // Show loading
+            loading.classList.add('active');
+            statusText.textContent = 'Processing your pronunciation...';
+            
+            try {
+                const response = await fetch('/api/upload-audio', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                // Hide loading
+                loading.classList.remove('active');
+                
+                if (response.ok) {
+                    // Show feedback
+                    statusText.textContent = 'Recording complete';
+                    transcription.textContent = result.transcription || 'Unable to transcribe';
+                    feedback.innerHTML = result.feedback || 'No feedback available';
+                    feedbackSection.classList.add('active');
+                } else {
+                    showMessage(`Error: ${result.error || 'Upload failed'}`, 'error');
+                    statusText.textContent = 'Error processing audio';
+                }
+            } catch (err) {
+                console.error('Error uploading audio:', err);
+                loading.classList.remove('active');
+                showMessage('Error: Could not upload recording to server', 'error');
+                statusText.textContent = 'Upload failed';
+            }
+        }
+        
+        // Show message
+        function showMessage(text, type) {
+            message.innerHTML = text;
+            message.className = `message ${type}`;
+        }
+        
+        // Play pronunciation using OpenAI TTS (high quality)
+        async function playPronunciation() {
+            const expectedText = phraseInput.value.trim();
+            
+            if (!expectedText) {
+                showMessage('Please enter a phrase first', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const listenBtn = document.getElementById('listenBtn');
+            const originalText = listenBtn.innerHTML;
+            listenBtn.innerHTML = '⏳ Generating...';
+            listenBtn.disabled = true;
+            
+            try {
+                const response = await fetch('/api/pronounce', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: expectedText })
+                });
+                
+                if (response.ok) {
+                    // Get the audio blob from the response
+                    const audioBlob = await response.blob();
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    
+                    // Play the audio
+                    const audio = new Audio(audioUrl);
+                    audio.play();
+                    
+                    // Clean up the URL after playing
+                    audio.onended = () => {
+                        URL.revokeObjectURL(audioUrl);
+                    };
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.error || 'Could not generate pronunciation'}`, 'error');
+                }
+            } catch (err) {
+                console.error('Error generating pronunciation:', err);
+                showMessage('Error: Could not generate pronunciation', 'error');
+            } finally {
+                // Restore button state
+                listenBtn.innerHTML = originalText;
+                listenBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
