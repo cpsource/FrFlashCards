@@ -331,6 +331,7 @@
         let startTime;
         let timerInterval;
         let stream;
+        let autoStopTimeout;  // For 15 second auto-stop
         
         const startBtn = document.getElementById('startBtn');
         const stopBtn = document.getElementById('stopBtn');
@@ -410,6 +411,14 @@
                 mediaRecorder.start();
                 startTime = Date.now();
                 
+                // Set auto-stop after 15 seconds
+                autoStopTimeout = setTimeout(() => {
+                    if (mediaRecorder && mediaRecorder.state === 'recording') {
+                        stopRecording();
+                        showMessage('⏱ Recording stopped automatically after 15 seconds', 'error');
+                    }
+                }, 15000);  // 15 seconds
+                
                 // Update UI
                 startBtn.disabled = true;
                 stopBtn.disabled = false;
@@ -432,8 +441,18 @@
         
         // Stop recording
         stopBtn.addEventListener('click', () => {
+            stopRecording();
+        });
+        
+        function stopRecording() {
             if (mediaRecorder && mediaRecorder.state === 'recording') {
                 mediaRecorder.stop();
+                
+                // Clear auto-stop timeout if user stopped manually
+                if (autoStopTimeout) {
+                    clearTimeout(autoStopTimeout);
+                    autoStopTimeout = null;
+                }
                 
                 // Update UI
                 startBtn.disabled = false;
@@ -455,7 +474,7 @@
                     audioContext.close();
                 }
             }
-        });
+        }
         
         // Update timer
         function updateTimer() {
