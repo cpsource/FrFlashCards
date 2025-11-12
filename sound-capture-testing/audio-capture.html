@@ -324,7 +324,7 @@
             formData.append('audio', audioBlob, `recording_${timestamp}.wav`);
             
             try {
-                const response = await fetch('/upload-audio', {
+                const response = await fetch('/api/upload-audio', {
                     method: 'POST',
                     body: formData
                 });

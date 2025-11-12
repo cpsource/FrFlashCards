@@ -51,8 +51,8 @@ def get_examples():
     with get_conn() as conn:
         with conn.cursor() as cur:
             cur.execute(
-                """
-                SELECT french, english
+            """
+            SELECT french, english
                 FROM examples
                 WHERE expression = %s
                 ORDER BY id
@@ -85,7 +85,7 @@ def upload_audio():
     audio_file = request.files['audio']
     
     # Create recordings directory if it doesn't exist
-    recordings_dir = 'recordings'
+    recordings_dir = '/var/www/FrFlashCards/recordings'
     os.makedirs(recordings_dir, exist_ok=True)
     
     # Save the file
@@ -114,7 +114,7 @@ def list_recordings():
     """
     List all audio recordings in the recordings directory.
     """
-    recordings_dir = 'recordings'
+    recordings_dir = '/var/www/FrFlashCards/recordings'
     
     if not os.path.exists(recordings_dir):
         return jsonify({'recordings': []})
