@@ -1,10 +1,93 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, session, redirect, url_for
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+
 import os
+import psycopg2
 import psycopg
 import sys
 import io
 
+# Get top-level flask object
 app = Flask(__name__)
+# Set the secret key from environment variable
+app.secret_key = os.getenv('FLASK_SECRET_KEY')
+# Optional: Add a check to make sure it's set
+if not app.secret_key:
+    raise ValueError("FLASK_SECRET_KEY not found in environment variables!")
+
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'  # Redirect here if not logged in
+
+# Define your User class
+class User(UserMixin):
+    def __init__(self, id, username, email):
+        self.id = id
+        self.username = username
+        self.email = email
+
+# User loader - Flask-Login uses this to reload user from session
+@login_manager.user_loader
+def load_user(user_id):
+    # Load user from your database
+    # This is called on every request for logged-in users
+    # For now, a simple example:
+    conn = psycopg2.connect(os.getenv('NEON_DATABASE_URL'))
+    cur = conn.cursor()
+    cur.execute("SELECT id, username, email FROM users WHERE id = %s", (user_id,))
+    result = cur.fetchone()
+    conn.close()
+
+    if result:
+        return User(id=result[0], username=result[1], email=result[2])
+    return None
+
+# Login route
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        # Check credentials (you should hash passwords!)
+        conn = psycopg2.connect(os.getenv('NEON_DATABASE_URL'))
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT id, username, email, password_hash FROM users WHERE username = %s",
+            (username,)
+        )
+        result = cur.fetchone()
+        conn.close()
+        
+        if result and check_password_hash(result[3], password):
+            user = User(id=result[0], username=result[1], email=result[2])
+            login_user(user)
+            return redirect(url_for('dashboard'))
+        else:
+            return "Invalid credentials", 401
+    
+    # Return login form HTML
+    return '''
+        <form method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit">Login</button>
+        </form>
+    '''
+
+# Logout route
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+# Protected route example
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    return f"Hello {current_user.username}!"
 
 @app.route("/")
 def index():
@@ -15,6 +98,7 @@ def hello():
     return {"message": "Hello from Flask!"}
 
 @app.route("/time")
+@login_required
 def db_time():
     """Return current time from Neon/Postgres"""
     dsn = os.getenv("NEON_DATABASE_URL")
@@ -39,6 +123,7 @@ def get_conn():
     return psycopg.connect(DSN, autocommit=True)
     
 @app.route("/examples")
+@login_required
 def get_examples():
     """
     Example: GET /api/examples?expression=le%20manteau
@@ -88,6 +173,7 @@ def get_openai_client():
 #client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 @app.route('/upload-audio', methods=['POST'])
+@login_required
 def upload_audio():
     """
     Handle audio file uploads from the audio-capture.html page.
@@ -224,6 +310,7 @@ Provide brief, encouraging pronunciation feedback."""
 
 # Optional: Route to list all recordings
 @app.route('/recordings', methods=['GET'])
+@login_required
 def list_recordings():
     """
     List all audio recordings in the recordings directory.
@@ -252,6 +339,7 @@ def list_recordings():
 
 # Optional: Route to delete old recordings (for cleanup)
 @app.route('/recordings/<filename>', methods=['DELETE'])
+@login_required
 def delete_recording(filename):
     """
     Delete a specific recording file.
@@ -307,6 +395,7 @@ TROUBLESHOOTING:
 """
 
 @app.route('/pronounce', methods=['POST'])
+@login_required
 def pronounce():
     """
     Generate high-quality French pronunciation using OpenAI TTS.

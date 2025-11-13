@@ -1,0 +1,40 @@
+CREATE TABLE french_expressions (
+    id SERIAL PRIMARY KEY,
+    expression TEXT NOT NULL UNIQUE,    -- e.g. "le manteau"
+    mp3_sound BYTEA NOT NULL            -- e.g. The mp3 sound file of column expression
+);
+
+-- Optional: Add an index on expression for faster lookups
+CREATE INDEX idx_expression ON french_expressions(expression);
+
+-- Optional: Add a timestamp for when entries were created
+ALTER TABLE french_expressions ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+---
+
+To insert data
+
+import psycopg2
+
+conn = psycopg2.connect("dbname=yourdb user=youruser")
+cur = conn.cursor()
+
+with open('audio.mp3', 'rb') as f:
+    mp3_data = f.read()
+
+cur.execute(
+    "INSERT INTO french_expressions (expression, mp3_sound) VALUES (%s, %s)",
+    ('le chat', psycopg2.Binary(mp3_data))
+)
+conn.commit()
+
+---
+
+To retrieve
+
+cur.execute("SELECT mp3_sound FROM french_expressions WHERE expression = %s", ('le chat',))
+mp3_bytes = cur.fetchone()[0]
+
+with open('output.mp3', 'wb') as f:
+    f.write(mp3_bytes)
+

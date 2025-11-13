@@ -1,0 +1,11 @@
+CREATE TABLE examples (
+    id          SERIAL PRIMARY KEY,
+    expression  TEXT NOT NULL,   -- e.g. "le manteau"
+    french      TEXT NOT NULL,   -- example sentence in French
+    english     TEXT NOT NULL    -- translation
+);
+
+CREATE INDEX idx_examples_expression
+  ON examples(expression);
+
+
