@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file, session, redirect, url_for
+from flask import Flask, request, jsonify, send_file, session, redirect, url_for, render_template
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
 import os
@@ -92,7 +92,7 @@ def dashboard():
 
 @app.route("/")
 def index():
-    return {"message": "API root is alive."}
+    return render_template('index.html', user=current_user)
 
 @app.route("/hello")
 def hello():
