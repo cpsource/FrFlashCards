@@ -94,6 +94,16 @@ def dashboard():
 def index():
     return render_template('index.html', user=current_user)
 
+@app.route('/about')
+def about():
+    return render_template('about.html', user=current_user)
+
+from flask import send_from_directory
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 @app.route("/hello")
 def hello():
     return {"message": "Hello from Flask!"}
