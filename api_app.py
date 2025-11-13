@@ -6,6 +6,7 @@ import psycopg2
 import psycopg
 import sys
 import io
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Get top-level flask object
 app = Flask(__name__)
