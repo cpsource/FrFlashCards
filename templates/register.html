@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Register - frflashy.com{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header text-center" style="background-color:#B0E0E6;">
+                    <h3>📝 Registration</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info" role="alert">
+                        <h5 class="alert-heading">Manual Registration Required</h5>
+                        <p>
+                            frflashy uses a manual registration system. Please send email to 
+                            <strong><a href="mailto:frflashy000@gmail.com?subject=Registration">frflashy000@gmail.com</a></strong> 
+                            and put <strong>"Registration"</strong> in the subject line and our administrators will add you as a user.
+                        </p>
+                        <hr>
+                        <p class="mb-0">
+                            <em>We are sorry for this inconvenience which became necessary when hackers attacked the site.</em>
+                        </p>
+                        <p class="mb-0 mt-2">
+                            — The Administrators
+                        </p>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('index') }}" class="btn btn-primary">
+                            <i class="fas fa-home"></i> Return to Homepage
+                        </a>
+                        <a href="{{ url_for('login') }}" class="btn btn-secondary">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
