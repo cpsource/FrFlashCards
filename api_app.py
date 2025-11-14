@@ -44,6 +44,23 @@ def load_user(user_id):
         return User(id=result[0], username=result[1], email=result[2])
     return None
 
+# vocab
+#@app.route('/vocab/kitchen/Nommez-image.html')
+#def vocab_kitchen_nommez():
+#    return render_template('vocab/kitchen/Nommez-image.html')
+
+@app.route('/vocab/<category>/')
+@app.route('/vocab/<category>/Nommez-image.html')
+def vocab_category(category):
+    # This handles /vocab/kitchen/, /vocab/bathroom/, etc.
+    return render_template(f'vocab/{category}/Nommez-image.html')
+
+#@app.route('/vocab/<category>/')
+#@app.route('/vocab/<category>/index.html')
+#def vocab_category(category):
+#    # This handles /vocab/kitchen/, /vocab/bathroom/, etc.
+#    return render_template(f'vocab/{category}/index.html')
+
 # Login route
 @app.route('/login', methods=['GET', 'POST'])
 def login():

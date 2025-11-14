@@ -82,11 +82,11 @@
   </main>
 
   <script>
-    const BASE_PATH = '/kitchen-vocabulary/';
-    const CSV_PATH = BASE_PATH + 'kitchen-vocabulary.csv';
+    const BASE_PATH = "{{ url_for('static', filename='kitchen-vocabulary/') }}";
+    const CSV_PATH = "{{ url_for('static', filename='kitchen-vocabulary/kitchen-vocabulary.csv') }}";
     const IMG_EXT = '.png';
     const MP3_EXT = '.mp3';
-
+    
     // Enable debug mode if URL has ?debug=True
     const params = new URLSearchParams(window.location.search);
     const DEBUG_MODE = params.get('debug')?.toLowerCase() === 'true';
