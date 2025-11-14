@@ -26,6 +26,13 @@
       · <a href="/learn-your-verbs/index.html">Verbes</a> ·
       <a href="/stories/index.html">L'heure du conte</a> ·
       <a href="/about">À propos</a>
+
+{% if current_user.is_authenticated %}
+        <a href="/logout"> . se déconnecter ({{ current_user.username }}) </a>
+{% else %}
+        <a href="/login"> . se connecter </a>
+{% endif %}
+      
     </div>
   </div>
 </footer>
