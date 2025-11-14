@@ -190,6 +190,9 @@ def get_examples():
 #
 # Audio Capture
 #
+@app.route('/speaker')
+def speaker():
+    return render_template('speaker/speaker.html')
 
 # Flask route for audio capture
 # Add this to your Flask application (e.g., app.py)

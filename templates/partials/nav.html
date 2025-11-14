@@ -56,6 +56,12 @@
 
 {% if current_user.is_authenticated %}
     <li class="nav-item">
+        <a class="nav-link" href="/speaker">
+          <i class="fas fa-sign-out-alt"></i>parler
+        </a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="/logout">
           <i class="fas fa-sign-out-alt"></i>se déconnecter ({{ current_user.username }})
         </a>
