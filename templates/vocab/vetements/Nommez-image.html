@@ -82,8 +82,10 @@
   </main>
 
   <script>
-    const BASE_PATH = '/vetements-vocabulary/';
-    const CSV_PATH = BASE_PATH + 'vetements-a1-a2.csv';
+
+    const BASE_PATH = "{{ url_for('static', filename='vetements-vocabulary/') }}";
+    const CSV_PATH = "{{ url_for('static', filename='vetements-vocabulary/vetements-a1-a2.csv') }}";
+    
     const IMG_EXT = '.png';
     const MP3_EXT = '.mp3';
 

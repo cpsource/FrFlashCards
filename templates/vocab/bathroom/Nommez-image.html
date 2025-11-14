@@ -82,8 +82,9 @@
   </main>
 
   <script>
-    const BASE_PATH = '/bathroom-vocabulary/';
-    const CSV_PATH = BASE_PATH + 'bathroom-vocabulary.csv';
+    const BASE_PATH = "{{ url_for('static', filename='bathroom-vocabulary/') }}";
+    const CSV_PATH = "{{ url_for('static', filename='bathroom-vocabulary/bathroom-vocabulary.csv') }}";
+    
     const IMG_EXT = '.png';
     const MP3_EXT = '.mp3';
 
