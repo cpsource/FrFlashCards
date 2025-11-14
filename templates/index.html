@@ -19,76 +19,13 @@
   <link rel="stylesheet" href="/static/css/frflashy.css">
 </head>
 <body>
+
   <!-- Header with Banner -->
-  <header class="site-header">
-    <div class="header-banner">
-      <img src="/static/img/willoughby-lake.png" alt="Willoughby Lake" class="header-image">
-      <div class="header-overlay">
-        <h1 class="site-title">frflashy.com</h1>
-        <p class="site-tagline">Grâce à la science, vous pouvez apprendre le français facilement.</p>
-      </div>
-    </div>
-  </header>
-
+  {% include "partials/header.html" %}
+  
   <!-- Navigation -->
-  <nav class="main-nav">
-    <div class="nav-container">
-      <ul class="nav-list">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">
-            <i class="fas fa-home"></i>Accueil
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/texts/index.html">
-            <i class="fas fa-lightbulb"></i>Textes
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/hints/hints.html">
-            <i class="fas fa-lightbulb"></i>Conseils
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/learn-your-verbs/index.html">
-            <i class="fas fa-book-open"></i>Verbes
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/stories/index.html">
-            <i class="fas fa-clock"></i>L'heure du conte
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="vocabulaireDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-utensils"></i>Vocabulaire
-          </a>
-          <div class="dropdown-menu" aria-labelledby="vocabulaireDropdown">
-            <a class="dropdown-item" href="/lesanimaux-vocabulary/index.html">
-              <i class="fas fa-paw"></i> Les Animaux
-            </a>
-            <a class="dropdown-item" href="/vocab/kitchen/index.html">
-              <i class="fas fa-utensils"></i> Cuisine
-            </a>
-            <a class="dropdown-item" href="/vocab/bathroom/index.html">
-              <i class="fas fa-bath"></i> Salle de Bain
-            </a>
-            <a class="dropdown-item" href="/vocab/vetements/index.html">
-              <i class="fas fa-bath"></i> vêtements
-            </a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">
-            <i class="fas fa-info-circle"></i>À propos
-        </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
+  {% include "partials/nav.html" %}
+  
   <!-- Main Content -->
   <main class="container-fluid px-0">
     <h1 class="page-title">Bienvenue sur frflashy.com</h1>
