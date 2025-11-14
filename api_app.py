@@ -82,31 +82,34 @@ def login():
         if result and check_password_hash(result[3], password):
             user = User(id=result[0], username=result[1], email=result[2])
             login_user(user)
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('index'))
         else:
             return "Invalid credentials", 401
-    
-    # Return login form HTML
-    return '''
-        <form method="post">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <button type="submit">Login</button>
-        </form>
-    '''
+
+    #GET request - show login form
+    return render_template('login.html')
+
+#    # Return login form HTML
+#    return '''
+#        <form method="post">
+#            <input type="text" name="username" placeholder="Username">
+#            <input type="password" name="password" placeholder="Password">
+#            <button type="submit">Login</button>
+#        </form>
+#    '''
 
 # Logout route
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 # Protected route example
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return f"Hello {current_user.username}!"
+    return f"Hello, you are at /dashboard. {current_user.username}!"
 
 @app.route("/")
 def index():

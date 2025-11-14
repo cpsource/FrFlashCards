@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Login - frflashy.com{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header text-center" style="background-color:#B0E0E6;">
+                    <h3>🔐 Login</h3>
+                </div>
+                <div class="card-body">
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                    
+                    <form method="post">
+                        <div class="form-group mb-3">
+                            <label for="username">Username</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="username" 
+                                   name="username" 
+                                   placeholder="Enter username"
+                                   required>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" 
+                                   class="form-control" 
+                                   id="password" 
+                                   name="password" 
+                                   placeholder="Enter password"
+                                   required>
+                        </div>
+
+
+<div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary flex-fill">
+        Login
+    </button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary flex-fill">
+        Cancel
+    </a>
+</div>			
+
+<!--
+<button type="submit" class="btn btn-primary btn-block w-100">
+  Login
+</button>
+-->
+                    </form>
+                    
+                    <hr>
+                    
+                    <p class="text-center mb-0">
+                        Don't have an account? <a href="/register">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
