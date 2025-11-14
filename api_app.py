@@ -8,6 +8,13 @@ import sys
 import io
 from werkzeug.security import generate_password_hash, check_password_hash
 
+# At the top of api_app.py define TIERs
+TIER_ADMIN   = 0
+TIER_GRATIS  = 1
+TIER_BASIC   = 2
+TIER_PRO     = 3
+TIER_PREMIUM = 4
+
 # Get top-level flask object
 app = Flask(__name__)
 # Set the secret key from environment variable
@@ -27,7 +34,8 @@ class User(UserMixin):
         self.id = id
         self.username = username
         self.email = email
-
+        self.tier # Add tier attribute - 0 admin, 1 gratis, 2 basic, 3 pro, 4 premium
+        
 from functools import wraps
 from flask import abort
 def require_min_tier(min_tier):
@@ -55,12 +63,12 @@ def load_user(user_id):
     # For now, a simple example:
     conn = psycopg2.connect(os.getenv('NEON_DATABASE_URL'))
     cur = conn.cursor()
-    cur.execute("SELECT id, username, email FROM users WHERE id = %s", (user_id,))
+    cur.execute("SELECT id, username, email, tier FROM users WHERE id = %s", (user_id,))
     result = cur.fetchone()
     conn.close()
 
     if result:
-        return User(id=result[0], username=result[1], email=result[2])
+        return User(id=result[0], username=result[1], email=result[2], tier=result[3])
     return None
 
 # vocab
@@ -92,14 +100,14 @@ def login():
         conn = psycopg2.connect(os.getenv('NEON_DATABASE_URL'))
         cur = conn.cursor()
         cur.execute(
-            "SELECT id, username, email, password_hash FROM users WHERE username = %s",
+            "SELECT id, username, email, password_hash, tier FROM users WHERE username = %s",
             (username,)
         )
         result = cur.fetchone()
         conn.close()
         
         if result and check_password_hash(result[3], password):
-            user = User(id=result[0], username=result[1], email=result[2])
+            user = User(id=result[0], username=result[1], email=result[2], tier=result[3])
             login_user(user)
             return redirect(url_for('index'))
         else:
@@ -541,4 +549,48 @@ OpenAI TTS:
 ✗ Costs ~$0.0003 per phrase
 ✗ Requires API call
 """
-    
+
+"""
+# When NOT logged in:
+current_user.is_authenticated  # False
+current_user.is_anonymous      # True
+current_user.id                # None
+current_user.username          # AttributeError (doesn't exist)
+current_user.tier              # AttributeError (doesn't exist)
+
+# In routes
+if current_user.is_authenticated:
+    tier = current_user.tier  # Safe - user is logged in
+else:
+    tier = None  # Not logged in
+
+<!-- In templates -->
+{% if current_user.is_authenticated %}
+    <p>Welcome, {{ current_user.username }}!</p>
+    <p>Your tier: {{ current_user.tier }}</p>
+{% else %}
+    <p>Please log in</p>
+{% endif %}
+
+# Bad - will crash if not logged in
+@app.route('/profile')
+def profile():
+    name = current_user.username  # ❌ AttributeError if not logged in!
+    return f"Hello {name}"
+
+# Good - check first
+@app.route('/profile')
+@login_required  # Redirects to login if not authenticated
+def profile():
+    name = current_user.username  # ✓ Safe - user is logged in
+    return f"Hello {name}"
+
+# Or check manually
+@app.route('/profile')
+def profile():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    name = current_user.username
+    return f"Hello {name}"
+
+"""
