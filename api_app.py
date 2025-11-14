@@ -69,7 +69,7 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         
-        # Check credentials (you should hash passwords!)
+        # Check credentials
         conn = psycopg2.connect(os.getenv('NEON_DATABASE_URL'))
         cur = conn.cursor()
         cur.execute(
@@ -84,9 +84,10 @@ def login():
             login_user(user)
             return redirect(url_for('index'))
         else:
-            return "Invalid credentials", 401
+            # Show login form again with error message
+            return render_template('login.html', error="Invalid username or password")
 
-    #GET request - show login form
+    # GET request - show login form
     return render_template('login.html')
 
 #    # Return login form HTML
