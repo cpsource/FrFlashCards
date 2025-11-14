@@ -28,6 +28,25 @@ class User(UserMixin):
         self.username = username
         self.email = email
 
+from functools import wraps
+from flask import abort
+def require_min_tier(min_tier):
+    def deco(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            u = current_user  # however you load it
+            if u is None or u.tier < min_tier:
+                return abort(403)
+            return f(*args, **kwargs)
+        return wrapper
+    return deco
+
+# usage
+@app.route("/pro-content")
+@require_min_tier(3)  # pro and above
+def pro_content():
+    return "You are at the pro level!"
+        
 # User loader - Flask-Login uses this to reload user from session
 @login_manager.user_loader
 def load_user(user_id):
