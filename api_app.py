@@ -49,6 +49,7 @@ def load_user(user_id):
 #def vocab_kitchen_nommez():
 #    return render_template('vocab/kitchen/Nommez-image.html')
 
+# run everything in vocab through Flask
 @app.route('/vocab/<category>/')
 @app.route('/vocab/<category>/Nommez-image.html')
 def vocab_category(category):
