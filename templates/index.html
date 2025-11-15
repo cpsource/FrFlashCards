@@ -47,16 +47,40 @@
     <div class="content-card">
       <h2 class="section-title">Commencer Votre Voyage</h2>
       <div class="row">
+
+	<!-- first col -->
         <div class="col-md-4 mb-3">
           <h3><i class="fas fa-book-open text-info"></i> Histoires</h3>
           <p>Lisez des histoires fascinantes adaptées à votre niveau avec support audio et visuel.</p>
           <a href="/stories/index.html" class="btn btn-lake">Explorer les histoires</a>
         </div>
+
+	<!-- second col -->	
         <div class="col-md-4 mb-3">
           <h3><i class="fas fa-utensils text-success"></i> Vocabulaire</h3>
           <p>Apprenez le vocabulaire pratique avec des images et de l'audio pour une mémorisation optimale.</p>
-          <a href="/kitchen-vocabulary/index.html" class="btn btn-lake">Découvrir le vocabulaire</a>
-        </div>
+          
+          <!-- Vocabulary Dropdown -->
+            <button class="btn btn-lake dropdown-toggle" type="button" id="vocabDropdown"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Le vocabulaire
+            </button>
+            <div class="dropdown-menu" aria-labelledby="vocabDropdown">
+              <a class="dropdown-item" href="/lesanimaux-vocabulary/index.html">
+                <i class="fas fa-paw"></i> Les Animaux
+              </a>
+              <a class="dropdown-item" href="/vocab/kitchen/">
+                <i class="fas fa-utensils"></i> Cuisine
+              </a>
+              <a class="dropdown-item" href="/vocab/bathroom/">
+                <i class="fas fa-bath"></i> Salle de Bain
+              </a>
+              <a class="dropdown-item" href="/vocab/vetements/">
+                <i class="fas fa-tshirt"></i> Vêtements
+              </a>
+            </div>
+          </div>
+
         <div class="col-md-4 mb-3">
           <h3><i class="fas fa-lightbulb text-warning"></i> Conseils</h3>
           <p>Des conseils pratiques et des astuces pour accélérer votre apprentissage du français.</p>
@@ -64,7 +88,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="content-card">
       <h2 class="section-title">Pourquoi frflashy.com?</h2>
       <ul>

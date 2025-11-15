@@ -271,6 +271,26 @@ a:hover {
   color: white;
 }
 
+.btn-lake.dropdown-toggle {
+    display: inline-block !important;
+    width: auto !important;
+}
+
+.dropdown {
+  display: inline-block;   /* Shrinks container to button width */
+}
+
+/* Shrink dropdown container */
+.col-md-4 .dropdown {
+  display: inline-block;
+}
+
+/* Force vocabulary button to natural width */
+.col-md-4 .dropdown .btn {
+  display: inline-block !important;
+  width: auto !important;
+}
+
 /* Dropdown Menu Styling */
 .nav-item.dropdown {
   position: relative;
