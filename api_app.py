@@ -8,6 +8,13 @@ import sys
 import io
 from werkzeug.security import generate_password_hash, check_password_hash
 
+# Define tier constants
+TIER_GRATIS  = 0
+TIER_BASIC   = 1
+TIER_PRO     = 2
+TIER_PREMIUM = 3
+TIER_ADMIN   = 4
+
 # Get top-level flask object
 app = Flask(__name__)
 # Set the secret key from environment variable
@@ -16,6 +23,17 @@ app.secret_key = os.getenv('FLASK_SECRET_KEY')
 if not app.secret_key:
     raise ValueError("FLASK_SECRET_KEY not found in environment variables!")
 
+# Make tier constants available in ALL templates
+@app.context_processor
+def inject_tiers():
+    return {
+        'TIER_GRATIS' : TIER_GRATIS,
+        'TIER_BASIC'  : TIER_BASIC,
+        'TIER_PRO'    : TIER_PRO,
+        'TIER_PREMIUM': TIER_PREMIUM,
+        'TIER_ADMIN'  : TIER_ADMIN
+    }
+
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -23,10 +41,11 @@ login_manager.login_view = 'login'  # Redirect here if not logged in
 
 # Define your User class
 class User(UserMixin):
-    def __init__(self, id, username, email):
-        self.id = id
+    def __init__(self, id, username, email, tier=TIER_GRATIS):
+        self.id       = id
         self.username = username
-        self.email = email
+        self.email    = email
+        self.tier     = tier
 
 # User loader - Flask-Login uses this to reload user from session
 @login_manager.user_loader
@@ -36,12 +55,12 @@ def load_user(user_id):
     # For now, a simple example:
     conn = psycopg2.connect(os.getenv('NEON_DATABASE_URL'))
     cur = conn.cursor()
-    cur.execute("SELECT id, username, email FROM users WHERE id = %s", (user_id,))
+    cur.execute("SELECT id, username, email, tier FROM users WHERE id = %s", (user_id,))
     result = cur.fetchone()
     conn.close()
 
     if result:
-        return User(id=result[0], username=result[1], email=result[2])
+        return User(id=result[0], username=result[1], email=result[2], tier=result[3])
     return None
 
 # vocab
@@ -73,14 +92,14 @@ def login():
         conn = psycopg2.connect(os.getenv('NEON_DATABASE_URL'))
         cur = conn.cursor()
         cur.execute(
-            "SELECT id, username, email, password_hash FROM users WHERE username = %s",
+            "SELECT id, username, email, password_hash, tier FROM users WHERE username = %s",
             (username,)
         )
         result = cur.fetchone()
         conn.close()
         
         if result and check_password_hash(result[3], password):
-            user = User(id=result[0], username=result[1], email=result[2])
+            user = User(id=result[0], username=result[1], email=result[2], tier=result[3])
             login_user(user)
             return redirect(url_for('index'))
         else:
@@ -522,4 +541,28 @@ OpenAI TTS:
 ✗ Costs ~$0.0003 per phrase
 ✗ Requires API call
 """
+
+#
+# Demonstrate checking Tier
+#
+
+# In any route
+@app.route('/premium-feature')
+@login_required
+def premium_feature():
+    if current_user.tier < TIER_PRO:
+        return "You need a Pro account for this feature", 403
     
+    # Show premium content
+    return render_template('premium.html')
+
+#
+# <!-- In any template -->
+# {% if current_user.is_authenticated %}
+#     <p>Your tier: {{ current_user.tier }}</p>
+#     
+#     {% if current_user.tier >= TIER_PREMIUM %}
+#         <a href="/premium-feature">Premium Features</a>
+#     {% endif %}
+# {% endif %}
+#
